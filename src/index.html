@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 
+<script src="js/script.js" type="text/javascript"></script>
+
 <head>
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
@@ -16,14 +18,13 @@
 
 <textarea id="requete" rows="20" cols="80"></textarea>
 
-<button onclick="rechercher()">Rechercher</button>
+<button onclick="Rechercher()">Rechercher</button>
 
 <table id="resultats">
 
 </table>
 
 <script>
-
   (function() {
     document.getElementById("requete").innerHTML = `PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -39,30 +40,22 @@ PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 SELECT * WHERE {
 ...
 }`;
-})();
+  })();
+//Pour faire une requête : mettre la requete en string (comme contenu_requete) + faire fonction déclencheur qui prend les résultats en paramètres et traite
+  function declencher_resultat(results){
+    afficherResultats(results);
+  }
 
-  function rechercher() {
+  function Rechercher(){
     var contenu_requete = document.getElementById("requete").value;
+    rechercher(contenu_requete, declencher_resultat);
 
-    // Encodage de l'URL à transmettre à DBPedia
-    var url_base = "http://dbpedia.org/sparql";
-    var url = url_base + "?query=" + encodeURIComponent(contenu_requete) + "&format=json";
-
-    // Requête HTTP et affichage des résultats
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var results = JSON.parse(this.responseText);
-            afficherResultats(results);
-        }
-    };
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
   }
 
   // Affichage des résultats dans un tableau
   function afficherResultats(data)
   {
+    console.log(data);
     // Tableau pour mémoriser l'ordre des variables ; sans doute pas nécessaire
     // pour vos applications, c'est juste pour la démo sous forme de tableau
     var index = [];
@@ -98,6 +91,7 @@ SELECT * WHERE {
     document.getElementById("resultats").innerHTML = contenuTableau;
 
   }
+
 </script>
 
 </body>
