@@ -1,0 +1,75 @@
+body {
+    display: flex;
+    flex-direction: row;
+    margin: 0
+}
+
+#images {
+    background-color: indigo;
+    width: 50%;
+}
+
+#contenu {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+#logo-origine {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+#logo-origine img {
+    width: 25%;
+}
+#type-origine {
+    
+}
+
+#plat-description {
+    display: flex;
+    flex-direction: column;
+}
+#nom-plat {
+    font-weight: bold;
+    font-size:2em;
+
+}
+
+#tableaux {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+}
+
+#tab-gauche {
+    display: flex;
+    flex-direction: column;
+    background-color: gray;
+    width: 50%
+
+}
+#type-plat {
+    background-color: rgb(91, 190, 129);
+}
+
+
+#tab-droite {
+    display: flex;
+    flex-direction: column;
+    background-color:rgb(190, 101, 101);
+    width: 50%
+}
+
+#propositions {
+    display: flex;
+    flex-direction: column;
+}
+#plat-du-jour-content {
+    display: flex;
+    flex-direction: row;
+}
+
+
