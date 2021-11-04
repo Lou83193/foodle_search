@@ -12,6 +12,7 @@ body {
 #contenu {
     display: flex;
     flex-direction: column;
+    width: 50%;
 }
 
 #logo-origine {
