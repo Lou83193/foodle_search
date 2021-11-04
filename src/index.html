@@ -1,104 +1,43 @@
-<!DOCTYPE html>
 <html>
 
 <head>
-  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-  <meta content="utf-8" http-equiv="encoding">
-
-  <style>
-    table, th, td {
-      border: 1px solid black;
-    }
-  </style>
+    <link href="/style/index.css" rel="stylesheet">
 </head>
 
 <body>
 
-<textarea id="requete" rows="20" cols="80"></textarea>
+    <div id="logo">
+        <img src="/style/img/Logo.png"/>
+    </div>
 
-<button onclick="rechercher()">Rechercher</button>
+    <div id="recherche">
 
-<table id="resultats">
+        <div id="barres">
 
-</table>
+            <input type="text" id="barre-recherche-plats"></input>
+            <div id="barre-recherche-pays">Combobox pays</div>
+            <!--<datalist id="barre-recherche-pays">Combobox pays</datalist>-->
 
-<script>
+        </div>
 
-  (function() {
-    document.getElementById("requete").innerHTML = `PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX dc: <http://purl.org/dc/elements/1.1/>
-PREFIX : <http://dbpedia.org/resource/>
-PREFIX dbpedia2: <http://dbpedia.org/property/>
-PREFIX dbpedia: <http://dbpedia.org/>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-\n
-SELECT * WHERE {
-...
-}`;
-})();
+        <button id="bouton-recherche">C'est parti!</button>
 
-  function rechercher() {
-    var contenu_requete = document.getElementById("requete").value;
+    </div>
 
-    // Encodage de l'URL à transmettre à DBPedia
-    var url_base = "http://dbpedia.org/sparql";
-    var url = url_base + "?query=" + encodeURIComponent(contenu_requete) + "&format=json";
+    <div id="plat-du-jour">
 
-    // Requête HTTP et affichage des résultats
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var results = JSON.parse(this.responseText);
-            afficherResultats(results);
-        }
-    };
-    xmlhttp.open("GET", url, true);
-    xmlhttp.send();
-  }
-
-  // Affichage des résultats dans un tableau
-  function afficherResultats(data)
-  {
-    // Tableau pour mémoriser l'ordre des variables ; sans doute pas nécessaire
-    // pour vos applications, c'est juste pour la démo sous forme de tableau
-    var index = [];
-
-    var contenuTableau = "<tr>";
-
-    data.head.vars.forEach((v, i) => {
-      contenuTableau += "<th>" + v + "</th>";
-      index.push(v);
-    });
-
-    data.results.bindings.forEach(r => {
-      contenuTableau += "<tr>";
-
-      index.forEach(v => {
-
-        if (r[v].type === "uri")
-        {
-          contenuTableau += "<td><a href='" + r[v].value + "' target='_blank'>" + r[v].value + "</a></td>";
-        }
-        else {
-          contenuTableau += "<td>" + r[v].value + "</td>";
-        }
-      });
-
-
-      contenuTableau += "</tr>";
-    });
-
-
-    contenuTableau += "</tr>";
-
-    document.getElementById("resultats").innerHTML = contenuTableau;
-
-  }
-</script>
+        <div id="plat-du-jour-label">Plat du jour</div>
+        <div id="plat-du-jour-content">
+            <div id="plat-du-jour-image">
+                <img src="style/img/DummyImage.jpg"/>
+            </div>
+            <div id="plat-du-jour">
+                <div id="plat-du-jour-nom">Nom du plat</div>
+                <div id="plat-du-jour-description">DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription</div>
+            </div>
+        </div>
+    </div>
 
 </body>
+
 </html>
