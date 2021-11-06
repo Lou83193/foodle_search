@@ -96,7 +96,7 @@ function chargerDescriptionPlat(json) {
 function chargerOriginePlat(json) {
 
     const map = obtenirResultatsJson(json);
-    let pays = "";
+    let pays = ""; 
     let region = "";
     if (map.has("country")) {
         pays = map.get("country");
@@ -112,9 +112,14 @@ function chargerOriginePlat(json) {
     }
     pays = normalizeString(pays);
     region = normalizeString(region);
+
     $('#origine-pays').html(pays);
     $('#origine-region').html(region);
 
+    if (pays == "") { $('#origine-pays').remove(); }
+    if (region == "") { $('#origine-region').remove(); }
+    if (pays == "" && region == "") { $('#origine').remove(); }
+    
 }
 
 function chargerTypePlat(json) {
@@ -133,6 +138,8 @@ function chargerTypePlat(json) {
     }
     let fullType = (type != "") ? type + " - " + temperature : temperature; 
     $('#type-plat > div').html(fullType);
+
+    if (fullType == "") { $('#type-plat').remove(); }
 
 }
 
