@@ -6,16 +6,16 @@ function displaySearchResult(index, result) {
   let template = document.getElementById('searchResult');
   let newNode = document.importNode(template.content, true);
   let cardImage = newNode.querySelector('img');
-  cardImage.alt = result['name'].value + ' image';
+  cardImage.alt = result['label'].value + ' image';
   cardImage.src = result['thumbnail'].value;
   let cardTitle = newNode.querySelector('h5');
-  cardTitle.innerHTML = result['name'].value;
+  cardTitle.innerHTML = result['label'].value;
   let cardText = newNode.querySelector('p');
   cardText.innerHTML = result['abstract'].value;
   let countryLink = newNode.querySelectorAll('a')[1];
   countryLink.href = result['country'].value; // todo : later link to country only search
   countryLink.innerHTML = result['countryName'].value;
-  newNode.getElementById("card-link").href = "page-plat.html?plat=" + result['name'].value;
+  newNode.getElementById("card-link").href = "page-plat.html?plat=" + result['label'].value;
   document.getElementById('results-container').appendChild(newNode);
   // todo : add onclick -> redirects to detail?plat=nom
 }
@@ -27,15 +27,15 @@ function loadSearch() {
   document.getElementById("search-desc").innerHTML = searchContent;
   let countryFilter = findGetParameter('country');
   console.log('Searched for (query, country):', searchContent, countryFilter);
-  let query = 'SELECT DISTINCT ?Food, ?name, ?country, ?countryName, ?thumbnail, ?abstract WHERE {\n' +
-      '  ?Food a dbo:Food ; dbp:name ?name ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?thumbnail ; dbo:abstract ?abstract .\n' +
+  let query = 'SELECT DISTINCT ?Food, ?label, ?country, ?countryName, ?thumbnail, ?abstract WHERE {\n' +
+      '  ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?thumbnail ; dbo:abstract ?abstract .\n' +
       '  ?country rdfs:label ?countryName .\n' +
       '  \n' +
       '  FILTER(langMatches(lang(?abstract), "en") || lang(?abstract) = "")\n' +
       '  FILTER(langMatches(lang(?countryName), "en") || lang(?countryName) = "")\n' +
-      '  FILTER((lang(?name) = "" || langMatches(lang(?name), "fr")) || (lang(?label) = "" || langMatches(lang(?label), "fr")) || (lang(?name) = "" || langMatches(lang(?name), "en")) || (lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
-      '  FILTER (regex(?name, "(?i){1}") || regex(?label, "(?i){1}"))\n' +
-      '} ORDER BY ASC(?name) LIMIT 100';
+      '  FILTER((lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
+      '  FILTER (regex(?label, "(?i){1}"))\n' +
+      '} ORDER BY ASC(?label) LIMIT 100';
   query = query.replaceAll('{1}', searchContent);
   rechercher(query, data => {
     console.log(data);
