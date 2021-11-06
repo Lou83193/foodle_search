@@ -14,9 +14,9 @@
     <template id="searchResult">
         <div class="col-sm-4">
             <div class="card">
-                <img src="" class="card-img-top" alt="">
+                <img src="" class="food-img" alt="">
                 <div class="card-body">
-                    <h5 class="card-title"></h5>
+                    <a id="card-link"><h5 class="card-title"></h5></a>
                     <p class="card-text"></p>
                     <a href=""></a>
                 </div>
@@ -26,11 +26,14 @@
     <div class="container">
         <div class="row justify-content-start align-items-center">
             <div class="col">
-                <img class="foodle_logo" src="style/img/foodle_logo.png"/>
+                <a href="index.html"><img id="foodle_logo" src="style/img/foodle-modern-logo.png"/></a>
             </div>
             <div class="col">
                 <input class="search_bar" />
             </div>
+        </div>
+        <div class="row">
+            <h1 id="results-for">Results for "<span id="search-desc"></span>"...</h1>
         </div>
         <div class="row" id="results-container">
             <!-- inject search results here -->
