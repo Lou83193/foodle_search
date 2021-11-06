@@ -3,7 +3,7 @@ function cleanSearchResults() {
 }
 
 function displaySearchResult(index, result) {
-  // todo : fetch & display detailed info ! 
+  // todo : fetch & display detailed info !
   let template = document.getElementById('searchResult');
   let newNode = document.importNode(template.content, true);
   let cardImage = newNode.querySelector('img'); // todo : fill info
