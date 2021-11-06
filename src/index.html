@@ -13,8 +13,8 @@
 
 <div id="recherche">
     <div id="barres">
-        <input type="text" id="barre-recherche-plats" class="card" placeholder="Rechercher un plat..."/>
-        <input type="text" id="barre-recherche-pays" class="card" list="liste-recherche-pays" placeholder="Filtrer par pays..." />
+        <input type="text" id="barre-recherche-plats" class="card" placeholder="Search a dish..."/>
+        <input type="text" id="barre-recherche-pays" class="card" list="liste-recherche-pays" placeholder="Filter by country..." />
         <datalist id="liste-recherche-pays" >
             <option> Sélectionner un pays ...
             <option> France
@@ -22,17 +22,17 @@
                 <!-- Todo : load -->
         </datalist>
     </div>
-    <button id="bouton-recherche" class="card" onclick="searchButtonClicked()">C'est parti!</button>
+    <button id="bouton-recherche" class="card" onclick="searchButtonClicked()">Lookup</button>
 </div>
 
 <div id="plat-du-jour-section" class="card">
-    <div id="plat-du-jour-label">Plat du jour</div>
+    <div id="plat-du-jour-label">Highlighted food 💡</div>
     <div id="plat-du-jour-content">
         <div id="plat-du-jour-image">
             <img src="style/img/DummyImage.jpg"/>
         </div>
         <div id="plat-du-jour">
-            <div id="plat-du-jour-nom">Nom du plat</div>
+            <div id="plat-du-jour-nom">Food name</div>
             <div id="plat-du-jour-description">DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription</div>
         </div>
     </div>
