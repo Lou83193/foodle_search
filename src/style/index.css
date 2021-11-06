@@ -4,8 +4,23 @@ body {
     padding-top: 10vh;
 }
 
+#logo {
+    text-align: center;
+    margin: 1.5em 0em;
+}
+
 #barres {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+#barre-recherche-plats {
+    flex-grow: 4;
+}
+
+#barre-recherche-pays {
+    background-color: grey;
 }
 
 #recherche {
