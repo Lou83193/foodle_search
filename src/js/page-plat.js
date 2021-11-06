@@ -1,31 +1,31 @@
 function chargerInfosPlat(plat) {
 
     // Nom du plat 
-    $("#nom-plat").html(plat);
+    $("#nom-plat").html("<h1>" + plat + "</h>");
 
     // Description du plat
-    let query1 = "SELECT * WHERE { ?Food a dbo:Food. ?Food rdfs:label '{1}'@en. ?Food ?attribut ?detail. FILTER(!isLiteral(?detail) || lang(?detail) = '' || langMatches(lang(?detail), 'en')). FILTER(?attribut IN (dbo:abstract, rdfs:comment, dbp:caption)). }";
+    let query1 = "SELECT * WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (dbo:abstract, rdfs:comment, dbp:caption)). }";
     query1 = query1.replace('{1}', plat);
     rechercher(query1, chargerDescriptionPlat);
 
     // Origine du plat
-    let query2 = "SELECT * WHERE {?Food a dbo:Food. ?Food rdfs:label '{1}'@en. ?Food ?attribut ?detail. FILTER(!isLiteral(?detail) || lang(?detail) = '' || langMatches(lang(?detail), 'en')). FILTER(?attribut IN (dbo:country, dbo:region, dbo:cuisine, dbp:nationalCuisine)). }";
+    let query2 = "SELECT * WHERE {?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (dbo:country, dbo:region, dbo:cuisine, dbp:nationalCuisine)). }";
     query2 = query2.replace('{1}', plat);
     rechercher(query2, chargerOriginePlat); 
 
     // Type du plat
-    let query3 = "SELECT * WHERE {?Food a dbo:Food. ?Food rdfs:label '{1}'@en. ?Food ?attribut ?detail. FILTER(!isLiteral(?detail) || lang(?detail) = '' || langMatches(lang(?detail), 'en')). FILTER(?attribut IN (dbo:type, dbo:servingTemperature, dbp:served)). }";
+    let query3 = "SELECT * WHERE {?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (dbo:type, dbo:servingTemperature, dbp:served)). }";
     query3 = query3.replace('{1}', plat);
     rechercher(query3, chargerTypePlat);
 
     // Ingrédients du plat
-    let query4 = "SELECT * WHERE { ?Food a dbo:Food. ?Food rdfs:label '{1}'@en. ?Food ?attribut ?detail. FILTER(!isLiteral(?detail) || lang(?detail) = '' || langMatches(lang(?detail), 'en')). FILTER(?attribut IN (dbo:ingredient, dbo:ingredientName, dbp:mainIngredient, dbp:minorIngredient)). }";
+    let query4 = "SELECT * WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (dbo:ingredient, dbo:ingredientName, dbp:mainIngredient, dbp:minorIngredient)). }";
     query4 = query4.replace('{1}', plat);
     rechercher(query4, chargerIngredientsPlat);
 
     /*
     // Valeurs nutritionnelles du plat
-    let query5 = "SELECT * WHERE {?Food a dbo:Food. ?Food rdfs:label '{1}'@en. ?Food ?attribut ?detail. FILTER(!isLiteral(?detail) || lang(?detail) = '' || langMatches(lang(?detail), 'en')). FILTER(?attribut IN (dbp:fat, dbp:ironMg, dbp:fiber)). }";
+    let query5 = "SELECT * WHERE {?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (dbp:fat, dbp:ironMg, dbp:fiber)). }";
     query5 = query5.replace('{1}', plat);
     rechercher(query5, chargerNutritionPlat);
 
@@ -55,15 +55,15 @@ function obtenirResultatsJson(json) {
         let obj = json.results.bindings[i];
 
         // Récupérer le prédicat
-        let predicat = obj.attribut.value;
-        if (obj.attribut.type == 'uri') {
+        let predicat = obj.predicat.value;
+        if (obj.predicat.type == 'uri') {
             let uriSplit = predicat.split('/');
             predicat = uriSplit[uriSplit.length-1];
         }
 
         // Récupérer le sujet
-        let sujet = obj.detail.value;
-        if (obj.detail.type == 'uri') {
+        let sujet = obj.sujet.value;
+        if (obj.sujet.type == 'uri') {
             let uriSplit = sujet.split('/');
             sujet = uriSplit[uriSplit.length-1];
         }
@@ -123,7 +123,7 @@ function chargerTypePlat(json) {
     let type = "";
     let temperature = "";
     if (map.has("type")) {
-        type = map.get("type");
+        type = normalizeString(map.get("type"));
     }
     if (map.has("servingTemperature")) {
         temperature = map.get("servingTemperature");
@@ -131,14 +131,8 @@ function chargerTypePlat(json) {
     else if (map.has("served")) {
         temperature = map.get("served");
     }
-    let fullType = "";
-    if (type != "") {
-        fullType = "<b>" + type + "</b>" + " - " + temperature;
-    } 
-    else {
-        fullType =  "<b>" + "Serving temperature" + "</b>" + " - " + temperature; 
-    }
-    $('#type-plat').html(fullType);
+    let fullType = (type != "") ? type + " - " + temperature : temperature; 
+    $('#type-plat > div').html(fullType);
 
 }
 
@@ -155,7 +149,6 @@ function chargerIngredientsPlat(json) {
     }
 
     const map = obtenirResultatsJson(json);
-    console.log(map);
     if (map.has("ingredient")) {
         construireSetIngredients(map.get("ingredient"));
     }
@@ -170,13 +163,13 @@ function chargerIngredientsPlat(json) {
     }
 
     let ingredientList = Array.from(ingredientSet);
-    let ingredientListHTML = "<b>List of ingredients</b><br/><ul>";
+    let ingredientListHTML = "<ul>";
     let n = ingredientList.length;
     for (let i = 0; i < n; i++) {
         ingredientListHTML += "<li>" + ingredientList[i] + "</li>";
     }
     ingredientListHTML += "</ul>";
-    $('#ingredient').html(ingredientListHTML); 
+    $('#ingredient > div').html(ingredientListHTML); 
 
 }
 
