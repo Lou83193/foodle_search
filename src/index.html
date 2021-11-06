@@ -1,39 +1,76 @@
 <html>
 
 <head>
-    <link href="/style/index.css" rel="stylesheet">
+    <!--<link href="/style/index.css" rel="stylesheet">-->
+    <title>Foodle</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
 
-    <div id="logo">
-        <img src="/style/img/Logo.png"/>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+
+    <div class = "container row mx-auto" id="logo">
+        <img class = "mx-auto" src="/style/img/Logo.png"/>
     </div>
 
-    <div id="recherche">
 
-        <div id="barres">
+    <div class="col mt-4" id="recherche">
 
-            <input type="text" id="barre-recherche-plats"></input>
-            <div id="barre-recherche-pays">Combobox pays</div>
-            <!--<datalist id="barre-recherche-pays">Combobox pays</datalist>-->
-
+        <div class="row input-group w-75 mx-auto ">
+            <input type="text" class="form-control rounded-pill " placeholder="Rechercher un plat...">
+            <div class="dropdown ">
+                <button class="btn btn-secondary dropdown-toggle ml-4 btn-light text-dark rounded-pill border-right border-bottom" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filtrer par pays...
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </div>
         </div>
 
-        <button id="bouton-recherche">C'est parti!</button>
-
+        <div class="row mx-auto my-5 ">
+            <button class="btn mx-auto btn-light rounded-pill border-right border-bottom" id="bouton-recherche" type="submit" >C'est parti!</button>
+        </div>
     </div>
 
-    <div id="plat-du-jour">
 
-        <div id="plat-du-jour-label">Plat du jour</div>
-        <div id="plat-du-jour-content">
-            <div id="plat-du-jour-image">
-                <img src="style/img/DummyImage.jpg"/>
+
+
+    <div class = "container col w-75 border-bottom rounded-pill" id="plat-du-jour">
+
+        <div class="col text-center my-4" id="plat-du-jour-label">
+            <h5> <strong>Le plat à la une</strong>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-lightbulb" viewBox="0 0 16 16">
+                <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z"/>
+            </svg>
+            </h5>
+        </div>
+        <div class="row" id="plat-du-jour-content">
+            <div class="col" id="plat-du-jour-image">
+                <img class="img-thumbnail" src="style/img/DummyImage.jpg"/>
             </div>
-            <div id="plat-du-jour">
-                <div id="plat-du-jour-nom">Nom du plat</div>
-                <div id="plat-du-jour-description">DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription</div>
+            <div class="col" id="plat-du-jour">
+                <div id="plat-du-jour-nom"><h6><strong>Nom du plat</strong></h6></div>
+                <div class="text-muted" id="plat-du-jour-description">DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription</div>
             </div>
         </div>
     </div>
