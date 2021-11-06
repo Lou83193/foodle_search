@@ -1,42 +1,42 @@
 <html>
 
 <head>
-    <link href="/style/index.css" rel="stylesheet">
+    <link href="style/index.css" rel="stylesheet">
+    <script type="text/javascript" src="index.js"></script>
 </head>
 
 <body>
 
-    <div id="logo">
-        <img src="/style/img/Logo.png"/>
+<div id="logo">
+    <img src="style/img/Logo.png" alt="Logo Foodle" height="70"/>
+</div>
+
+<div id="recherche">
+    <div id="barres">
+        <input type="text" id="barre-recherche-plats" class="card" placeholder="Rechercher un plat..."/>
+        <input type="text" id="barre-recherche-pays" class="card" list="liste-recherche-pays" placeholder="Filtrer par pays..." />
+        <datalist id="liste-recherche-pays" >
+            <option> Sélectionner un pays ...
+            <option> France
+            <option> Italie
+                <!-- Todo : load -->
+        </datalist>
     </div>
+    <button id="bouton-recherche" class="card" onclick="searchButtonClicked()">C'est parti!</button>
+</div>
 
-    <div id="recherche">
-
-        <div id="barres">
-
-            <input type="text" id="barre-recherche-plats"></input>
-            <div id="barre-recherche-pays">Combobox pays</div>
-            <!--<datalist id="barre-recherche-pays">Combobox pays</datalist>-->
-
+<div id="plat-du-jour-section" class="card">
+    <div id="plat-du-jour-label">Plat du jour</div>
+    <div id="plat-du-jour-content">
+        <div id="plat-du-jour-image">
+            <img src="style/img/DummyImage.jpg"/>
         </div>
-
-        <button id="bouton-recherche">C'est parti!</button>
-
-    </div>
-
-    <div id="plat-du-jour">
-
-        <div id="plat-du-jour-label">Plat du jour</div>
-        <div id="plat-du-jour-content">
-            <div id="plat-du-jour-image">
-                <img src="style/img/DummyImage.jpg"/>
-            </div>
-            <div id="plat-du-jour">
-                <div id="plat-du-jour-nom">Nom du plat</div>
-                <div id="plat-du-jour-description">DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription</div>
-            </div>
+        <div id="plat-du-jour">
+            <div id="plat-du-jour-nom">Nom du plat</div>
+            <div id="plat-du-jour-description">DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription</div>
         </div>
     </div>
+</div>
 
 </body>
 
