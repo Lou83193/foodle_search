@@ -6,13 +6,13 @@ body {
 
 #images {
     background-color: indigo;
-    width: 50%;
+    width: 25%;
 }
 
 #contenu {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 75%;
     margin: 0em 1em;
 }
 
@@ -25,8 +25,9 @@ body {
 #logo-origine img {
     width: 25%;
 }
-#type-origine {
-    
+#origine {
+    display: flex;
+    flex-direction: column;
 }
 
 #plat-description {
@@ -54,17 +55,17 @@ body {
 
 }
 #type-plat {
-    background-color: rgb(91, 190, 129);
+    background-color: rgba(0, 0, 0, 0.15);
     margin-bottom: 0.5em;
 }
 #ingredient {
-    background-color: gray;
+    background-color: rgba(0, 0, 0, 0.15);
 }
 
 #tab-droite {
     display: flex;
     flex-direction: column;
-    background-color:rgb(190, 101, 101);
+    background-color:rgba(0, 0, 0, 0.15);
     width: 50%;
     margin-left: 0.5em;
 }
@@ -79,7 +80,7 @@ body {
 #barres-propositions {
     display: flex;
     flex-direction: row;
-    background-color: gray;
+    background-color: rgba(0, 0, 0, 0.15);
 }
 
 

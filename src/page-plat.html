@@ -2,6 +2,9 @@
 
 <head>
     <link href="style/page-plat.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/page-plat.js"></script>
 </head>
 
 <body>
@@ -15,7 +18,14 @@
 
         <div id="logo-origine">
             <img src="/style/img/Logo.png"/>
-            <div id="type-origine">Origine</div>
+            <div id="origine">
+                <div id="origine-pays">
+                    Pays origine
+                </div>
+                <div id="origine-region">
+                    Region origine
+                </div>
+            </div>
         </div>
 
         <div id="plat-description">
@@ -34,12 +44,20 @@
         </div>
 
         <div id="propositions">
-            <text id="propositions-label">Propositions</text> 
-            <div id="barres-propositions">Je propose</div>
+            <text id="propositions-label">Plats similaires</text> 
+            <div id="barres-propositions">Liste des plats...</div>
         </div>
 
     </div>
 
+    <script>
+
+        const url = window.location.search;
+        const urlParams = new URLSearchParams(url);
+        const plat = urlParams.get("plat");
+        chargerInfosPlat(plat);
+
+    </script>
 
 </body>
 
