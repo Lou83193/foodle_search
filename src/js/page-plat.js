@@ -38,10 +38,17 @@ function chargerInfosPlat(plat) {
 } 
 
 function normalizeString(str) {
-    str = str.replace("_", " ");
     str = str.trim();
-    str = str.toLowerCase();
-    str = str.charAt(0).toUpperCase() + str.slice(1);
+    str = str.replace('_', ' ');
+    str = str.replace(',_', ', ');
+    strList = str.split(' ');
+    for (let i = 0; i < strList.length; i++) {
+        subStr = strList[i];
+        subStr = subStr.toLowerCase();
+        subStr = subStr.charAt(0).toUpperCase() + subStr.slice(1);
+        strList[i] = subStr;
+    }
+    str = strList.join(' ');
     return str;
 }
 
@@ -71,6 +78,8 @@ function obtenirResultatsJson(json) {
         map.set(predicat, sujet);
 
     }
+
+console.log(map)
 
     return map;
     
@@ -136,7 +145,7 @@ function chargerTypePlat(json) {
     else if (map.has("served")) {
         temperature = map.get("served");
     }
-    let fullType = (type != "") ? type + " - " + temperature : temperature; 
+    let fullType = (temperature != "") ? type + " - " + temperature : type; 
     $('#type-plat > div').html(fullType);
 
     if (fullType == "") { $('#type-plat').remove(); }

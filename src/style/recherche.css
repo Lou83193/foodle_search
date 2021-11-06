@@ -4,9 +4,9 @@
     border-radius: 15px 15px 0px 0px;
 }
 
+/*white-space: nowrap;*/
 .card-text {
     height: 100px;
-    //white-space: nowrap;
     overflow: hidden;
     text-overflow: fade(10px);
 }
