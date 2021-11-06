@@ -1,6 +1,7 @@
 body {
     display: flex;
     flex-direction: column;
+    padding-top: 10vh;
 }
 
 #barres {
@@ -11,11 +12,18 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0vh 20vw;
 }
 
 #bouton-recherche {
     width: 40%;
-    margin: 0.5em;
+    margin-top: 3vh;
+    font-size: medium;
+    color: #6D5F5F;
+}
+
+#bouton-recherche:hover{
+    background-color: whitesmoke;
 }
 
 #barres {
@@ -25,18 +33,37 @@ body {
 
 #barre-recherche-plats {
     flex-grow: 4;
+    margin-right: 1vw;
 }
 
-#plat-du-jour {
+#barre-recherche-plats, #barre-recherche-pays, #bouton-recherche {
+    padding: 10px 20px;
+    transition-duration: 700ms;
+}
+
+.card {
+    box-shadow: 0px 1px 5px #9D9C9C;
+    border-radius: 15px;
+    border: 0px solid #9D9C9C;
+    background-color: white;
+    transition-duration: 700ms;
+}
+
+#barre-recherche-plats:focus, #barre-recherche-pays:focus, #bouton-recherche:focus {
+    outline: none;
+    box-shadow: 0px 2px 10px #9D9C9C;
+}
+
+#plat-du-jour-section {
     display: flex;
     flex-direction: column;
+    margin: 5vh 20vw;
+    padding: 1vh 2vw;
 }
 #plat-du-jour-content {
     display: flex;
     flex-direction: row;
 }
-
-
 
 #logo {
     text-align: center;
@@ -46,9 +73,7 @@ body {
     font-weight: bold;
     margin: 1em 0em;
 }
-#barre-recherche-pays {
-    background-color: grey;
-}
+
 #plat-du-jour-image {
     width: 15%;
     margin-right: 1em;
