@@ -37,18 +37,23 @@ function chargerInfosPlat(plat) {
 
 } 
 
-function normalizeString(str) {
+function normalizeString(str, uppercaseAll) {
     str = str.trim();
-    str = str.replace('_', ' ');
-    str = str.replace(',_', ', ');
+    str = str.replaceAll('_', ' ');
     strList = str.split(' ');
-    for (let i = 0; i < strList.length; i++) {
-        subStr = strList[i];
-        subStr = subStr.toLowerCase();
-        subStr = subStr.charAt(0).toUpperCase() + subStr.slice(1);
-        strList[i] = subStr;
+    if (uppercaseAll) {
+        for (let i = 0; i < strList.length; i++) {
+            subStr = strList[i];
+            subStr = subStr.toLowerCase();
+            subStr = subStr.charAt(0).toUpperCase() + subStr.slice(1);
+            strList[i] = subStr;
+        }
+        str = strList.join(' ');
     }
-    str = strList.join(' ');
+    else {
+        str = str.toLowerCase();
+        str = str.charAt(0).toUpperCase() + str.slice(1);
+    }
     return str;
 }
 
@@ -75,11 +80,18 @@ function obtenirResultatsJson(json) {
             sujet = uriSplit[uriSplit.length-1];
         }
         
-        map.set(predicat, sujet);
+        if (!map.has(predicat)) {
+            map.set(predicat, [sujet]);
+        }
+        else {
+            values = map.get(predicat);
+            values.push(sujet); 
+            map.set(predicat, values);
+        }
 
     }
 
-console.log(map)
+    console.log(json)
 
     return map;
     
@@ -90,22 +102,34 @@ function chargerDescriptionPlat(json) {
     const map = obtenirResultatsJson(json);
     let description = ""; 
     if (map.has('abstract')) {
-        description = map.get('abstract');
+        description = map.get('abstract')[0];
     }
     else if (map.has('rdf-schema#comment')) {
-        description = map.get('rdf-schema#comment');
+        description = map.get('rdf-schema#comment')[0];
     }
     else if (map.has('caption')) {
-        description = map.get('caption');
+        description = map.get('caption')[0];
     }
     $('#description-plat').html(description);
+
+    /*
+    var el = document.getElementById('description-plat');
+    var divHeight = el.offsetHeight;
+    var lineHeight = 1.5*parseFloat(getComputedStyle(el).fontSize);
+    var lines = divHeight / lineHeight;
+    console.log(divHeight, lineHeight, lines) 
+    if (lines <= 3) {
+        $('#description > a').css('display', 'none');
+    } 
+    */
+
 
 }
 
 function chargerOriginePlat(json) {
 
     const map = obtenirResultatsJson(json);
-    let pays = ""; 
+    let pays = [""]; 
     let region = "";
     if (map.has("country")) {
         pays = map.get("country");
@@ -117,10 +141,14 @@ function chargerOriginePlat(json) {
         pays = map.get("nationalCuisine");
     }
     if (map.has("region")) {
-        region = map.get("region");
+        region = map.get("region")[0];
     }
-    pays = normalizeString(pays);
-    region = normalizeString(region);
+
+    for (var i = 0; i < pays.length; i++) {
+        pays[i] = normalizeString(pays[i], true);
+    }
+    pays = pays.join(", ");
+    region = normalizeString(region, true);
 
     $('#origine-pays').html(pays);
     $('#origine-region').html(region);
@@ -134,10 +162,10 @@ function chargerOriginePlat(json) {
 function chargerTypePlat(json) {
 
     const map = obtenirResultatsJson(json);
-    let type = "";
-    let temperature = "";
+    let type = [""];
+    let temperature = [""]; 
     if (map.has("type")) {
-        type = normalizeString(map.get("type"));
+        type = map.get("type");
     }
     if (map.has("servingTemperature")) {
         temperature = map.get("servingTemperature");
@@ -145,6 +173,17 @@ function chargerTypePlat(json) {
     else if (map.has("served")) {
         temperature = map.get("served");
     }
+
+    for (var i = 0; i < type.length; i++) {
+        type[i] = normalizeString(type[i], true);
+    }
+    type = type.join(", ");
+
+    for (var i = 0; i < temperature.length; i++) {
+        temperature[i] = normalizeString(temperature[i], true);
+    }
+    temperature = temperature.join(", ");
+
     let fullType = (temperature != "") ? type + " - " + temperature : type; 
     $('#type-plat > div').html(fullType);
 
@@ -155,12 +194,15 @@ function chargerTypePlat(json) {
 function chargerIngredientsPlat(json) {
 
     let ingredientSet = new Set();
-    function construireSetIngredients(strIngredients) {
-        let listIngredients = strIngredients.split(",");
-        let n = listIngredients.length;
-        for (let i = 0; i < n; i++) {
-            let ingredient = normalizeString(listIngredients[i]);
-            ingredientSet.add(ingredient);
+    function construireSetIngredients(ingredients) {
+        for (let k = 0; k < ingredients.length; k++) {
+            let strIngredients = ingredients[k];
+            let listIngredients = strIngredients.split(",");
+            if (listIngredients.length == 1) listIngredients = strIngredients.split(";");
+            for (let i = 0; i < listIngredients.length; i++) {
+                let ingredient = normalizeString(listIngredients[i], false);
+                ingredientSet.add(ingredient);
+            }
         }
     }
 

@@ -34,7 +34,7 @@ body {
     display: flex;
     flex-direction: row;
     background: rgba(0, 0, 0, 0.1);
-    border-radius: 0.5em; 
+    border-radius: 0.5em;  
     padding: 0.25em 0.75em; 
     height: fit-content;
 }
@@ -43,6 +43,9 @@ body {
     margin-right: 0.5em;
 }
 
+#description-plat {
+    line-height: 1.5em;  
+}
 #description-plat.collapse:not(.show) {
     display: block;
     height: 3rem;
