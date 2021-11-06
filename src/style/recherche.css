@@ -1,0 +1,33 @@
+.food-img {
+    object-fit: cover;
+    height: 300px;
+    border-radius: 15px 15px 0px 0px;
+}
+
+.card-text {
+    height: 100px;
+    //white-space: nowrap;
+    overflow: hidden;
+    text-overflow: fade(10px);
+}
+
+.card {
+    box-shadow: 0px 1px 5px #9D9C9C;
+    border-radius: 15px;
+    border: 0px solid #9D9C9C;
+    background-color: white;
+    transition-duration: 700ms;
+}
+
+#results-container > div {
+    margin-top: 1.5vh;
+    margin-bottom: 1.5vh;
+}
+
+#foodle_logo {
+    margin: 2vh 0vw;
+}
+
+#results-for {
+    font-size: 20pt;
+}
