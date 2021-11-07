@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 /* BARRE DE NAVIGATION */
 .navbar {
     background:white;
