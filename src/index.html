@@ -1,26 +1,27 @@
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 
 <head>
     <link href="style/index.css" rel="stylesheet">
     <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+
 </head>
 
-<body>
+<body onload="loadCountries()">
 
 <div id="logo">
     <img src="style/img/foodle-modern-logo.png" alt="Logo Foodle" height="70"/>
 </div>
 
-<div id="recherche">
+<div id="recherche" >
     <div id="barres">
         <input type="text" id="barre-recherche-plats" class="card" placeholder="Search a dish..."/>
         <input type="text" id="barre-recherche-pays" class="card" list="liste-recherche-pays" placeholder="Filter by country..." />
         <datalist id="liste-recherche-pays" >
             <option> Sélectionner un pays ...
-            <option> France
-            <option> Italie
                 <!-- Todo : load -->
         </datalist>
+
     </div>
     <button id="bouton-recherche" class="card" onclick="searchButtonClicked()">Lookup</button>
 </div>
