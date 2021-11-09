@@ -259,51 +259,52 @@ function chargerNutritionPlat(json) {
     if (map.has('fat')) {
         let nutrientHtml = "<tr><td>Total Fat";
         if (map.has('satfat')) {
-            nutrientHtml += "</br>&nbsp Saturated</td><td>" + map.get('fat') + "g </br>" + map.get('satfat') + "g</td></tr>";
+            nutrientHtml += "</br>&nbsp Saturated</td><td>" + map.get('fat')[0] + "g </br>" + map.get('satfat')[0] + "g</td></tr>";
+        } else {
+            nutrientHtml += "</td><td>" + map.get('fat')[0] + "g</td></tr>";
         }
-        nutrientHtml += "</td><td>" + map.get('fat') + "g</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
     if (map.has('sodiumMg')) {
-        let nutrientHtml = "<tr><td>Sodium</td><td>" + map.get('sodiumMg') + "mg</td></tr>";
+        let nutrientHtml = "<tr><td>Sodium</td><td>" + map.get('sodiumMg')[0] + "mg</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
     if (map.has('Carbohydrate')) {
-        let nutrientHtml = "<tr><td id='carbohydrate-text'>Total Carbohydrate</td><td id='carbohydrate-value'>" + map.get('Carbohydrate') + "g</td></tr>";
+        let nutrientHtml = "<tr><td id='carbohydrate-text'>Total Carbohydrate</td><td id='carbohydrate-value'>" + map.get('Carbohydrate')[0] + "g</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
     if (map.has('fiber')) {
         if (map.has('Carbohydrate')) {
             $('#carbohydrate-text').append('</br>&nbsp Fiber');
-            $('#carbohydrate-value').append('</br>' + map.get('fiber') + 'g');
+            $('#carbohydrate-value').append('</br>' + map.get('fiber')[0] + 'g');
         } else {
-            let nutrientHtml = "<tr><td>Fiber</td><td>" + map.get('fiber') + "g</td></tr>";
+            let nutrientHtml = "<tr><td>Fiber</td><td>" + map.get('fiber')[0] + "g</td></tr>";
             $("#nutrientFacts tbody").append(nutrientHtml);
         }
     }
     if (map.has('sugars')) {
         if (map.has('Carbohydrate')) {
             $('#carbohydrate-text').append('</br>&nbsp Sugars');
-            $('#carbohydrate-value').append('</br>' + map.get('sugars') + 'g');
+            $('#carbohydrate-value').append('</br>' + map.get('sugars')[0] + 'g');
         } else {
-            let nutrientHtml = "<tr><td>Sugars</td><td>" + map.get('sugars') + "g</td></tr>";
+            let nutrientHtml = "<tr><td>Sugars</td><td>" + map.get('sugars')[0] + "g</td></tr>";
             $("#nutrientFacts tbody").append(nutrientHtml);
         }
     }
     if (map.has('protein')) {
-        let nutrientHtml = "<tr><td>Protein</td><td>" + map.get('protein') + "g</td></tr>";
+        let nutrientHtml = "<tr><td>Protein</td><td>" + map.get('protein')[0] + "g</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
     if (map.has('vitcMg')) {
-        let nutrientHtml = "<tr><td>Vitamin C</td><td>" + map.get('vitcMg') + "mg</td></tr>";
+        let nutrientHtml = "<tr><td>Vitamin C</td><td>" + map.get('vitcMg')[0] + "mg</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
     if (map.has('calciumMg')) {
-        let nutrientHtml = "<tr><td>Calcium</td><td>" + map.get('calciumMg') + "mg</td></tr>";
+        let nutrientHtml = "<tr><td>Calcium</td><td>" + map.get('calciumMg')[0] + "mg</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
     if (map.has('ironMg')) {
-        let nutrientHtml = "<tr><td>Iron</td><td>" + map.get('ironMg') + "mg</td></tr>";
+        let nutrientHtml = "<tr><td>Iron</td><td>" + map.get('ironMg')[0] + "mg</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
 }
