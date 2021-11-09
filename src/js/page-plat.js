@@ -130,7 +130,6 @@ function chargerDescriptionPlat(json) {
     } 
     */
 
-
 }
 
 function chargerOriginePlat(json) {
@@ -140,26 +139,30 @@ function chargerOriginePlat(json) {
     let region = "";
     if (map.has("country")) {
         pays = map.get("country");
+        for (var i = 0; i < pays.length; i++) {
+            pays[i] = "<a href='./page-pays.html?country=" + pays[i] + "'>" + normalizeString(pays[i], true) + "</a>";
+        }
     }
     else if (map.has("cuisine")) {
         pays = map.get("cuisine");
+        for (var i = 0; i < pays.length; i++) {
+            pays[i] = normalizeString(pays[i], true);
+        }
     }
     else if (map.has("nationalCuisine")) {
         pays = map.get("nationalCuisine");
+        for (var i = 0; i < pays.length; i++) {
+            pays[i] = normalizeString(pays[i], true);
+        }
     }
     if (map.has("region")) {
         region = map.get("region")[0];
+        region = normalizeString(region, true);
     }
 
-    for (var i = 0; i < pays.length; i++) {
-        pays[i] = normalizeString(pays[i], true);
-    }
-    pays = pays.join(", ");
-    region = normalizeString(region, true);
+    pays = pays.join(", "); 
 
-    paysLink = "<a href='./page-pays.html?country=" + pays + "'>" + pays + "</a>";
-
-    $('#origine-pays').html(paysLink);
+    $('#origine-pays').html(pays);
     $('#origine-region').html(region);
 
     if (pays == "") { $('#origine-pays').remove(); }
@@ -216,10 +219,12 @@ function chargerIngredientsPlat(json) {
         for (let k = 0; k < ingredients.length; k++) {
             let strIngredients = ingredients[k];
             let listIngredients = strIngredients.split(",");
-            if (listIngredients.length == 1) listIngredients = strIngredients.split(";");
             for (let i = 0; i < listIngredients.length; i++) {
-                let ingredient = normalizeString(listIngredients[i], false);
-                ingredientSet.add(ingredient);
+                let subListIngredients = listIngredients[i].split(";");
+                for (let j = 0; j < subListIngredients.length; j++) {
+                    let ingredient = normalizeString(subListIngredients[j], false);
+                    ingredientSet.add(ingredient);
+                }
             }
         }
     }
