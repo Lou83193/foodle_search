@@ -31,13 +31,28 @@ function rechercher(contenu_requete, trigger_resultat) {
 }
 
 function searchButtonClicked(idBarrePlats, idBarrePays) {
-    searchContent = document.getElementById(idBarrePlats).value;
-    countryContent = document.getElementById(idBarrePays).value;
+    console.log(document.getElementById(idBarrePlats));
+    searchContent = (idBarrePlats != '') ? document.getElementById(idBarrePlats).value : '';
+    countryContent = (idBarrePays != '') ? document.getElementById(idBarrePays).value : '';
     if (searchContent != '' || countryContent != '') {
         // launch search !
         // redirect with get parameters (if defined) of both !
         // the other page, on load, gets parameters, fetches content based on it and renders
         redirectParameters = '?' + (searchContent != ''? 'search='+searchContent : '') + (searchContent != '' && countryContent != ''? '&' : '') + (countryContent != ''? 'country='+countryContent : '');
-        window.location.href = window.location.href.replace('/index.html', '/recherche.html' + redirectParameters);
+        window.location.href = '/recherche.html' + redirectParameters;
     }
+}
+
+function applyHeaderSearchBarListeners() {
+
+    $('#search-button').click(function(event) {
+        searchButtonClicked('search-input', '');
+    });
+    
+    $("#search-input").keyup(function(event) {
+        if (event.keyCode == 13) {
+            $("#search-button").click();
+        }
+    });
+
 }
