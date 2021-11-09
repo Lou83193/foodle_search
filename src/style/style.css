@@ -1,5 +1,11 @@
+@font-face {
+    font-family: mainFont;
+    src: url('fonts/segoeui.woff') format('woff');
+}
+
 body {
     margin: 0;
+    font-family: mainFont;
 }
 
 /* BARRE DE NAVIGATION */
@@ -9,10 +15,12 @@ body {
 }
 .navbar-collapse {
     justify-content: flex-end;
+    margin: auto 1em; 
 }
 .navbar-brand {
     color: #fff;
     cursor: pointer;
+    margin: auto 1em; 
 }
 .navbar-brand > img {
     height: 2em;

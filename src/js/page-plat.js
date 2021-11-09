@@ -254,7 +254,7 @@ function chargerIngredientsPlat(json) {
     ingredientListHTML += "</ul>";
     $('#ingredient > div').html(ingredientListHTML); 
 
-    if (n == 0) { $('#ingredient').remove(); }
+    if (n == 0) { $('#ingredient').remove(); $('#recipe-link').remove(); }
 
 }
 
