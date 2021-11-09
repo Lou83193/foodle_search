@@ -34,7 +34,7 @@
 
     <header id="page-body" class="page-header header">
 
-        <div class="col" id="images"></div>
+        <div id="images"></div>
     
         <div id="contenu">
     
@@ -71,12 +71,33 @@
                         <div>???</div>
                     </div>  
                     <div class="tab-panel" id="nutrition">
-                        <h5>Nutrition</h5>  
-                        <div>Nothing to display here...</div>
+                        <h5>Nutrition Facts for 100 g</h5>
+                        <div>
+                            <div id="calories" style="font-weight: bold"> Calories : <span>N/A</span></div>
+                            <table class="table table-success table-bordered " id="nutrientFacts">
+                                <caption>We dont garantee the values of this table. To be healthy, eat 5 vegetables and fruits every days !</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nutrient</th>
+                                        <th scope="col">Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="nutrient_NA">
+                                        <td>N/A</td>
+                                        <td>N/A</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>  
                 </div>
             </div>
-    
+
+            <div class="recipe" id="recipe-link">
+                Recipe
+            </div>
+
             <div id="plats-similaires">
                 <h3>Similar dishes</h3>
                 <div id="barres-plats-similaires">List of similar dishes...</div>

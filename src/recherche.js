@@ -5,7 +5,7 @@ let queryNoCountryFilter = 'SELECT DISTINCT (SAMPLE(?Food) AS ?food) ?label (SAM
     '    FILTER(langMatches(lang(?Abstract), "en") || lang(?Abstract) = "")\n' +
     '    FILTER(langMatches(lang(?CountryName), "en") || lang(?CountryName) = "")\n' +
     '    FILTER((lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
-    '    FILTER (regex(?label, "(?i){1}"))\n' +
+    '    FILTER (regex(?label, "{1}($|\s|-)|(^|\s|-){1}", "i"))\n' +
     '} \n' +
     'GROUP BY ?label\n' +
     'ORDER BY ASC(?label) \n' +
@@ -18,7 +18,7 @@ let queryCountryFilter = 'SELECT DISTINCT (SAMPLE(?Food) AS ?food) ?label (SAMPL
     '    FILTER(langMatches(lang(?CountryName), "en") || lang(?CountryName) = "")\n' +
     '    FILTER(regex(?CountryName, "(?i){2}"))\n' +
     '    FILTER((lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
-    '    FILTER (regex(?label, "(?i){1}"))\n' +
+    '    FILTER (regex(?label, "{1}($|\s|-)|(^|\s|-){1}", "i"))\n' +
     '} \n' +
     'GROUP BY ?label\n' +
     'ORDER BY ASC(?label) \n' +
