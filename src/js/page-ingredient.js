@@ -23,6 +23,7 @@ function loadIngredientSearch() {
 
   let searchContent = findGetParameter('ingredient');
   document.getElementById("search-desc").innerHTML = searchContent;
+  document.getElementById("buy-link").innerHTML = "<a href='https://www.walmart.com/search?q=" + searchContent + "'>BUY</a>";
 
   let query = "SELECT (SAMPLE(?Food) AS ?food) ?label (SAMPLE(?CountryName) AS ?countryName) (SAMPLE(?Thumbnail) AS ?thumbnail) (SAMPLE(?Abstract) as ?abstract) WHERE { \
     ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?Thumbnail ; dbo:abstract ?Abstract . \
