@@ -37,7 +37,8 @@ function loadSearch() {
     'dbo:abstract ?desc;\n' +
     'rdfs:label ?label;\n' +
     'dbo:thumbnail ?flag.\n' +
-    '} LIMIT 3';
+    'FILTER(langMatches(lang(?desc), "EN"))\n' +
+    '} LIMIT 1';
     query = query.replaceAll('{1}', countryParameter);
     rechercher(query, data => {
         console.log(data);
