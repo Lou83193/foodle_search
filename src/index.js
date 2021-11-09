@@ -1,5 +1,4 @@
 function loadCountries() {
-
     let query= 'SELECT DISTINCT ?label WHERE {\n' +
         '?Country a dbo:Country. \n' +
         '?Country rdfs:label ?label.\n' +
@@ -25,6 +24,6 @@ function loadCountries() {
             list.appendChild(option);
         });
     });
-
 }
+
 
