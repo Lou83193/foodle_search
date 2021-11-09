@@ -96,7 +96,7 @@ function loadHighlightedFood() {
         let query2='SELECT ?image WHERE {\n'+
             '?food a dbo:Food.\n'+
             '?food rdfs:label "{1}"@en.\n'+
-            '?food foaf:depiction ?image.\n'+
+            '?food dbo:thumbnail ?image.\n'+
             '} LIMIT 1';
 
         rechercher(query2.replaceAll('{1}',foodname), data2 => {

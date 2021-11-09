@@ -38,9 +38,9 @@ function chargerInfosPlat(plat) {
     console.log(query6);
 
     // Plats Similaires
-    let query7 = "SELECT * WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. ?sujet a dbo:Food. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (owl:sameAs, dbo:hasVariant, dbp:variations,dbo:wikiPageWikiLink, dbp:similarDish)).}";
+    let query7 = "SELECT ?nom, SAMPLE(?Thumbnail) AS ?thumbnail WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. ?sujet a dbo:Food. ?sujet rdfs:label ?nom ; dbo:thumbnail ?Thumbnail. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(lang(?nom) = '' || langMatches(lang(?nom), 'en')). FILTER(?predicat IN (owl:sameAs, dbo:hasVariant, dbp:variations,dbo:wikiPageWikiLink, dbp:similarDish)).} GROUP BY ?nom";
     query7 = query7.replace('{1}', plat);
-    //rechercher(query7, chargerPlatSimilaire);
+    rechercher(query7, chargerPlatSimilaire);
 } 
 
 function normalizeString(str, uppercaseAll) {
@@ -356,4 +356,23 @@ function chargerImagesPlat(json) {
 
 }
 
-function chargerPlatSimilaire(json) {}
+function chargerPlatSimilaire(json) {
+    let results = json.results.bindings;
+
+    for (let result of results) {
+        // cloner template, remplir, append
+        let template = document.getElementById('template-suggestion');
+        let newNode = document.importNode(template.content, true);
+        let cardImage = newNode.querySelector('img');
+        cardImage.alt = result['nom'].value + ' image';
+        cardImage.src = result['thumbnail'].value;
+        let cardTitle = newNode.querySelector('h5');
+        cardTitle.innerHTML = result['nom'].value;
+        newNode.getElementById("card-link").href = "page-plat.html?plat=" + result['nom'].value;
+        document.getElementById('suggestions-container').insertBefore(newNode, document.getElementById("prev-btn"));
+
+    }
+
+    slider.init($($('.slider')[0]).attr('id'));
+
+}

@@ -66,12 +66,6 @@ var slider = (function() {
          * provided, use the defaults. */
         setOptions(id,opts);
 
-        /* Hide the controls if the total number of items is less than the
-         * number of items to be displayed. */
-        if(options[id].numActiveItems >= $(`#${id} ${itemClass}`).length && windowSize()) {
-            $(`#${id} .carousel-control-prev`).hide();
-            $(`#${id} .carousel-control-next`).hide();
-        }
 
         /* Set the index if one of the items has the sliderFocus CSS class */
         var idx = $('#'+id+' .sliderFocus').index();
@@ -85,10 +79,10 @@ var slider = (function() {
         /* Create click listeners for the slider controls, each item in the
          * slider and optionally for the indicators. */
         controlsListeners(id);
-        itemListener(id);
-        if(options[id].indicatorLinks) {
-            addIndicatorListeners(id);
-        }
+        //itemListener(id);
+        //if(options[id].indicatorLinks) {
+        //    addIndicatorListeners(id);
+        //}
         
         /* If the slider has the class of "slide", the user wants the slider to
         automatically increment every interval. */
