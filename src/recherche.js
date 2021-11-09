@@ -1,3 +1,23 @@
+let queryNoCountryFilter = 'SELECT DISTINCT ?Food, ?label, ?country, ?countryName, ?thumbnail, ?abstract WHERE {\n' +
+    '  ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?thumbnail ; dbo:abstract ?abstract .\n' +
+    '  ?country rdfs:label ?countryName .\n' +
+    '  \n' +
+    '  FILTER(langMatches(lang(?abstract), "en") || lang(?abstract) = "")\n' +
+    '  FILTER(langMatches(lang(?countryName), "en") || lang(?countryName) = "")\n' +
+    '  FILTER((lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
+    '  FILTER (regex(?label, "(?i){1}"))\n' +
+    '} ORDER BY ASC(?label) LIMIT 200';
+let queryCountryFilter = 'SELECT DISTINCT ?Food, ?label, ?country, ?countryName, ?thumbnail, ?abstract WHERE {\n' +
+    '  ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?thumbnail ; dbo:abstract ?abstract .\n' +
+    '  ?country rdfs:label ?countryName .\n' +
+    '  \n' +
+    '  FILTER(langMatches(lang(?abstract), "en") || lang(?abstract) = "")\n' +
+    '  FILTER(langMatches(lang(?countryName), "en") || lang(?countryName) = "")\n' +
+    '  FILTER(regex(?countryName, "(?i){2}"))\n' +
+    '  FILTER((lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
+    '  FILTER (regex(?label, "(?i){1}"))\n' +
+    '} ORDER BY ASC(?label) LIMIT 200';
+
 function cleanSearchResults() {
   document.getElementById('results-container').innerHTML = '';
 }
@@ -17,7 +37,6 @@ function displaySearchResult(index, result) {
   countryLink.innerHTML = result['countryName'].value;
   newNode.getElementById("card-link").href = "page-plat.html?plat=" + result['label'].value;
   document.getElementById('results-container').appendChild(newNode);
-  // todo : add onclick -> redirects to detail?plat=nom
 }
 
 function loadSearch() {
@@ -27,16 +46,9 @@ function loadSearch() {
   document.getElementById("search-desc").innerHTML = searchContent;
   let countryFilter = findGetParameter('country');
   console.log('Searched for (query, country):', searchContent, countryFilter);
-  let query = 'SELECT DISTINCT ?Food, ?label, ?country, ?countryName, ?thumbnail, ?abstract WHERE {\n' +
-      '  ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?thumbnail ; dbo:abstract ?abstract .\n' +
-      '  ?country rdfs:label ?countryName .\n' +
-      '  \n' +
-      '  FILTER(langMatches(lang(?abstract), "en") || lang(?abstract) = "")\n' +
-      '  FILTER(langMatches(lang(?countryName), "en") || lang(?countryName) = "")\n' +
-      '  FILTER((lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
-      '  FILTER (regex(?label, "(?i){1}"))\n' +
-      '} ORDER BY ASC(?label) LIMIT 100';
+  let query = (countryFilter == null? queryNoCountryFilter : queryCountryFilter);
   query = query.replaceAll('{1}', searchContent);
+  if (countryFilter != null) query = query.replaceAll('{2}', countryFilter);
   rechercher(query, data => {
     console.log(data);
     cleanSearchResults();
