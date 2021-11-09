@@ -8,6 +8,15 @@
     width: 40%;
 }
 
+/*#images img {
+    display: block;
+    max-width:100%;
+    max-height:25%;
+    width: auto;
+    height: auto;
+}*/
+
+
 #contenu {
     display: flex;
     flex-direction: column; 
