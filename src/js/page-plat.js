@@ -4,7 +4,7 @@ function chargerInfosPlat(plat) {
     $("#nom-plat").html("<h1>" + plat + "</h>");
 
     // Recette
-    $('#recipe-link').html("<a href='https://www.allrecipes.com/search/results/?search=" + plat + "'>Recipes on allrecipes</a>");
+    $('#recipe-link').html("<a href='https://www.allrecipes.com/search/results/?search=" + plat + "' class='btn btn-info btn-lg'>Search recipe</a>");
 
     // Description du plat
     let query1 = "SELECT * WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (dbo:abstract, rdfs:comment, dbp:caption)). }";
@@ -26,13 +26,13 @@ function chargerInfosPlat(plat) {
     query4 = query4.replace('{1}', plat);
     rechercher(query4, chargerIngredientsPlat);
 
-
     // Valeurs nutritionnelles du plat
     let query5 = "SELECT * WHERE {?Food a dbo:Food. ?Food rdfs:label '{1}'@en. ?Food ?predicat ?sujet. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (dbp:kj, dbp:fat, dbp:satfat, dbp:sodiumMg,  dbr:Carbohydrate, dbp:fiber, dbp:sugars, dbp:protein, dbp:vitcMg, dbp:calciumMg, dbp:ironMg)). }";
     query5 = query5.replace('{1}', plat);
-    rechercher(query5, chargerNutritionPlat);
+    rechercher(query5, chargerNutritionPlat); 
 
-    let query6 = "SELECT ?image WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food foaf:depiction ?image. } LIMIT 4"
+    // Images du plat
+    let query6 = "SELECT DISTINCT ?image  WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. { {?food dbo:thumbnail ?image.} UNION {?food foaf:depiction ?image.}} } LIMIT 5";
     query6 = query6.replaceAll('{1}', plat);
     rechercher(query6, chargerImagesPlat);
     console.log(query6);
@@ -129,7 +129,6 @@ function chargerDescriptionPlat(json) {
     } 
     */
 
-
 }
 
 function chargerOriginePlat(json) {
@@ -139,27 +138,30 @@ function chargerOriginePlat(json) {
     let region = "";
     if (map.has("country")) {
         pays = map.get("country");
+        for (var i = 0; i < pays.length; i++) {
+            pays[i] = "<a href='./page-pays.html?country=" + pays[i] + "'>" + normalizeString(pays[i], true) + "</a>";
+        }
     }
     else if (map.has("cuisine")) {
         pays = map.get("cuisine");
+        for (var i = 0; i < pays.length; i++) {
+            pays[i] = normalizeString(pays[i], true);
+        }
     }
     else if (map.has("nationalCuisine")) {
         pays = map.get("nationalCuisine");
+        for (var i = 0; i < pays.length; i++) {
+            pays[i] = normalizeString(pays[i], true);
+        }
     }
     if (map.has("region")) {
         region = map.get("region")[0];
+        region = normalizeString(region, true);
     }
 
-    for (var i = 0; i < pays.length; i++) {
-        pays[i] = normalizeString(pays[i], true);
-    }
-    pays = pays.join(", ");
-    region = normalizeString(region, true);
+    pays = pays.join(", "); 
 
-    paysLink = "<a href='./page-pays.html?country=" + pays + "'>" + pays + "</a>";
-    console.log("Pays Link " + paysLink);
-
-    $('#origine-pays').html(paysLink);
+    $('#origine-pays').html(pays);
     $('#origine-region').html(region);
 
     if (pays == "") { $('#origine-pays').remove(); }
@@ -192,11 +194,20 @@ function chargerTypePlat(json) {
         temperature[i] = normalizeString(temperature[i], true);
     }
     temperature = temperature.join(", ");
+    
+    let fullType = "";
+    if (type != "" && temperature != "") {
+        fullType = type + " - " + temperature;
+    }
+    else if (type != "") {
+        fullType = type;
+    }
+    else if (temperature != "") {
+        fullType = temperature;
+    }
+    $('#type').html(fullType);
 
-    let fullType = (temperature != "") ? type + " - " + temperature : type; 
-    $('#type-plat > div').html(fullType);
-
-    if (fullType == "") { $('#type-plat').remove(); }
+    if (fullType == "") { $('#type').remove(); $('#nom-plat-type-separator').remove(); }
 
 }
 
@@ -207,10 +218,12 @@ function chargerIngredientsPlat(json) {
         for (let k = 0; k < ingredients.length; k++) {
             let strIngredients = ingredients[k];
             let listIngredients = strIngredients.split(",");
-            if (listIngredients.length == 1) listIngredients = strIngredients.split(";");
             for (let i = 0; i < listIngredients.length; i++) {
-                let ingredient = normalizeString(listIngredients[i], false);
-                ingredientSet.add(ingredient);
+                let subListIngredients = listIngredients[i].split(";");
+                for (let j = 0; j < subListIngredients.length; j++) {
+                    let ingredient = normalizeString(subListIngredients[j], false);
+                    ingredientSet.add(ingredient);
+                }
             }
         }
     }
@@ -233,14 +246,20 @@ function chargerIngredientsPlat(json) {
     let ingredientListHTML = "<ul>";
     let n = ingredientList.length;
     for (let i = 0; i < n; i++) {
-        ingredientListHTML += "<li><a style='color: black' href='https://en.wikipedia.org/wiki/" + ingredientList[i] + "'>" + ingredientList[i] + "</a> (<a href='https://www.walmart.com/search?q=" + ingredientList[i] + "'>BUY</a>)</li>";
+        if (ingredientList[i] == "") continue; 
+        //let ingredientURL = "<a style='color: black' href='https://en.wikipedia.org/wiki/" + ingredientList[i] + "'>" + ingredientList[i] + "</a> (<a href='https://www.walmart.com/search?q=" + ingredientList[i] + "'>BUY</a>)";
+        let ingredientURL = "<a class='ingredientURL' href='./page-ingredient.html?ingredient=" + ingredientList[i] + "'>" + ingredientList[i] + "</a>";
+        ingredientListHTML += "<li>" + ingredientURL + "</li>";
     }
     ingredientListHTML += "</ul>";
     $('#ingredient > div').html(ingredientListHTML); 
 
+    if (n == 0) { $('#ingredient').remove(); }
+
 }
 
 function chargerNutritionPlat(json) {
+
     const map = obtenirResultatsJson(json);
 
     // Calories field
@@ -257,87 +276,84 @@ function chargerNutritionPlat(json) {
     if (map.has('fat')) {
         let nutrientHtml = "<tr><td>Total Fat";
         if (map.has('satfat')) {
-            nutrientHtml += "</br>&nbsp Saturated</td><td>" + map.get('fat') + "g </br>" + map.get('satfat') + "g</td></tr>";
+            nutrientHtml += "</br>&nbsp Saturated</td><td>" + map.get('fat')[0] + "g </br>" + map.get('satfat')[0] + "g</td></tr>";
+        } else {
+            nutrientHtml += "</td><td>" + map.get('fat')[0] + "g</td></tr>";
         }
-        nutrientHtml += "</td><td>" + map.get('fat') + "g</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
     if (map.has('sodiumMg')) {
-        let nutrientHtml = "<tr><td>Sodium</td><td>" + map.get('sodiumMg') + "mg</td></tr>";
+        let nutrientHtml = "<tr><td>Sodium</td><td>" + map.get('sodiumMg')[0] + "mg</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
     if (map.has('Carbohydrate')) {
-        let nutrientHtml = "<tr><td id='carbohydrate-text'>Total Carbohydrate</td><td id='carbohydrate-value'>" + map.get('Carbohydrate') + "g</td></tr>";
+        let nutrientHtml = "<tr><td id='carbohydrate-text'>Total Carbohydrate</td><td id='carbohydrate-value'>" + map.get('Carbohydrate')[0] + "g</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
     if (map.has('fiber')) {
         if (map.has('Carbohydrate')) {
             $('#carbohydrate-text').append('</br>&nbsp Fiber');
-            $('#carbohydrate-value').append('</br>' + map.get('fiber') + 'g');
+            $('#carbohydrate-value').append('</br>' + map.get('fiber')[0] + 'g');
         } else {
-            let nutrientHtml = "<tr><td>Fiber</td><td>" + map.get('fiber') + "g</td></tr>";
+            let nutrientHtml = "<tr><td>Fiber</td><td>" + map.get('fiber')[0] + "g</td></tr>";
             $("#nutrientFacts tbody").append(nutrientHtml);
         }
     }
     if (map.has('sugars')) {
         if (map.has('Carbohydrate')) {
             $('#carbohydrate-text').append('</br>&nbsp Sugars');
-            $('#carbohydrate-value').append('</br>' + map.get('sugars') + 'g');
+            $('#carbohydrate-value').append('</br>' + map.get('sugars')[0] + 'g');
         } else {
-            let nutrientHtml = "<tr><td>Sugars</td><td>" + map.get('sugars') + "g</td></tr>";
+            let nutrientHtml = "<tr><td>Sugars</td><td>" + map.get('sugars')[0] + "g</td></tr>";
             $("#nutrientFacts tbody").append(nutrientHtml);
         }
     }
     if (map.has('protein')) {
-        let nutrientHtml = "<tr><td>Protein</td><td>" + map.get('protein') + "g</td></tr>";
+        let nutrientHtml = "<tr><td>Protein</td><td>" + map.get('protein')[0] + "g</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
     if (map.has('vitcMg')) {
-        let nutrientHtml = "<tr><td>Vitamin C</td><td>" + map.get('vitcMg') + "mg</td></tr>";
+        let nutrientHtml = "<tr><td>Vitamin C</td><td>" + map.get('vitcMg')[0] + "mg</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
     if (map.has('calciumMg')) {
-        let nutrientHtml = "<tr><td>Calcium</td><td>" + map.get('calciumMg') + "mg</td></tr>";
+        let nutrientHtml = "<tr><td>Calcium</td><td>" + map.get('calciumMg')[0] + "mg</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
     if (map.has('ironMg')) {
-        let nutrientHtml = "<tr><td>Iron</td><td>" + map.get('ironMg') + "mg</td></tr>";
+        let nutrientHtml = "<tr><td>Iron</td><td>" + map.get('ironMg')[0] + "mg</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
+
 }
 
 function chargerImagesPlat(json) {
 
-    let container = document.getElementById("images");
-    //let tabImg = [];
+    let res = json.results.bindings;
+    let thumbnailURI = "";
+    console.log(json);
 
-    for (let i = 0; i<json.results.bindings.length; i++){
-        let img = document.createElement('img');
-        img.src = json.results.bindings[i]['image'].value;
-        img.classList.add("w-100");
-        img.classList.add("h-60");
-        //tabImg.push(img);
-        container.appendChild(img);
+    // Add the thumbnail first
+    if (res.length > 0) {
+        let thumbnail = document.createElement('img');
+        thumbnail.src = res[0]['image'].value;
+        thumbnailURI = thumbnail.src;
+        $('#images .row:nth-child(1) .col:nth-child(1)').append(thumbnail); 
     }
-    /*let div1 = document.createElement('div');
-    div1.classList.add("h-50");
-    div1.classList.add("w-100");
-    div1.appendChild(tabImg[0]);
+    
+    // Then the other depictions 
+    if (res.length > 1) {
+        let count = 0;
+        for (let i = 1; i < res.length; i++) {
+            let img = document.createElement('img');
+            img.src = res[i]['image'].value;
+            if (thumbnailURI.toLowerCase().includes(img.src.toLowerCase())) continue; // skip if it's the same URI as the thumbnail
+            $('#images .row:nth-child(' + ((count>1)+2) + ') .col:nth-child(' + (((count)%2)+1) + ')').append(img);   
+            console.log(count);
+            count++;
+        }
+    }
 
-    let div2 = document.createElement('div');
-    div2.classList.add("row");
-    div2.classList.add("h-20");
-    div2.classList.add("w-100");
-    div2.appendChild(tabImg[1]);
-    div2.appendChild(tabImg[2]);
-
-    let div3 = document.createElement('div');
-    div3.classList.add("h-30");
-    div3.classList.add("w-100");
-    div3.appendChild(tabImg[3]);
-
-    container.appendChild(div1);
-    container.appendChild(div2);
-    container.appendChild(div3);
-    */
 }
+
+function chargerPlatSimilaire(json) {}

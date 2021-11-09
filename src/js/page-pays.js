@@ -30,6 +30,7 @@ function loadSearch() {
     // get parameters (null if not defined)
     let countryParameter = findGetParameter('country');
     document.getElementById("country-title").innerHTML = countryParameter;
+    
     console.log('Searched for (country) description:', countryParameter);
     let query = 'SELECT ?label ?desc ?flag WHERE {\n' +
     '?country a dbo:Country.\n' +
@@ -40,6 +41,7 @@ function loadSearch() {
     'FILTER(langMatches(lang(?desc), "EN"))\n' +
     '} LIMIT 1';
     query = query.replaceAll('{1}', countryParameter);
+    
     rechercher(query, data => {
         console.log(data);
         let index = [];
@@ -53,13 +55,20 @@ function loadSearch() {
     });
     
     console.log('Searched for (country) food:', countryParameter);
-    query = 'SELECT ?food WHERE {\n' +
-    '?country a dbo:Country.\n' +
-    '?country rdfs:label "{1}"@en.\n' +
-    '?country dbo:country ?food.\n' +
-    '?food a dbo:Food.\n' +
-    '} LIMIT 10';
+    query = 'SELECT DISTINCT (SAMPLE(?Food) AS ?food) ?label (SAMPLE(?Thumbnail) AS ?thumbnail) (SAMPLE(?Abstract) as ?abstract) WHERE  {\n' +
+    '    ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?Thumbnail ; dbo:abstract ?Abstract .\n' +
+    '    ?country rdfs:label ?CountryName.\n' +
+    '\n' +
+    '    FILTER(langMatches(lang(?Abstract), "en") || lang(?Abstract) = "")\n' +
+    '    FILTER(langMatches(lang(?CountryName), "en") || lang(?CountryName) = "")\n' +
+    '    FILTER(regex(?CountryName, "(?i){1}"))\n' +
+    '    FILTER((lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
+    '} \n' +
+    'GROUP BY ?label\n' +
+    'ORDER BY ASC(?label) \n' +
+    'LIMIT 200';
     query = query.replaceAll('{1}', countryParameter);
+    
     rechercher(query, data => {
         console.log(data);
         cleanSearchResults();
@@ -68,7 +77,7 @@ function loadSearch() {
         data.head.vars.forEach((v, _) => {
             index.push(v);
         });
-        
+
         data.results.bindings.forEach(r => {
             displaySearchResult(index, r);
         });
