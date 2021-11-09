@@ -25,7 +25,7 @@ function loadIngredientSearch() {
   document.getElementById("search-desc").innerHTML = searchContent;
   document.getElementById("buy-link").innerHTML = "<a href='https://www.walmart.com/search?q=" + searchContent + "'>BUY</a>";
 
-  let query = "SELECT (SAMPLE(?Food) AS ?food) ?label (SAMPLE(?CountryName) AS ?countryName) (SAMPLE(?Thumbnail) AS ?thumbnail) (SAMPLE(?Abstract) as ?abstract) WHERE { \
+  let query = "SELECT ?predicat (SAMPLE(?Food) AS ?food) ?label (SAMPLE(?CountryName) AS ?countryName) (SAMPLE(?Thumbnail) AS ?thumbnail) (SAMPLE(?Abstract) as ?abstract) WHERE { \
     ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?Thumbnail ; dbo:abstract ?Abstract . \
     ?country rdfs:label ?CountryName . \
     ?Food a dbo:Food. \
@@ -34,7 +34,7 @@ function loadIngredientSearch() {
     FILTER(langMatches(lang(?Abstract), 'en') || lang(?Abstract) = '') \
     FILTER(langMatches(lang(?CountryName), 'en') || lang(?CountryName) = '') \
     FILTER(lang(?label) = '' || langMatches(lang(?label), 'en')). \
-    FILTER(regex(?labelIngredient, '(?i){1}')). \
+    FILTER((isLiteral(?sujet) && regex(?sujet, '(?i){1}')) || (!isLiteral(?sujet) && regex(?labelIngredient, '(?i){1}'))). \
     FILTER(?predicat IN (dbo:ingredient, dbo:ingredientName, dbp:mainIngredient, dbp:minorIngredient)). \
     } \
     LIMIT 200";
