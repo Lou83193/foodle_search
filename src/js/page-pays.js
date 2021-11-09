@@ -34,8 +34,8 @@ function loadSearch() {
     let query = 'SELECT ?label ?desc ?flag WHERE {\n' +
     '?country a dbo:Country.\n' +
     '?country rdfs:label "{1}"@en;\n' +
-    'dbo:abstract ?desc.\n' +
-    'rdfs:label ?label.\n' +
+    'dbo:abstract ?desc;\n' +
+    'rdfs:label ?label;\n' +
     'dbo:thumbnail ?flag.\n' +
     '} LIMIT 3';
     query = query.replaceAll('{1}', countryParameter);
