@@ -228,7 +228,9 @@ function chargerIngredientsPlat(json) {
     let ingredientListHTML = "<ul>";
     let n = ingredientList.length;
     for (let i = 0; i < n; i++) {
-        ingredientListHTML += "<li><a style='color: black' href='https://en.wikipedia.org/wiki/" + ingredientList[i] + "'>" + ingredientList[i] + "</a> (<a href='https://www.walmart.com/search?q=" + ingredientList[i] + "'>BUY</a>)</li>";
+        //let ingredientURL = "<a style='color: black' href='https://en.wikipedia.org/wiki/" + ingredientList[i] + "'>" + ingredientList[i] + "</a> (<a href='https://www.walmart.com/search?q=" + ingredientList[i] + "'>BUY</a>)";
+        let ingredientURL = "<a href='./page-ingredient.html?ingredient=" + ingredientList[i] + "'>" + ingredientList[i] + "</a>";
+        ingredientListHTML += "<li>" + ingredientURL + "</li>";
     }
     ingredientListHTML += "</ul>";
     $('#ingredient > div').html(ingredientListHTML); 

@@ -21,16 +21,22 @@ function displaySearchResult(index, result) {
 
 function loadIngredientSearch() {
 
-  let searchContent = findGetParameter('search');
+  let searchContent = findGetParameter('ingredient');
   document.getElementById("search-desc").innerHTML = searchContent;
 
-  let query = "SELECT ?food WHERE { \
-    ?food a dbo:Food. \
-    ?food ?predicat ?sujet. \
-    ?sujet rdfs:label ?label. \
-    FILTER(regex(?label, '(?i){1}')) \
+  let query = "SELECT (SAMPLE(?Food) AS ?food) ?label (SAMPLE(?CountryName) AS ?countryName) (SAMPLE(?Thumbnail) AS ?thumbnail) (SAMPLE(?Abstract) as ?abstract) WHERE { \
+    ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?Thumbnail ; dbo:abstract ?Abstract . \
+    ?country rdfs:label ?CountryName . \
+    ?Food a dbo:Food. \
+    ?Food ?predicat ?sujet. \
+    ?sujet rdfs:label ?labelIngredient. \
+    FILTER(langMatches(lang(?Abstract), 'en') || lang(?Abstract) = '') \
+    FILTER(langMatches(lang(?CountryName), 'en') || lang(?CountryName) = '') \
+    FILTER(lang(?label) = '' || langMatches(lang(?label), 'en')). \
+    FILTER(regex(?labelIngredient, '(?i){1}')). \
     FILTER(?predicat IN (dbo:ingredient, dbo:ingredientName, dbp:mainIngredient, dbp:minorIngredient)). \
-    }";
+    } \
+    LIMIT 200";
   query = query.replaceAll('{1}', searchContent);
   
   rechercher(query, data => {
