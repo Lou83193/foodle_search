@@ -4,7 +4,7 @@
 }
 
 #images {
-    background-color: rgba(0, 0, 0, 0.1); 
+    background-color: rgba(0, 0, 0, 0.1);
     width: 40%;
 }
 
@@ -19,7 +19,7 @@
 
 #contenu {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     width: 60%;
     margin: 0em 1em;
     box-sizing: border-box;
@@ -33,14 +33,14 @@
     margin: 1em 0em;
 }
 #nom-plat {
-    border-bottom: solid #4C90F6 3px;  
+    border-bottom: solid #4C90F6 3px;
 }
 #origine {
     display: flex;
     flex-direction: row;
     background: rgba(0, 0, 0, 0.1);
-    border-radius: 0.5em;  
-    padding: 0.25em 0.75em; 
+    border-radius: 0.5em;
+    padding: 0.25em 0.75em;
     height: fit-content;
 }
 #origine-label {
@@ -49,14 +49,14 @@
 }
 
 #description-plat {
-    line-height: 1.5em;  
+    line-height: 1.5em;
 }
 #description-plat.collapse:not(.show) {
     display: block;
     height: 3rem;
     overflow: hidden;
 }
-  
+
 #description-plat.collapsing {
     height: 3rem;
 }
@@ -89,7 +89,7 @@
 .tab-panel {
     background-color: rgba(0, 0, 0, 0.15);
     padding: 0.5em 1em;
-    border-radius: 0.5em; 
+    border-radius: 0.5em;
 }
 
 #ingredient {
@@ -115,3 +115,5 @@
     display: flex;
     flex-direction: row;
 }
+
+

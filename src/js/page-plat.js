@@ -37,7 +37,7 @@ function chargerInfosPlat(plat) {
     // Plats Similaires
     let query7 = "SELECT * WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. ?sujet a dbo:Food. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (owl:sameAs, dbo:hasVariant, dbp:variations,dbo:wikiPageWikiLink, dbp:similarDish)).}";
     query7 = query7.replace('{1}', plat);
-    rechercher(query7, chargerPlatSimilaire);
+    //rechercher(query7, chargerPlatSimilaire); TODO
     
 
 } 
