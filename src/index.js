@@ -80,11 +80,11 @@ function loadHighlightedFood() {
         console.log(data);
         let foodname = data.results.bindings["0"]["label"]["value"];
         let type = data.results.bindings["0"]["type"]["value"];
-        let link = data.results.bindings["0"]["Food"]["value"];
+        //let link = data.results.bindings["0"]["Food"]["value"];
         let i= 'http://dbpedia.org/resource/'.length;
         type = " - "+ type.substring(i)
         let x = document.createElement("A");
-        x.setAttribute("href", link);
+        x.setAttribute("href", 'page-plat.html?plat='+foodname);
         let clickable=document.createTextNode(foodname+type);
         x.appendChild(clickable);
         document.getElementById("plat-du-jour-nom").appendChild(x);
