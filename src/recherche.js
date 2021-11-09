@@ -33,7 +33,7 @@ function displaySearchResult(index, result) {
   let cardText = newNode.querySelector('p');
   cardText.innerHTML = result['abstract'].value;
   let countryLink = newNode.querySelectorAll('a')[1];
-  countryLink.href = "page-pays.html/?country=" + result['country'].value;
+  countryLink.href = "page-pays.html/?country=" + result['countryName'].value;
   countryLink.innerHTML = result['countryName'].value;
   newNode.getElementById("card-link").href = "page-plat.html?plat=" + result['label'].value;
   document.getElementById('results-container').appendChild(newNode);
@@ -48,7 +48,7 @@ function loadSearch() {
     window.location.href = "page-pays.html?country="+countryFilter;
     return;
   }// redirect to country search
-  
+
   document.getElementById("search-desc").innerHTML = searchContent;
   console.log('Searched for (query, country):', searchContent, countryFilter);
   let query = (countryFilter == null? queryNoCountryFilter : queryCountryFilter);
