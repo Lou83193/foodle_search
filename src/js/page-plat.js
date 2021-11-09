@@ -155,7 +155,10 @@ function chargerOriginePlat(json) {
     pays = pays.join(", ");
     region = normalizeString(region, true);
 
-    $('#origine-pays').html(pays);
+    paysLink = "<a href='/page-pays.html?country=" + pays + "'>" + pays + "</a>";
+    console.log("Pays Link " + paysLink);
+
+    $('#origine-pays').html(paysLink);
     $('#origine-region').html(region);
 
     if (pays == "") { $('#origine-pays').remove(); }

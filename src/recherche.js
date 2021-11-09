@@ -58,7 +58,6 @@ function loadSearch() {
   console.log('Searched for (query, country):', searchContent, countryFilter);
   let query = (countryFilter == null? queryNoCountryFilter : queryCountryFilter);
   query = query.replaceAll('{1}', searchContent);
-  console.log(query);
   if (countryFilter != null) query = query.replaceAll('{2}', countryFilter);
   rechercher(query, data => {
     console.log(data);
