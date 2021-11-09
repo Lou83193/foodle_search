@@ -30,6 +30,7 @@ function loadSearch() {
     // get parameters (null if not defined)
     let countryParameter = findGetParameter('country');
     document.getElementById("country-title").innerHTML = countryParameter;
+    
     console.log('Searched for (country) description:', countryParameter);
     let query = 'SELECT ?label ?desc ?flag WHERE {\n' +
     '?country a dbo:Country.\n' +
@@ -40,6 +41,7 @@ function loadSearch() {
     'FILTER(langMatches(lang(?desc), "EN"))\n' +
     '} LIMIT 1';
     query = query.replaceAll('{1}', countryParameter);
+    
     rechercher(query, data => {
         console.log(data);
         let index = [];
@@ -53,13 +55,18 @@ function loadSearch() {
     });
     
     console.log('Searched for (country) food:', countryParameter);
-    query = 'SELECT ?food WHERE {\n' +
-    '?country a dbo:Country.\n' +
-    '?country rdfs:label "{1}"@en.\n' +
-    '?country dbo:country ?food.\n' +
-    '?food a dbo:Food.\n' +
-    '} LIMIT 10';
+    query = 'SELECT DISTINCT ?label ?thumbnail ?abstract WHERE  {\n' +
+    '    ?food a dbo:Food ; rdfs:label ?label ; dbo:thumbnail ?thumbnail ; dbo:abstract ?abstract .\n' +
+    '    ?country rdfs:label "{1}"@en.\n' +
+    '\n' +
+    '    FILTER(langMatches(lang(?Abstract), "en") || lang(?Abstract) = "")\n' +
+    '    FILTER((lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
+    '} \n' +
+    'GROUP BY ?label\n' +
+    'ORDER BY ASC(?label) \n' +
+    'LIMIT 200';
     query = query.replaceAll('{1}', countryParameter);
+    
     rechercher(query, data => {
         console.log(data);
         cleanSearchResults();
@@ -68,7 +75,7 @@ function loadSearch() {
         data.head.vars.forEach((v, _) => {
             index.push(v);
         });
-        
+
         data.results.bindings.forEach(r => {
             displaySearchResult(index, r);
         });
