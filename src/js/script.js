@@ -39,7 +39,7 @@ function searchButtonClicked(idBarrePlats, idBarrePays) {
         // redirect with get parameters (if defined) of both !
         // the other page, on load, gets parameters, fetches content based on it and renders
         redirectParameters = '?' + (searchContent != ''? 'search='+searchContent : '') + (searchContent != '' && countryContent != ''? '&' : '') + (countryContent != ''? 'country='+countryContent : '');
-        window.location.href = '/recherche.html' + redirectParameters;
+        window.location.href = 'recherche.html' + redirectParameters;
     }
 }
 

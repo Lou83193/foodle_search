@@ -1,22 +1,28 @@
-let queryNoCountryFilter = 'SELECT DISTINCT ?Food, ?label, ?country, ?countryName, ?thumbnail, ?abstract WHERE {\n' +
-    '  ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?thumbnail ; dbo:abstract ?abstract .\n' +
-    '  ?country rdfs:label ?countryName .\n' +
-    '  \n' +
-    '  FILTER(langMatches(lang(?abstract), "en") || lang(?abstract) = "")\n' +
-    '  FILTER(langMatches(lang(?countryName), "en") || lang(?countryName) = "")\n' +
-    '  FILTER((lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
-    '  FILTER (regex(?label, "{1}($|\s|-)|(^|\s|-){1}", "i"))\n' +
-    '} ORDER BY ASC(?label) LIMIT 200';
-let queryCountryFilter = 'SELECT DISTINCT ?Food, ?label, ?country, ?countryName, ?thumbnail, ?abstract WHERE {\n' +
-    '  ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?thumbnail ; dbo:abstract ?abstract .\n' +
-    '  ?country rdfs:label ?countryName .\n' +
-    '  \n' +
-    '  FILTER(langMatches(lang(?abstract), "en") || lang(?abstract) = "")\n' +
-    '  FILTER(langMatches(lang(?countryName), "en") || lang(?countryName) = "")\n' +
-    '  FILTER(regex(?countryName, "(?i){2}"))\n' +
-    '  FILTER((lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
-    '  FILTER (regex(?label, "{1}($|\s|-)|(^|\s|-){1}", "i"))' +
-    '} ORDER BY ASC(?label) LIMIT 200';
+let queryNoCountryFilter = 'SELECT DISTINCT (SAMPLE(?Food) AS ?food) ?label (SAMPLE(?CountryName) AS ?countryName) (SAMPLE(?Thumbnail) AS ?thumbnail) (SAMPLE(?Abstract) as ?abstract) WHERE  {\n' +
+    '    ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?Thumbnail ; dbo:abstract ?Abstract .\n' +
+    '    ?country rdfs:label ?CountryName .\n' +
+    '\n' +
+    '    FILTER(langMatches(lang(?Abstract), "en") || lang(?Abstract) = "")\n' +
+    '    FILTER(langMatches(lang(?CountryName), "en") || lang(?CountryName) = "")\n' +
+    '    FILTER((lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
+    '    FILTER (regex(?label, "{1}($|\s|-)|(^|\s|-){1}", "i"))\n' +
+    '} \n' +
+    'GROUP BY ?label\n' +
+    'ORDER BY ASC(?label) \n' +
+    'LIMIT 200';
+let queryCountryFilter = 'SELECT DISTINCT (SAMPLE(?Food) AS ?food) ?label (SAMPLE(?CountryName) AS ?countryName) (SAMPLE(?Thumbnail) AS ?thumbnail) (SAMPLE(?Abstract) as ?abstract) WHERE  {\n' +
+    '    ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?Thumbnail ; dbo:abstract ?Abstract .\n' +
+    '    ?country rdfs:label ?CountryName .\n' +
+    '\n' +
+    '    FILTER(langMatches(lang(?Abstract), "en") || lang(?Abstract) = "")\n' +
+    '    FILTER(langMatches(lang(?CountryName), "en") || lang(?CountryName) = "")\n' +
+    '    FILTER(regex(?CountryName, "(?i){2}"))\n' +
+    '    FILTER((lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
+    '    FILTER (regex(?label, "{1}($|\s|-)|(^|\s|-){1}", "i"))\n' +
+    '} \n' +
+    'GROUP BY ?label\n' +
+    'ORDER BY ASC(?label) \n' +
+    'LIMIT 200';
 
 function cleanSearchResults() {
   document.getElementById('results-container').innerHTML = '';
@@ -40,7 +46,6 @@ function displaySearchResult(index, result) {
 }
 
 function loadSearch() {
-  // todo : HANDLE SEARCH CONTENT NULL -> search only country (redirect to page Emilien)
   // get parameters (null if not defined)
   let searchContent = findGetParameter('search');
   let countryFilter = findGetParameter('country');
