@@ -74,14 +74,18 @@ body {
     margin: 1em 0em;
 }
 
-#plat-du-jour-image {
-    width: 15%;
-    margin-right: 1em;
-}
+
 #plat-du-jour-nom {
     font-weight: bold;
 }
 
-#plat-du-jour-image img {
-    width: 100%;
+#plat-du-jour {
+    margin-left: 1em;
+    height: 200px;
 }
+
+#plat-du-jour-image img {
+    object-fit: cover;
+    height: 200px;
+}
+
