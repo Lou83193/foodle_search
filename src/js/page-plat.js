@@ -151,7 +151,7 @@ function chargerOriginePlat(json) {
     pays = pays.join(", ");
     region = normalizeString(region, true);
 
-    paysLink = "<a href='/page-pays.html?country=" + pays + "'>" + pays + "</a>";
+    paysLink = "<a href='./page-pays.html?country=" + pays + "'>" + pays + "</a>";
     console.log("Pays Link " + paysLink);
 
     $('#origine-pays').html(paysLink);
