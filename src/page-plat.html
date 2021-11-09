@@ -38,9 +38,13 @@
     
         <div id="contenu">
     
-            <div id="nom-origine">
+            <div id="nom-type-origine">
 
-                <div id="nom-plat">Name of the dish</div>
+                <div id="nom-type">
+                    <div id="nom-plat">Name of the dish</div>
+                    <div id="nom-plat-type-separator">•</div>
+                    <div id="type"></div>
+                </div>
 
                 <div id="origine">
                     <div id="origine-label">From:</div>
@@ -48,7 +52,6 @@
                         <div id="origine-pays">Country of origin</div> 
                         <div id="origine-region">Region of origin</div>
                     </div>
-                    
                 </div>
 
             </div>
@@ -64,12 +67,11 @@
                         <h5>Ingredients</h5>  
                         <div></div> 
                     </div>
+                    <div class="recipe-button" id="recipe-link">
+                        Recipe
+                    </div>
                 </div>
                 <div id="tab-droite">
-                    <div class="tab-panel" id="type-plat">
-                        <h5>Dish type</h5>  
-                        <div>???</div>
-                    </div>  
                     <div class="tab-panel" id="nutrition">
                         <h5>Nutrition Facts for 100 g</h5>
                         <div>
@@ -94,9 +96,7 @@
                 </div>
             </div>
 
-            <div class="recipe" id="recipe-link">
-                Recipe
-            </div>
+            
 
             <div id="plats-similaires">
                 <h3>Similar dishes</h3>

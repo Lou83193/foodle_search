@@ -4,29 +4,38 @@
 }
 
 #images {
-    width: 30vw;
-    height:100vh;
-    margin:0;
+    width: 30%;
+    margin: 0;
+    margin-left: 0;
 }
-
-
 #contenu {
     display: flex;
     flex-direction: column; 
-    width: 60%;
-    margin: 0em 1em;
+    width: 70%;
+    margin: 1em 2em; 
     box-sizing: border-box;
 }
 
-#nom-origine {
+#nom-type-origine {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content:space-between;
     margin: 1em 0em;
 }
+#nom-type {
+    display: flex;
+    flex-direction: row;
+}
 #nom-plat {
     border-bottom: solid #4C90F6 3px;  
+}
+#nom-plat-type-separator {
+    margin: auto 2em;
+}
+#type {
+    margin: auto 0;
+    font-style: oblique;
 }
 #origine {
     display: flex;
@@ -42,7 +51,7 @@
 }
 
 #description-plat {
-    line-height: 1.5em;  
+    line-height: 1.5em; 
 }
 #description-plat.collapse:not(.show) {
     display: block;
@@ -53,11 +62,9 @@
 #description-plat.collapsing {
     height: 3rem;
 }
-
 #description a.collapsed::after {
     content: '+ Show More';
 }
-
 #description a:not(.collapsed)::after {
     content: '- Show Less';
 }
@@ -86,7 +93,9 @@
 }
 
 #ingredient {
-    background-color: rgba(251, 196, 4, 0.4);
+    background-color: white;
+    border: solid 1px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.1);
 }
 #ingredient ul {
     margin-top: inherit;
@@ -96,9 +105,11 @@
 #ingredient ul li {
     list-style: square;
 }
+/*
 .ingredientURL {
     color: black;
 }
+*/
 
 #type-plat {
     background-color: rgba(237, 78, 61, 0.4);
@@ -108,17 +119,23 @@
     background-color: rgba(60, 177, 94, 0.4);
 }
 
+#plats-similaires {
+    margin-top: 2em;
+}
 #barres-plats-similaires {
     display: flex;
     flex-direction: row;
 }
 
-.recipe {
-    display: flex;
-    flex-direction: row;
+.recipe-button {
     background: rgba(0, 0, 0, 0.1);
     border-radius: 0.5em;
-    padding: 0.25em 0.75em;
-    height: fit-content;
-    width: 50%;
+    padding: 0.25em 1.75em;
+    margin: 2em 0;
+    width: fit-content;
+}
+
+.recipe-button > a {
+    text-decoration: none;
+    color: black;
 }

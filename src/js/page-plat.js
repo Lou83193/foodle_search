@@ -4,7 +4,7 @@ function chargerInfosPlat(plat) {
     $("#nom-plat").html("<h1>" + plat + "</h>");
 
     // Recette
-    $('#recipe-link').html("<a href='https://www.allrecipes.com/search/results/?search=" + plat + "'>Recipes on allrecipes</a>");
+    $('#recipe-link').html("<a href='https://www.allrecipes.com/search/results/?search=" + plat + "'>Search recipe</a>");
 
     // Description du plat
     let query1 = "SELECT * WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (dbo:abstract, rdfs:comment, dbp:caption)). }";
@@ -26,12 +26,12 @@ function chargerInfosPlat(plat) {
     query4 = query4.replace('{1}', plat);
     rechercher(query4, chargerIngredientsPlat);
 
-
     // Valeurs nutritionnelles du plat
     let query5 = "SELECT * WHERE {?Food a dbo:Food. ?Food rdfs:label '{1}'@en. ?Food ?predicat ?sujet. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (dbp:kj, dbp:fat, dbp:satfat, dbp:sodiumMg,  dbr:Carbohydrate, dbp:fiber, dbp:sugars, dbp:protein, dbp:vitcMg, dbp:calciumMg, dbp:ironMg)). }";
     query5 = query5.replace('{1}', plat);
     rechercher(query5, chargerNutritionPlat);
 
+    // Images du plat
     let query6 = "SELECT ?image WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food foaf:depiction ?image. } LIMIT 4"
     query6 = query6.replaceAll('{1}', plat);
     rechercher(query6, chargerImagesPlat);
@@ -41,7 +41,6 @@ function chargerInfosPlat(plat) {
     let query7 = "SELECT * WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. ?sujet a dbo:Food. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (owl:sameAs, dbo:hasVariant, dbp:variations,dbo:wikiPageWikiLink, dbp:similarDish)).}";
     query7 = query7.replace('{1}', plat);
     rechercher(query7, chargerPlatSimilaire);
-
 
 } 
 
@@ -196,9 +195,9 @@ function chargerTypePlat(json) {
     temperature = temperature.join(", ");
 
     let fullType = (temperature != "") ? type + " - " + temperature : type; 
-    $('#type-plat > div').html(fullType);
+    $('#type').html(fullType);
 
-    if (fullType == "") { $('#type-plat').remove(); }
+    if (fullType == "") { $('#type').remove(); $('#nom-plat-type-separator').remove(); }
 
 }
 
@@ -245,6 +244,7 @@ function chargerIngredientsPlat(json) {
 }
 
 function chargerNutritionPlat(json) {
+
     const map = obtenirResultatsJson(json);
 
     // Calories field
@@ -309,6 +309,7 @@ function chargerNutritionPlat(json) {
         let nutrientHtml = "<tr><td>Iron</td><td>" + map.get('ironMg')[0] + "mg</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
+
 }
 
 function chargerImagesPlat(json) {
