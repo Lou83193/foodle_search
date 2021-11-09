@@ -3,6 +3,9 @@ function chargerInfosPlat(plat) {
     // Nom du plat 
     $("#nom-plat").html("<h1>" + plat + "</h>");
 
+    // Recette
+    $('#recipe-link').html("<a href='https://www.allrecipes.com/search/results/?search=" + plat + "'>Recipes on allrecipes</a>");
+
     // Description du plat
     let query1 = "SELECT * WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (dbo:abstract, rdfs:comment, dbp:caption)). }";
     query1 = query1.replace('{1}', plat);
@@ -29,12 +32,16 @@ function chargerInfosPlat(plat) {
     query5 = query5.replace('{1}', plat);
     rechercher(query5, chargerNutritionPlat);
 
-    /*
-    // Images du plat
-    let query6 = "SELECT ?image WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food foaf:depiction ?image. } LIMIT 4";
-    query6 = query6.replace('{1}', plat);
+    let query6 = "SELECT ?image WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food foaf:depiction ?image. } LIMIT 4"
+    query6 = query6.replaceAll('{1}', plat);
     rechercher(query6, chargerImagesPlat);
-    */
+    console.log(query6);
+
+    // Plats Similaires
+    let query7 = "SELECT * WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. ?sujet a dbo:Food. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (owl:sameAs, dbo:hasVariant, dbp:variations,dbo:wikiPageWikiLink, dbp:similarDish)).}";
+    query7 = query7.replace('{1}', plat);
+    rechercher(query7, chargerPlatSimilaire);
+
 
 } 
 
@@ -151,7 +158,7 @@ function chargerOriginePlat(json) {
     pays = pays.join(", ");
     region = normalizeString(region, true);
 
-    paysLink = "<a href='/page-pays.html?country=" + pays + "'>" + pays + "</a>";
+    paysLink = "<a href='./page-pays.html?country=" + pays + "'>" + pays + "</a>";
     console.log("Pays Link " + paysLink);
 
     $('#origine-pays').html(paysLink);
@@ -228,7 +235,9 @@ function chargerIngredientsPlat(json) {
     let ingredientListHTML = "<ul>";
     let n = ingredientList.length;
     for (let i = 0; i < n; i++) {
-        ingredientListHTML += "<li>" + ingredientList[i] + "</li>";
+        //let ingredientURL = "<a style='color: black' href='https://en.wikipedia.org/wiki/" + ingredientList[i] + "'>" + ingredientList[i] + "</a> (<a href='https://www.walmart.com/search?q=" + ingredientList[i] + "'>BUY</a>)";
+        let ingredientURL = "<a class='ingredientURL' href='./page-ingredient.html?ingredient=" + ingredientList[i] + "'>" + ingredientList[i] + "</a>";
+        ingredientListHTML += "<li>" + ingredientURL + "</li>";
     }
     ingredientListHTML += "</ul>";
     $('#ingredient > div').html(ingredientListHTML); 
@@ -244,72 +253,96 @@ function chargerNutritionPlat(json) {
     }
 
     // Nutrient fields
-    if(map.size != 0) {
+    if (map.size != 0) {
         $("#nutrient_NA").remove();
-    } else
-    {
+    } else {
         $('#nutrition').remove();
     }
-    if(map.has('fat')){
+    if (map.has('fat')) {
         let nutrientHtml = "<tr><td>Total Fat";
-        if(map.has('satfat')){
-            nutrientHtml += "</br>&nbsp Saturated</td><td>" + map.get('fat') + "g </br>" + map.get('satfat') + "g</td></tr>";
+        if (map.has('satfat')) {
+            nutrientHtml += "</br>&nbsp Saturated</td><td>" + map.get('fat')[0] + "g </br>" + map.get('satfat')[0] + "g</td></tr>";
+        } else {
+            nutrientHtml += "</td><td>" + map.get('fat')[0] + "g</td></tr>";
         }
-        nutrientHtml += "</td><td>" + map.get('fat') + "g</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
-    if(map.has('sodiumMg'))
-    {
-        let nutrientHtml = "<tr><td>Sodium</td><td>" + map.get('sodiumMg') + "mg</td></tr>";
+    if (map.has('sodiumMg')) {
+        let nutrientHtml = "<tr><td>Sodium</td><td>" + map.get('sodiumMg')[0] + "mg</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
-    if(map.has('Carbohydrate'))
-    {
-        let nutrientHtml = "<tr><td id='carbohydrate-text'>Total Carbohydrate</td><td id='carbohydrate-value'>" + map.get('Carbohydrate') + "g</td></tr>";
+    if (map.has('Carbohydrate')) {
+        let nutrientHtml = "<tr><td id='carbohydrate-text'>Total Carbohydrate</td><td id='carbohydrate-value'>" + map.get('Carbohydrate')[0] + "g</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
-    if(map.has('fiber')){
-        if(map.has('Carbohydrate')) {
+    if (map.has('fiber')) {
+        if (map.has('Carbohydrate')) {
             $('#carbohydrate-text').append('</br>&nbsp Fiber');
-            $('#carbohydrate-value').append('</br>' + map.get('fiber') + 'g');
+            $('#carbohydrate-value').append('</br>' + map.get('fiber')[0] + 'g');
         } else {
-            let nutrientHtml = "<tr><td>Fiber</td><td>" + map.get('fiber') + "g</td></tr>";
+            let nutrientHtml = "<tr><td>Fiber</td><td>" + map.get('fiber')[0] + "g</td></tr>";
             $("#nutrientFacts tbody").append(nutrientHtml);
         }
     }
-    if(map.has('sugars')){
-        if(map.has('Carbohydrate')) {
+    if (map.has('sugars')) {
+        if (map.has('Carbohydrate')) {
             $('#carbohydrate-text').append('</br>&nbsp Sugars');
-            $('#carbohydrate-value').append('</br>' + map.get('sugars') + 'g');
+            $('#carbohydrate-value').append('</br>' + map.get('sugars')[0] + 'g');
         } else {
-            let nutrientHtml = "<tr><td>Sugars</td><td>" + map.get('sugars') + "g</td></tr>";
+            let nutrientHtml = "<tr><td>Sugars</td><td>" + map.get('sugars')[0] + "g</td></tr>";
             $("#nutrientFacts tbody").append(nutrientHtml);
         }
     }
-    if(map.has('protein'))
-    {
-        let nutrientHtml = "<tr><td>Protein</td><td>" + map.get('protein') + "g</td></tr>";
+    if (map.has('protein')) {
+        let nutrientHtml = "<tr><td>Protein</td><td>" + map.get('protein')[0] + "g</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
-    if(map.has('vitcMg'))
-    {
-        let nutrientHtml = "<tr><td>Vitamin C</td><td>" + map.get('vitcMg') + "mg</td></tr>";
+    if (map.has('vitcMg')) {
+        let nutrientHtml = "<tr><td>Vitamin C</td><td>" + map.get('vitcMg')[0] + "mg</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
-    if(map.has('calciumMg'))
-    {
-        let nutrientHtml = "<tr><td>Calcium</td><td>" + map.get('calciumMg') + "mg</td></tr>";
+    if (map.has('calciumMg')) {
+        let nutrientHtml = "<tr><td>Calcium</td><td>" + map.get('calciumMg')[0] + "mg</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
-    if(map.has('ironMg'))
-    {
-        let nutrientHtml = "<tr><td>Iron</td><td>" + map.get('ironMg') + "mg</td></tr>";
+    if (map.has('ironMg')) {
+        let nutrientHtml = "<tr><td>Iron</td><td>" + map.get('ironMg')[0] + "mg</td></tr>";
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
-
-
-
-
 }
 
-function chargerImagesPlat(json) {}
+function chargerImagesPlat(json) {
+
+    let container = document.getElementById("images");
+    //let tabImg = [];
+
+    for (let i = 0; i<json.results.bindings.length; i++){
+        let img = document.createElement('img');
+        img.src = json.results.bindings[i]['image'].value;
+        img.classList.add("w-100");
+        img.classList.add("h-60");
+        //tabImg.push(img);
+        container.appendChild(img);
+    }
+    /*let div1 = document.createElement('div');
+    div1.classList.add("h-50");
+    div1.classList.add("w-100");
+    div1.appendChild(tabImg[0]);
+
+    let div2 = document.createElement('div');
+    div2.classList.add("row");
+    div2.classList.add("h-20");
+    div2.classList.add("w-100");
+    div2.appendChild(tabImg[1]);
+    div2.appendChild(tabImg[2]);
+
+    let div3 = document.createElement('div');
+    div3.classList.add("h-30");
+    div3.classList.add("w-100");
+    div3.appendChild(tabImg[3]);
+
+    container.appendChild(div1);
+    container.appendChild(div2);
+    container.appendChild(div3);
+    */
+}
