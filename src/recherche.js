@@ -5,7 +5,7 @@ let queryNoCountryFilter = 'SELECT DISTINCT ?Food, ?label, ?country, ?countryNam
     '  FILTER(langMatches(lang(?abstract), "en") || lang(?abstract) = "")\n' +
     '  FILTER(langMatches(lang(?countryName), "en") || lang(?countryName) = "")\n' +
     '  FILTER((lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
-    '  FILTER (regex(?label, "(?i){1}"))\n' +
+    '  FILTER (regex(?label, "{1}($|\s|-)|(^|\s|-){1}", "i"))\n' +
     '} ORDER BY ASC(?label) LIMIT 200';
 let queryCountryFilter = 'SELECT DISTINCT ?Food, ?label, ?country, ?countryName, ?thumbnail, ?abstract WHERE {\n' +
     '  ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?thumbnail ; dbo:abstract ?abstract .\n' +
@@ -15,7 +15,7 @@ let queryCountryFilter = 'SELECT DISTINCT ?Food, ?label, ?country, ?countryName,
     '  FILTER(langMatches(lang(?countryName), "en") || lang(?countryName) = "")\n' +
     '  FILTER(regex(?countryName, "(?i){2}"))\n' +
     '  FILTER((lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
-    '  FILTER (regex(?label, "(?i){1}"))\n' +
+    '  FILTER (regex(?label, "{1}($|\s|-)|(^|\s|-){1}", "i"))' +
     '} ORDER BY ASC(?label) LIMIT 200';
 
 function cleanSearchResults() {
@@ -53,6 +53,7 @@ function loadSearch() {
   console.log('Searched for (query, country):', searchContent, countryFilter);
   let query = (countryFilter == null? queryNoCountryFilter : queryCountryFilter);
   query = query.replaceAll('{1}', searchContent);
+  console.log(query);
   if (countryFilter != null) query = query.replaceAll('{2}', countryFilter);
   rechercher(query, data => {
     console.log(data);
