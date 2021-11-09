@@ -55,11 +55,13 @@ function loadSearch() {
     });
     
     console.log('Searched for (country) food:', countryParameter);
-    query = 'SELECT DISTINCT ?label ?thumbnail ?abstract WHERE  {\n' +
-    '    ?food a dbo:Food ; rdfs:label ?label ; dbo:thumbnail ?thumbnail ; dbo:abstract ?abstract .\n' +
-    '    ?country rdfs:label "{1}"@en.\n' +
+    query = 'SELECT DISTINCT (SAMPLE(?Food) AS ?food) ?label (SAMPLE(?Thumbnail) AS ?thumbnail) (SAMPLE(?Abstract) as ?abstract) WHERE  {\n' +
+    '    ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?Thumbnail ; dbo:abstract ?Abstract .\n' +
+    '    ?country rdfs:label ?CountryName.\n' +
     '\n' +
     '    FILTER(langMatches(lang(?Abstract), "en") || lang(?Abstract) = "")\n' +
+    '    FILTER(langMatches(lang(?CountryName), "en") || lang(?CountryName) = "")\n' +
+    '    FILTER(regex(?CountryName, "(?i){1}"))\n' +
     '    FILTER((lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
     '} \n' +
     'GROUP BY ?label\n' +
