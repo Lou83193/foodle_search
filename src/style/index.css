@@ -81,7 +81,9 @@ body {
 
 #plat-du-jour {
     margin-left: 1em;
-    height: 200px;
+    height: auto;
+    text-overflow: fade(10px);
+
 }
 
 #plat-du-jour-image img {
