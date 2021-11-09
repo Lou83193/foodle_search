@@ -4,10 +4,9 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel='stylesheet' type='text/css' media='screen' href="style/style.css">
+    <link rel='stylesheet' type='text/css' media='screen' href="style/slider.css">
     <link rel='stylesheet' type='text/css' media='screen' href="style/page-plat.css">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
     <script src="js/page-plat.js"></script>
 
@@ -98,222 +97,94 @@
                 Recipe
             </div>
 
+            <template id="template-suggestion">
+
+            </template>
+
             <div id="plats-similaires">
                 <h3>Similar dishes</h3>
-                <div id="barres-plats-similaires">List of similar dishes...</div>
-                <!-- carousel -->
-                <div
-                        id="carouselMultiItemExample"
-                        class="carousel slide carousel-dark text-center"
-                        data-mdb-ride="carousel"
-                >
-                    <!-- Controls -->
-                    <div class="d-flex justify-content-center mb-4">
-                        <button
-                                class="carousel-control-prev position-relative"
-                                type="button"
-                                data-mdb-target="#carouselMultiItemExample"
-                                data-mdb-slide="prev"
-                        >
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button
-                                class="carousel-control-next position-relative"
-                                type="button"
-                                data-mdb-target="#carouselMultiItemExample"
-                                data-mdb-slide="next"
-                        >
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                    <!-- Inner -->
-                    <div class="carousel-inner py-4">
-                        <!-- Single item -->
-                        <div class="carousel-item active">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-4">
+                <div class="row">
+                    <div class="col">
+                        <div id="test-slider" class="slider carousel carousel-fade" data-ride="carousel">
+                            <!-- Indicators -->
+                            <ol class="carousel-indicators">
+                                <li data-target="test-slider" data-slide-to="0"></li>
+                                <li data-target="test-slider" data-slide-to="1"></li>
+                                <li data-target="test-slider" data-slide-to="2"></li>
+                                <li data-target="test-slider" data-slide-to="3"></li>
+                                <li data-target="test-slider" data-slide-to="4"></li>
+                            </ol>
+
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <div class="carousel-item">
+                                    <div class="col-sm">
                                         <div class="card">
-                                            <img
-                                                    src="https://mdbootstrap.com/img/new/standard/nature/181.jpg"
-                                                    class="card-img-top"
-                                                    alt="..."
-                                            />
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Pepperoni_pizza.jpg/300px-Pepperoni_pizza.jpg" class="food-img" alt="">
                                             <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">
-                                                    Some quick example text to build on the card title and make up the bulk
-                                                    of the card's content.
-                                                </p>
-                                                <a href="#!" class="btn btn-primary">Button</a>
+                                                <a class="card-link"><h5 class="card-title">Pizza</h5></a>
+                                                <a href="">Italie</a>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="col-lg-4 d-none d-lg-block">
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="col-sm">
                                         <div class="card">
-                                            <img
-                                                    src="https://mdbootstrap.com/img/new/standard/nature/182.jpg"
-                                                    class="card-img-top"
-                                                    alt="..."
-                                            />
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Pepperoni_pizza.jpg/300px-Pepperoni_pizza.jpg" class="food-img" alt="">
                                             <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">
-                                                    Some quick example text to build on the card title and make up the bulk
-                                                    of the card's content.
-                                                </p>
-                                                <a href="#!" class="btn btn-primary">Button</a>
+                                                <a class="card-link"><h5 class="card-title">Pizza</h5></a>
+                                                <a href="">Italie</a>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="col-lg-4 d-none d-lg-block">
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="col-sm">
                                         <div class="card">
-                                            <img
-                                                    src="https://mdbootstrap.com/img/new/standard/nature/183.jpg"
-                                                    class="card-img-top"
-                                                    alt="..."
-                                            />
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Pepperoni_pizza.jpg/300px-Pepperoni_pizza.jpg" class="food-img" alt="">
                                             <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">
-                                                    Some quick example text to build on the card title and make up the bulk
-                                                    of the card's content.
-                                                </p>
-                                                <a href="#!" class="btn btn-primary">Button</a>
+                                                <a class="card-link"><h5 class="card-title">Pizza</h5></a>
+                                                <a href="">Italie</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="col-sm">
+                                        <div class="card">
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Pepperoni_pizza.jpg/300px-Pepperoni_pizza.jpg" class="food-img" alt="">
+                                            <div class="card-body">
+                                                <a class="card-link"><h5 class="card-title">Pizza</h5></a>
+                                                <a href="">Italie</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <div class="col-sm">
+                                        <div class="card">
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Pepperoni_pizza.jpg/300px-Pepperoni_pizza.jpg" class="food-img" alt="">
+                                            <div class="card-body">
+                                                <a class="card-link"><h5 class="card-title">Pizza</h5></a>
+                                                <a href="">Italie</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Single item -->
-                        <div class="carousel-item">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12">
-                                        <div class="card">
-                                            <img
-                                                    src="https://mdbootstrap.com/img/new/standard/nature/184.jpg"
-                                                    class="card-img-top"
-                                                    alt="..."
-                                            />
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">
-                                                    Some quick example text to build on the card title and make up the bulk
-                                                    of the card's content.
-                                                </p>
-                                                <a href="#!" class="btn btn-primary">Button</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 d-none d-lg-block">
-                                        <div class="card">
-                                            <img
-                                                    src="https://mdbootstrap.com/img/new/standard/nature/185.jpg"
-                                                    class="card-img-top"
-                                                    alt="..."
-                                            />
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">
-                                                    Some quick example text to build on the card title and make up the bulk
-                                                    of the card's content.
-                                                </p>
-                                                <a href="#!" class="btn btn-primary">Button</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 d-none d-lg-block">
-                                        <div class="card">
-                                            <img
-                                                    src="https://mdbootstrap.com/img/new/standard/nature/186.jpg"
-                                                    class="card-img-top"
-                                                    alt="..."
-                                            />
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">
-                                                    Some quick example text to build on the card title and make up the bulk
-                                                    of the card's content.
-                                                </p>
-                                                <a href="#!" class="btn btn-primary">Button</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single item -->
-                        <div class="carousel-item">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                                        <div class="card">
-                                            <img
-                                                    src="https://mdbootstrap.com/img/new/standard/nature/187.jpg"
-                                                    class="card-img-top"
-                                                    alt="..."
-                                            />
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">
-                                                    Some quick example text to build on the card title and make up the bulk
-                                                    of the card's content.
-                                                </p>
-                                                <a href="#!" class="btn btn-primary">Button</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 mb-4 mb-lg-0 d-none d-lg-block">
-                                        <div class="card">
-                                            <img
-                                                    src="https://mdbootstrap.com/img/new/standard/nature/188.jpg"
-                                                    class="card-img-top"
-                                                    alt="..."
-                                            />
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">
-                                                    Some quick example text to build on the card title and make up the bulk
-                                                    of the card's content.
-                                                </p>
-                                                <a href="#!" class="btn btn-primary">Button</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-lg-4 mb-4 mb-lg-0 d-none d-lg-block">
-                                        <div class="card">
-                                            <img
-                                                    src="https://mdbootstrap.com/img/new/standard/nature/189.jpg"
-                                                    class="card-img-top"
-                                                    alt="..."
-                                            />
-                                            <div class="card-body">
-                                                <h5 class="card-title">Card title</h5>
-                                                <p class="card-text">
-                                                    Some quick example text to build on the card title and make up the bulk
-                                                    of the card's content.
-                                                </p>
-                                                <a href="#!" class="btn btn-primary">Button</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- Controls -->
+                            <a class="carousel-control-prev" href="#test-slider" role="button" data-slide="prev">
+                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                <span class="sr-only"><</span>
+                            </a>
+                            <a class="carousel-control-next" href="#test-slider" role="button" data-slide="next">
+                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                <span class="sr-only">></span>
+                            </a>
                         </div>
                     </div>
-                    <!-- Inner -->
                 </div>
             </div>
     
@@ -321,6 +192,9 @@
 
     </header>
 
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/slider.js" data-itemInFocus="2" data-activeItems="3"></script>
     <script>
 
         const url = window.location.search;

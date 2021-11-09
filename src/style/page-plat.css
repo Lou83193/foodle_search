@@ -4,10 +4,7 @@
 }
 
 #images {
-<<<<<<< HEAD
     background-color: rgba(0, 0, 0, 0.1);
-=======
->>>>>>> 57a4c789def16dc5153452137a60d09f2b88e30f
     width: 40%;
     height:500px;
     margin:0;
@@ -111,11 +108,32 @@
 #barres-plats-similaires {
     display: flex;
     flex-direction: row;
+    height: auto;
 }
 
-<<<<<<< HEAD
+#plats-similaires {
+    height: auto;
+    padding-bottom: 1vh;
+    padding-top: 1vh;
+}
 
-=======
+#plats-similaires img {
+    border-radius: 15px 15px 0px 0px;
+}
+
+#plats-similaires h3 {
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.card {
+    box-shadow: 0px 1px 5px #9D9C9C;
+    border-radius: 15px;
+    border: 0px solid #9D9C9C;
+    background-color: white;
+    transition-duration: 700ms;
+}
+
 .recipe {
     display: flex;
     flex-direction: row;
@@ -125,4 +143,4 @@
     height: fit-content;
     width: 50%;
 }
->>>>>>> 57a4c789def16dc5153452137a60d09f2b88e30f
+
