@@ -7,7 +7,7 @@
         <script type="text/javascript" src="index.js"></script>
     </head>
 
-    <body onload="loadCountries()">
+<body onload="loadCountries(); loadHighlightedFood();">
 
         <div id="logo">
             <img src="style/img/foodle-modern-logo.png" alt="Logo Foodle" height="70"/>
@@ -26,17 +26,17 @@
             <button id="bouton-recherche" class="card">Lookup</button>
         </div>
 
-        <div id="plat-du-jour-section" class="card">
-            <div id="plat-du-jour-label">Highlighted food 💡</div>
-            <div id="plat-du-jour-content">
-                <div id="plat-du-jour-image">
-                    <img src="style/img/DummyImage.jpg"/>
-                </div>
-                <div id="plat-du-jour">
-                    <div id="plat-du-jour-nom">Food name</div>
-                    <div id="plat-du-jour-description">DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription</div>
-                </div>
-            </div>
+
+
+
+<div id="plat-du-jour-section" class="card">
+    <div id="plat-du-jour-label">Highlighted food 💡</div>
+    <div id="plat-du-jour-content">
+        <div id="plat-du-jour-image">
+        </div>
+        <div id="plat-du-jour">
+            <div id="plat-du-jour-nom"></div>
+            <div id="plat-du-jour-description"></div>
         </div>
 
         <script> applyMainSearchBarListeners(); </script>

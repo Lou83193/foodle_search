@@ -151,7 +151,7 @@ function chargerOriginePlat(json) {
     pays = pays.join(", ");
     region = normalizeString(region, true);
 
-    paysLink = "<a href='/page-pays.html?country=" + pays + "'>" + pays + "</a>";
+    paysLink = "<a href='./page-pays.html?country=" + pays + "'>" + pays + "</a>";
     console.log("Pays Link " + paysLink);
 
     $('#origine-pays').html(paysLink);
@@ -228,7 +228,7 @@ function chargerIngredientsPlat(json) {
     let ingredientListHTML = "<ul>";
     let n = ingredientList.length;
     for (let i = 0; i < n; i++) {
-        ingredientListHTML += "<li>" + ingredientList[i] + "</li>";
+        ingredientListHTML += "<li><a style='color: black' href='https://en.wikipedia.org/wiki/" + ingredientList[i] + "'>" + ingredientList[i] + "</a> (<a href='https://www.walmart.com/search?q=" + ingredientList[i] + "'>BUY</a>)</li>";
     }
     ingredientListHTML += "</ul>";
     $('#ingredient > div').html(ingredientListHTML); 
