@@ -26,4 +26,17 @@ function loadCountries() {
     });
 }
 
+function applyMainSearchBarListeners() {
+
+    $('#bouton-recherche').click(function(event) {
+        searchButtonClicked('barre-recherche-plats', 'barre-recherche-pays');
+    });
+    
+    $("#barre-recherche-plats").keyup(function(event) {
+        if (event.keyCode == 13) {
+            $("#bouton-recherche").click();
+        }
+    });
+    
+}
 
