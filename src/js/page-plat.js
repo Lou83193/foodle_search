@@ -234,6 +234,7 @@ function chargerIngredientsPlat(json) {
 
 function chargerNutritionPlat(json) {
     const map = obtenirResultatsJson(json);
+
     // Calories field
     if (map.has("kj")) {
         $('#calories > span').html(map.get('kj') + ' KJ');
