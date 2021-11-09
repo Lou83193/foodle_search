@@ -35,8 +35,7 @@ function loadCountries() {
         '?Food a dbo:Food.\n' +
         '?Food dbo:country ?Country.\n' +
         'FILTER((lang(?label) = "" || langMatches(lang(?label), "en")) && !contains(?label,"cuisine") ).\n' +
-        '\n' +
-        '}';
+        '} \n ' +'ORDER BY ASC (?label) ';
     let pays = [];
     rechercher(query, data => {
         console.log(data);
@@ -73,21 +72,23 @@ function loadHighlightedFood() {
     '}\n'+
     'OFFSET '+ random+'\n'+
     'LIMIT 1' ;
-    console.log("random ="+random);
-    //'?Food foaf:depiction ?image.\n'+
 
-    //let pays = [];
+    console.log("random number ="+random);
+
 
     rechercher(query, data => {
         console.log(data);
-
-
-        let foodname = data.results.bindings["0"]["label"]["value"];      // Create a text node
-        //let foodname = document.createTextNode(data.results.bindings["0"]["label"]["value"]);      // Create a text node
-        let type= data.results.bindings["0"]["type"]["value"];
+        let foodname = data.results.bindings["0"]["label"]["value"];
+        let type = data.results.bindings["0"]["type"]["value"];
+        let link = data.results.bindings["0"]["Food"]["value"];
         let i= 'http://dbpedia.org/resource/'.length;
         type = " - "+ type.substring(i)
-        document.getElementById("plat-du-jour-nom").appendChild(document.createTextNode(foodname+type));
+        let x = document.createElement("A");
+        x.setAttribute("href", link);
+        let clickable=document.createTextNode(foodname+type);
+        x.appendChild(clickable);
+        document.getElementById("plat-du-jour-nom").appendChild(x);
+
 
         let description = document.createTextNode(data.results.bindings["0"]["detail"]["value"]);      // Create a text node
         document.getElementById("plat-du-jour-description").appendChild(description);
@@ -98,25 +99,31 @@ function loadHighlightedFood() {
             '?food foaf:depiction ?image.\n'+
             '} LIMIT 1';
 
-        console.log("query2 : "+ query2.replaceAll('{1}',foodname));
-
         rechercher(query2.replaceAll('{1}',foodname), data2 => {
             console.log(data2);
-            //gérer erreurs images
             let img = document.createElement('img');
-            img.src = data2.results.bindings["0"]["image"]["value"];
+            img.src=data2.results.bindings["0"]["image"]["value"];
+            checkImage(img.src, img);
             document.getElementById('plat-du-jour-image').append(img);
 
         });
 
     });
-
-
-
-
-
-
-
 }
 
+
+function checkImage(url, img) {
+    var image = new Image();
+    image.onload = function() {
+        if (this.width > 0) {
+            console.log("image exists");
+        }
+    }
+    image.onerror = function() {
+        console.log("image doesn't exist");
+        img.src="style/img/imageNotFound.png"
+
+    }
+    image.src = url;
+}
 
