@@ -33,7 +33,7 @@ function displaySearchResult(index, result) {
   let cardText = newNode.querySelector('p');
   cardText.innerHTML = result['abstract'].value;
   let countryLink = newNode.querySelectorAll('a')[1];
-  countryLink.href = "page-pays.html/?country=" + result['countryName'].value;
+  countryLink.href = "page-pays.html?country=" + result['countryName'].value;
   countryLink.innerHTML = result['countryName'].value;
   newNode.getElementById("card-link").href = "page-plat.html?plat=" + result['label'].value;
   document.getElementById('results-container').appendChild(newNode);
