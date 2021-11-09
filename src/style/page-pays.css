@@ -1,12 +1,13 @@
 #country-desc {
     line-height: 1.5em;  
 }
+
 #country-desc.collapse:not(.show) {
     display: block;
     height: 3rem;
     overflow: hidden;
 }
-  
+
 #country-desc.collapsing {
     height: 3rem;
 }
