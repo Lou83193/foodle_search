@@ -4,17 +4,10 @@
 }
 
 #images {
-    background-color: rgba(0, 0, 0, 0.1); 
     width: 40%;
+    height:500px;
+    margin:0;
 }
-
-/*#images img {
-    display: block;
-    max-width:100%;
-    max-height:25%;
-    width: auto;
-    height: auto;
-}*/
 
 
 #contenu {
