@@ -96,6 +96,10 @@
 #ingredient ul li {
     list-style: square;
 }
+.ingredientURL {
+    color: black;
+}
+
 #type-plat {
     background-color: rgba(237, 78, 61, 0.4);
     margin-bottom: 1em;
