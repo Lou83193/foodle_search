@@ -12,6 +12,9 @@ body {
     border-bottom: solid #4C90F6 3px;
 }
 
+.blue-button {
+    margin: auto 0em;
+ }
 .blue-button > a {
     border-radius: 2em;
     background-color: #4C90F6;

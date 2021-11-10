@@ -44,7 +44,7 @@ function loadIngredientSearch() {
     console.log(data);
     cleanSearchResults();
     $('.loader-overlay').css('display', 'none');
-    
+
     let index = [];
     data.head.vars.forEach((v, _) => {
       index.push(v);
