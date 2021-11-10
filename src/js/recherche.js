@@ -62,6 +62,7 @@ function loadSearch() {
   rechercher(query, data => {
     console.log(data);
     cleanSearchResults();
+    $('.loader-overlay').css('display', 'none');
 
     let index = [];
     data.head.vars.forEach((v, _) => {

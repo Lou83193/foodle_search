@@ -4,7 +4,7 @@ function chargerInfosPlat(plat) {
     $("#nom-plat").html("<h1>" + plat + "</h>");
 
     // Recette
-    $('#recipe-link').html("<a href='https://www.allrecipes.com/search/results/?search=" + plat + "' class='btn btn-info btn-lg'>Search recipe</a>");
+    $('#recipe-link').html("<a href='https://www.allrecipes.com/search/results/?search=" + plat + "' class='btn btn-info btn-lg' target='_blank'>Search recipe</a>");
 
     // Description du plat
     let query1 = "SELECT * WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (dbo:abstract, rdfs:comment, dbp:caption)). }";

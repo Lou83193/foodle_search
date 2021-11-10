@@ -48,3 +48,7 @@
     padding: 0.25em 0.75em;
     height: fit-content;
 }
+
+#results-for {
+    width: fit-content;  
+}

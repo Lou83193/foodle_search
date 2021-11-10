@@ -22,8 +22,8 @@ function displaySearchResult(index, result) {
 function loadIngredientSearch() {
 
   let searchContent = findGetParameter('ingredient');
-  document.getElementById("search-desc").innerHTML = searchContent;
-  document.getElementById("buy-link").innerHTML = "<a href='https://www.walmart.com/search?q=" + searchContent + "'>BUY</a>";
+  $("#search-desc").html(searchContent);
+  $("#buy-link").html("<a href='https://www.walmart.com/search?q=" + searchContent + "' class='btn btn-info btn-lg' target='_blank'>Buy at Walmart</a>"); 
 
   let query = "SELECT ?predicat (SAMPLE(?Food) AS ?food) ?label (SAMPLE(?CountryName) AS ?countryName) (SAMPLE(?Thumbnail) AS ?thumbnail) (SAMPLE(?Abstract) as ?abstract) WHERE { \
     ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?Thumbnail ; dbo:abstract ?Abstract . \
@@ -43,7 +43,8 @@ function loadIngredientSearch() {
   rechercher(query, data => {
     console.log(data);
     cleanSearchResults();
-
+    $('.loader-overlay').css('display', 'none');
+    
     let index = [];
     data.head.vars.forEach((v, _) => {
       index.push(v);

@@ -1,0 +1,7 @@
+.search-ingredient-top {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0em 1em;
+}
