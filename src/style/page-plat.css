@@ -56,7 +56,9 @@
     background: rgba(0, 0, 0, 0.1);
     border-radius: 0.5em;
     padding: 0.25em 0.75em;
-    height: fit-content;
+    height: intrinsic;          
+    height: -moz-max-content;   
+    height: -webkit-max-content; 
 }
 #origine-label {
     font-weight: bold;

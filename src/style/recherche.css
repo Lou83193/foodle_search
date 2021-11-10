@@ -29,26 +29,7 @@
 }
 
 #results-for {
-    font-size: 20pt;
-}
-
-.search-ingredient-top {
-    width: 90%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin: 1em 0em;
-}
-
-.ingredient-buy {
-    display: flex;
-    flex-direction: row;
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 0.5em;
-    padding: 0.25em 0.75em;
-    height: fit-content;
-}
-
-#results-for {
-    width: fit-content;  
+    width: intrinsic;          
+    width: -moz-max-content;   
+    width: -webkit-max-content; 
 }
