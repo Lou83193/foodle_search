@@ -20,8 +20,8 @@ body {
 
 /* BARRE DE RECHERCHE */
 .search-bar {
-    position: relative;
-    width: 25%;
+    /* position: relative; */
+    /* width: 100%; */
 }
 #search-input {
     border-radius: 2em;

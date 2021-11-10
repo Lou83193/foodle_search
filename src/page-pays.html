@@ -14,39 +14,54 @@
     <script src='js/page-pays.js'></script>
 </head>
 <body onload="loadSearch()">
-    <nav class="navbar navbar-expand-md">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <a class="navbar-brand" href="index.html"><img src="style/img/foodle-modern-logo.png"></a> 
-        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navigation" aria-controls="main-navigation" aria-expanded="false" aria-label="Toggle search">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="main-navigation">
-            <div class="search-bar">
-                <input id='search-input' type="text" placeholder="Search..." />
-                <button id='search-button' type="button">
+            <form class="form-inline col-sm-10 col-md-8 col-lg-6 mx-0 p-0 my-2 my-sm-0">
+                <input id='search-input' type="text" placeholder="Search for food..." />
+                <button id='search-button' type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
                     </svg>
                 </button>
-            </div>
+            </form>
         </div>
     </nav>
 
     <div id="page-body" class="container-fluid p-0">
         
-        <div class="container-fluid row p-3 mx-0">
-            <div class="col">
-                <h1 id="country-title" class="title"></h1>
-                <div id="description">
-                    <div class="collapse" id="country-desc"></div>
-                    <a role="button" class="collapsed" data-toggle="collapse" href="#country-description" aria-expanded="false" aria-controls="country-desc"></a> 
+        <div class="container-fluid p-0">
+            <div id="country-header" class="row p-3 mx-0">
+                <div class="col pl-0">
+                    <h1 id="country-title" class="title"></h1>
+                    <div id="description">
+                        <div class="collapse" id="country-desc"></div>
+                        <a role="button" class="collapsed" data-toggle="collapse" href="#country-description" aria-expanded="false" aria-controls="country-desc"></a> 
+                    </div>
+                </div>
+                <div class="m-0 p-0">
+                    <img id="country-flag" class="float-right m-0 p-0" src="" alt="flag">
                 </div>
             </div>
-            <div class="col m-0 p-0">
-                <img id="country-flag" class="float-right m-0 p-0" src="" alt="flag">
+            <div class="row m-0 px-3">
+                <h2 id="country-dishes-title">Country Dishes:</h2>
+            </div>
+            <div class="row m-0 px-3">
+                <div class="col-sm-6 col-md-5 col-lg-4 p-0">
+                    <input id='search-input' type="text" placeholder="Filter results" />
+                    <button id='search-button' type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
 
-        <div id="results-container" class="row">
+        <div id="results-container" class="row m-0 py-3">
             <!-- inject search results here -->
         </div>
 
