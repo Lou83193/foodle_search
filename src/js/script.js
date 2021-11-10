@@ -43,6 +43,27 @@ function searchButtonClicked(idBarrePlats, idBarrePays) {
     }
 }
 
+
+function normalizeString(str, uppercaseAll) {
+    str = str.trim();
+    str = str.replaceAll('_', ' ');
+    strList = str.split(' ');
+    if (uppercaseAll) {
+        for (let i = 0; i < strList.length; i++) {
+            subStr = strList[i];
+            subStr = subStr.toLowerCase();
+            subStr = subStr.charAt(0).toUpperCase() + subStr.slice(1);
+            strList[i] = subStr;
+        }
+        str = strList.join(' ');
+    }
+    else {
+        str = str.toLowerCase();
+        str = str.charAt(0).toUpperCase() + str.slice(1);
+    }
+    return str;
+}
+
 function applyHeaderSearchBarListeners() {
 
     $('#search-button').click(function(event) {

@@ -40,7 +40,7 @@ function loadSearch() {
     $('.results-row').append('<div id="buy-link" class="blue-button">BUY</div>'); 
     $("#buy-link").html("<a href='https://www.walmart.com/search?q=" + searchKeyword + "' class='btn btn-info btn-lg' target='_blank'>Buy at Walmart</a>"); 
   }
-  $("#search-desc").html(searchKeyword);
+  $("#search-desc").html(normalizeString(searchKeyword));
 
   // Create appropriate query
   let triplets = []; let filters = [];
