@@ -121,13 +121,35 @@
     list-style: square;
 }
 
-#type-plat {
-    background-color: rgba(237, 78, 61, 0.4);
-    margin-bottom: 1em;
+#recipe-link {
+    margin: 1.5em 0; 
 }
+
 #nutrition {
-    background-color: rgba(60, 177, 94, 0.4);
+    background-color: rgba(253, 194, 0, 0.116);
+    border: solid 1px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.1);
 }
+#nutrition #calories {
+    margin-bottom: 0.5em; 
+}
+#nutrition caption {
+    font-size: 0.85em;
+    font-style: italic;
+}
+#nutrition table {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: solid 1px grey;
+}
+#nutrition table th {
+    width: 50%;
+    border-right: solid 1px grey;
+}
+#nutrition table td {
+    border-right: solid 1px grey;
+    padding: 0.25em 0.5em;
+}
+
 
 #plats-similaires {
     margin-top: 2em;
@@ -163,6 +185,4 @@
     background-color: white;
     transition-duration: 700ms;
 }
-#recipe-link {
-    margin: 1.5em 0; 
-}
+

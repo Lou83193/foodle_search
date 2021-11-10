@@ -227,7 +227,6 @@ function chargerIngredientsPlat(json) {
     let n = ingredientList.length;
     for (let i = 0; i < n; i++) {
         if (ingredientList[i] == "") continue; 
-        //let ingredientURL = "<a style='color: black' href='https://en.wikipedia.org/wiki/" + ingredientList[i] + "'>" + ingredientList[i] + "</a> (<a href='https://www.walmart.com/search?q=" + ingredientList[i] + "'>BUY</a>)";
         let ingredientURL = "<a class='ingredientURL' href='./recherche.html?searchType=ingredient&searchKeyword=" + ingredientList[i] + "'>" + ingredientList[i] + "</a>";
         ingredientListHTML += "<li>" + ingredientURL + "</li>";
     }
