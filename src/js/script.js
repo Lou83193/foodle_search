@@ -56,3 +56,37 @@ function applyHeaderSearchBarListeners() {
     });
 
 }
+
+function queryBuilder(triplets, filters, limit) {
+
+    let query = "";
+
+    // Header
+    query += "SELECT DISTINCT (SAMPLE(?Food) AS ?food) ?label (SAMPLE(?CountryName) AS ?countryName) (SAMPLE(?Thumbnail) AS ?thumbnail) (SAMPLE(?Abstract) as ?abstract) WHERE  { \n" +
+    "?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?Thumbnail ; dbo:abstract ?Abstract .\n" +
+    "?country rdfs:label ?CountryName .";
+
+    // Extra triplets 
+    for (let i = 0; i < triplets.length; i++) {
+        query += triplets[i] + "\n";
+    }
+
+    // Filters 
+    query += "FILTER(langMatches(lang(?Abstract), 'en') || lang(?Abstract) = '') \n" +
+    "FILTER(langMatches(lang(?CountryName), 'en') || lang(?CountryName) = '') \n" + 
+    "FILTER(langMatches(lang(?label), 'en') || lang(?label) = '').";
+
+    // Extra filters 
+    for (let i = 0; i < filters.length; i++) {
+        query += filters[i] + "\n";
+    }
+
+    // Footer 
+    query += "} \n" +
+    "GROUP BY ?label \n" +
+    "ORDER BY ASC(?label) \n" + 
+    "LIMIT " + limit; 
+
+    return query;
+
+}

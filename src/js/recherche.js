@@ -1,28 +1,19 @@
-let queryNoCountryFilter = 'SELECT DISTINCT (SAMPLE(?Food) AS ?food) ?label (SAMPLE(?CountryName) AS ?countryName) (SAMPLE(?Thumbnail) AS ?thumbnail) (SAMPLE(?Abstract) as ?abstract) WHERE  {\n' +
-    '    ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?Thumbnail ; dbo:abstract ?Abstract .\n' +
-    '    ?country rdfs:label ?CountryName .\n' +
-    '\n' +
-    '    FILTER(langMatches(lang(?Abstract), "en") || lang(?Abstract) = "")\n' +
-    '    FILTER(langMatches(lang(?CountryName), "en") || lang(?CountryName) = "")\n' +
-    '    FILTER((lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
-    '    FILTER (regex(?label, "{1}($|\s|-)|(^|\s|-){1}", "i"))\n' +
-    '} \n' +
-    'GROUP BY ?label\n' +
-    'ORDER BY ASC(?label) \n' +
-    'LIMIT 200';
-let queryCountryFilter = 'SELECT DISTINCT (SAMPLE(?Food) AS ?food) ?label (SAMPLE(?CountryName) AS ?countryName) (SAMPLE(?Thumbnail) AS ?thumbnail) (SAMPLE(?Abstract) as ?abstract) WHERE  {\n' +
-    '    ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?Thumbnail ; dbo:abstract ?Abstract .\n' +
-    '    ?country rdfs:label ?CountryName .\n' +
-    '\n' +
-    '    FILTER(langMatches(lang(?Abstract), "en") || lang(?Abstract) = "")\n' +
-    '    FILTER(langMatches(lang(?CountryName), "en") || lang(?CountryName) = "")\n' +
-    '    FILTER(regex(?CountryName, "(?i){2}"))\n' +
-    '    FILTER((lang(?label) = "" || langMatches(lang(?label), "en")))\n' +
-    '    FILTER (regex(?label, "{1}($|\s|-)|(^|\s|-){1}", "i"))\n' +
-    '} \n' +
-    'GROUP BY ?label\n' +
-    'ORDER BY ASC(?label) \n' +
-    'LIMIT 200';
+queryNoCountryFilter = queryBuilder(
+  [],
+  [
+    "FILTER (regex(?label, '{1}($|\s|-)|(^|\s|-){1}', 'i'))"
+  ],
+  200
+);
+
+queryCountryFilter = queryBuilder(
+  [],
+  [
+    "FILTER(regex(?CountryName, '(?i){2}'))",
+    "FILTER (regex(?label, '{1}($|\s|-)|(^|\s|-){1}', 'i'))"
+  ],
+  200
+);
 
 function cleanSearchResults() {
   document.getElementById('results-container').innerHTML = '';

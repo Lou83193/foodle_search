@@ -25,19 +25,16 @@ function loadIngredientSearch() {
   $("#search-desc").html(searchContent);
   $("#buy-link").html("<a href='https://www.walmart.com/search?q=" + searchContent + "' class='btn btn-info btn-lg' target='_blank'>Buy at Walmart</a>"); 
 
-  let query = "SELECT ?predicat (SAMPLE(?Food) AS ?food) ?label (SAMPLE(?CountryName) AS ?countryName) (SAMPLE(?Thumbnail) AS ?thumbnail) (SAMPLE(?Abstract) as ?abstract) WHERE { \
-    ?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?Thumbnail ; dbo:abstract ?Abstract . \
-    ?country rdfs:label ?CountryName . \
-    ?Food a dbo:Food. \
-    ?Food ?predicat ?sujet. \
-    ?sujet rdfs:label ?labelIngredient. \
-    FILTER(langMatches(lang(?Abstract), 'en') || lang(?Abstract) = '') \
-    FILTER(langMatches(lang(?CountryName), 'en') || lang(?CountryName) = '') \
-    FILTER(lang(?label) = '' || langMatches(lang(?label), 'en')). \
-    FILTER((isLiteral(?sujet) && regex(?sujet, '(?i){1}')) || (!isLiteral(?sujet) && regex(?labelIngredient, '(?i){1}'))). \
-    FILTER(?predicat IN (dbo:ingredient, dbo:ingredientName, dbp:mainIngredient, dbp:minorIngredient)). \
-    } \
-    LIMIT 200";
+  let query = queryBuilder(
+    [
+      "?Food ?predicat ?sujet .", 
+      "?sujet rdfs:label ?labelIngredient ." 
+    ], 
+    [
+      "FILTER((isLiteral(?sujet) && regex(?sujet, '(?i){1}')) || (!isLiteral(?sujet) && regex(?labelIngredient, '(?i){1}'))).",
+      "FILTER(?predicat IN (dbo:ingredient, dbo:ingredientName, dbp:mainIngredient, dbp:minorIngredient))."
+    ],
+    200);
   query = query.replaceAll('{1}', searchContent);
   
   rechercher(query, data => {
