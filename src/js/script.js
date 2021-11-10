@@ -38,9 +38,30 @@ function searchButtonClicked(idBarrePlats, idBarrePays) {
         // launch search !
         // redirect with get parameters (if defined) of both !
         // the other page, on load, gets parameters, fetches content based on it and renders
-        redirectParameters = '?' + (searchContent != ''? 'search='+searchContent : '') + (searchContent != '' && countryContent != ''? '&' : '') + (countryContent != ''? 'country='+countryContent : '');
+        redirectParameters = '?searchType=dish&' + (searchContent != '' ? 'searchKeyword='+searchContent : '') + (searchContent != '' && countryContent != ''? '&' : '') + (countryContent != ''? 'countryFilter='+countryContent : '');
         window.location.href = 'recherche.html' + redirectParameters;
     }
+}
+
+
+function normalizeString(str, uppercaseAll) {
+    str = str.trim();
+    str = str.replaceAll('_', ' ');
+    strList = str.split(' ');
+    if (uppercaseAll) {
+        for (let i = 0; i < strList.length; i++) {
+            subStr = strList[i];
+            subStr = subStr.toLowerCase();
+            subStr = subStr.charAt(0).toUpperCase() + subStr.slice(1);
+            strList[i] = subStr;
+        }
+        str = strList.join(' ');
+    }
+    else {
+        str = str.toLowerCase();
+        str = str.charAt(0).toUpperCase() + str.slice(1);
+    }
+    return str;
 }
 
 function applyHeaderSearchBarListeners() {
@@ -54,5 +75,39 @@ function applyHeaderSearchBarListeners() {
             $("#search-button").click();
         }
     });
+
+}
+
+function queryBuilder(triplets, filters, limit) {
+
+    let query = "";
+
+    // Header
+    query += "SELECT DISTINCT (SAMPLE(?Food) AS ?food) ?label (SAMPLE(?CountryName) AS ?countryName) (SAMPLE(?Thumbnail) AS ?thumbnail) (SAMPLE(?Abstract) as ?abstract) WHERE  { \n" +
+    "?Food a dbo:Food ; rdfs:label ?label ; dbo:country ?country ; dbo:thumbnail ?Thumbnail ; dbo:abstract ?Abstract .\n" +
+    "?country rdfs:label ?CountryName .";
+
+    // Extra triplets 
+    for (let i = 0; i < triplets.length; i++) {
+        query += triplets[i] + "\n";
+    }
+
+    // Filters 
+    query += "FILTER(langMatches(lang(?Abstract), 'en') || lang(?Abstract) = '') \n" +
+    "FILTER(langMatches(lang(?CountryName), 'en') || lang(?CountryName) = '') \n" + 
+    "FILTER(langMatches(lang(?label), 'en') || lang(?label) = '').";
+
+    // Extra filters 
+    for (let i = 0; i < filters.length; i++) {
+        query += filters[i] + "\n";
+    }
+
+    // Footer 
+    query += "} \n" +
+    "GROUP BY ?label \n" +
+    "ORDER BY ASC(?label) \n" + 
+    "LIMIT " + limit; 
+
+    return query;
 
 }

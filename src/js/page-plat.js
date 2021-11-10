@@ -1,10 +1,19 @@
+var numberQueriesDone = 0;
+
+function incrementQueryCount() {
+    numberQueriesDone++;
+    if (numberQueriesDone >= 7) {
+        $('.loader-overlay-opaque').css('display', 'none');
+    }
+}
+
 function chargerInfosPlat(plat) {
 
     // Nom du plat 
     $("#nom-plat").html("<h1>" + plat + "</h>");
 
     // Recette
-    $('#recipe-link').html("<a href='https://www.allrecipes.com/search/results/?search=" + plat + "' class='btn btn-info btn-lg'>Search recipe</a>");
+    $('#recipe-link').html("<a href='https://www.allrecipes.com/search/results/?search=" + plat + "' class='btn btn-info btn-lg' target='_blank'>Search recipe</a>");
 
     // Description du plat
     let query1 = "SELECT * WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (dbo:abstract, rdfs:comment, dbp:caption)). }";
@@ -35,33 +44,13 @@ function chargerInfosPlat(plat) {
     let query6 = "SELECT DISTINCT ?image  WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. { {?food dbo:thumbnail ?image.} UNION {?food foaf:depiction ?image.}} } LIMIT 5";
     query6 = query6.replaceAll('{1}', plat);
     rechercher(query6, chargerImagesPlat);
-    console.log(query6);
 
     // Plats Similaires
-    let query7 = "SELECT * WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. ?sujet a dbo:Food. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (owl:sameAs, dbo:hasVariant, dbp:variations,dbo:wikiPageWikiLink, dbp:similarDish)).}";
+    let query7 = "SELECT ?nom, SAMPLE(?Thumbnail) AS ?thumbnail WHERE { ?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. ?sujet a dbo:Food. ?sujet rdfs:label ?nom ; dbo:thumbnail ?Thumbnail. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(lang(?nom) = '' || langMatches(lang(?nom), 'en')). FILTER(?predicat IN (owl:sameAs, dbo:hasVariant, dbp:variations,dbo:wikiPageWikiLink, dbp:similarDish)).} GROUP BY ?nom";
     query7 = query7.replace('{1}', plat);
-    //rechercher(query7, chargerPlatSimilaire);
-} 
+    rechercher(query7, chargerPlatSimilaire);
 
-function normalizeString(str, uppercaseAll) {
-    str = str.trim();
-    str = str.replaceAll('_', ' ');
-    strList = str.split(' ');
-    if (uppercaseAll) {
-        for (let i = 0; i < strList.length; i++) {
-            subStr = strList[i];
-            subStr = subStr.toLowerCase();
-            subStr = subStr.charAt(0).toUpperCase() + subStr.slice(1);
-            strList[i] = subStr;
-        }
-        str = strList.join(' ');
-    }
-    else {
-        str = str.toLowerCase();
-        str = str.charAt(0).toUpperCase() + str.slice(1);
-    }
-    return str;
-}
+} 
 
 function obtenirResultatsJson(json) {
 
@@ -129,6 +118,8 @@ function chargerDescriptionPlat(json) {
     } 
     */
 
+    incrementQueryCount();
+
 }
 
 function chargerOriginePlat(json) {
@@ -168,6 +159,8 @@ function chargerOriginePlat(json) {
     if (region == "") { $('#origine-region').remove(); }
     if (pays == "" && region == "") { $('#origine').remove(); }
     
+    incrementQueryCount();
+
 }
 
 function chargerTypePlat(json) {
@@ -184,9 +177,10 @@ function chargerTypePlat(json) {
     else if (map.has("served")) {
         temperature = map.get("served");
     }
+    let isEmpty = (type.length == 0 && temperature.length == 0);
 
     for (var i = 0; i < type.length; i++) {
-        type[i] = normalizeString(type[i], true);
+        type[i] = "<a class='ingredientURL' href='./recherche.html?searchType=type&searchKeyword=" + type[i] + "'>" + normalizeString(type[i], true) + "</a>"; 
     }
     type = type.join(", ");
 
@@ -206,8 +200,10 @@ function chargerTypePlat(json) {
         fullType = temperature;
     }
     $('#type').html(fullType);
+    
+    if (isEmpty == "") { $('#type').remove(); $('#nom-plat-type-separator').remove(); }
 
-    if (fullType == "") { $('#type').remove(); $('#nom-plat-type-separator').remove(); }
+    incrementQueryCount();
 
 }
 
@@ -247,14 +243,15 @@ function chargerIngredientsPlat(json) {
     let n = ingredientList.length;
     for (let i = 0; i < n; i++) {
         if (ingredientList[i] == "") continue; 
-        //let ingredientURL = "<a style='color: black' href='https://en.wikipedia.org/wiki/" + ingredientList[i] + "'>" + ingredientList[i] + "</a> (<a href='https://www.walmart.com/search?q=" + ingredientList[i] + "'>BUY</a>)";
-        let ingredientURL = "<a class='ingredientURL' href='./page-ingredient.html?ingredient=" + ingredientList[i] + "'>" + ingredientList[i] + "</a>";
+        let ingredientURL = "<a class='ingredientURL' href='./recherche.html?searchType=ingredient&searchKeyword=" + ingredientList[i] + "'>" + ingredientList[i] + "</a>";
         ingredientListHTML += "<li>" + ingredientURL + "</li>";
     }
     ingredientListHTML += "</ul>";
     $('#ingredient > div').html(ingredientListHTML); 
 
-    if (n == 0) { $('#ingredient').remove(); }
+    if (n == 0) { $('#ingredient').remove(); $('#recipe-link').remove(); }
+
+    incrementQueryCount();
 
 }
 
@@ -325,6 +322,8 @@ function chargerNutritionPlat(json) {
         $("#nutrientFacts tbody").append(nutrientHtml);
     }
 
+    incrementQueryCount();
+
 }
 
 function chargerImagesPlat(json) {
@@ -349,11 +348,34 @@ function chargerImagesPlat(json) {
             img.src = res[i]['image'].value;
             if (thumbnailURI.toLowerCase().includes(img.src.toLowerCase())) continue; // skip if it's the same URI as the thumbnail
             $('#images .row:nth-child(' + ((count>1)+2) + ') .col:nth-child(' + (((count)%2)+1) + ')').append(img);   
-            console.log(count);
             count++;
         }
     }
 
+    incrementQueryCount();
+
 }
 
-function chargerPlatSimilaire(json) {}
+function chargerPlatSimilaire(json) {
+    
+    let results = json.results.bindings;
+
+    for (let result of results) {
+        // cloner template, remplir, append
+        let template = document.getElementById('template-suggestion');
+        let newNode = document.importNode(template.content, true);
+        let cardImage = newNode.querySelector('img');
+        cardImage.alt = result['nom'].value + ' image';
+        cardImage.src = result['thumbnail'].value;
+        let cardTitle = newNode.querySelector('h5');
+        cardTitle.innerHTML = result['nom'].value;
+        newNode.getElementById("card-link").href = "page-plat.html?plat=" + result['nom'].value;
+        document.getElementById('suggestions-container').insertBefore(newNode, document.getElementById("prev-btn"));
+
+    }
+
+    slider.init($($('.slider')[0]).attr('id'));
+
+    incrementQueryCount();
+
+}

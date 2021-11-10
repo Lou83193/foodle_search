@@ -22,7 +22,7 @@ function searchButtonClicked() {
         // launch search !
         // redirect with get parameters (if defined) of both !
         // the other page, on load, gets parameters, fetches content based on it and renders
-        redirectParameters = '?' + (searchContent != ''? 'search='+searchContent : '') + (searchContent != '' && countryContent != ''? '&' : '') + (countryContent != ''? 'country='+countryContent : '');
+        redirectParameters = '?searchType=dish&' + (searchContent != ''? 'searchKeyword='+searchContent : '') + (searchContent != '' && countryContent != ''? '&' : '') + (countryContent != ''? 'countryFilter='+countryContent : '');
         window.location.href = window.location.href.replace('/index.html', '/recherche.html' + redirectParameters);
     }
 }
@@ -96,7 +96,7 @@ function loadHighlightedFood() {
         let query2='SELECT ?image WHERE {\n'+
             '?food a dbo:Food.\n'+
             '?food rdfs:label "{1}"@en.\n'+
-            '?food foaf:depiction ?image.\n'+
+            '?food dbo:thumbnail ?image.\n'+
             '} LIMIT 1';
 
         rechercher(query2.replaceAll('{1}',foodname), data2 => {
