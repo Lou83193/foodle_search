@@ -58,7 +58,7 @@ function loadSearch() {
         "?Food ?predicat ?sujet .", 
         "?sujet rdfs:label ?labelIngredient ." 
       ];
-      filters =  [
+      filters = [
         "FILTER((isLiteral(?sujet) && regex(?sujet, '(?i){1}')) || (!isLiteral(?sujet) && regex(?labelIngredient, '(?i){1}'))).",
         "FILTER(?predicat IN (dbo:ingredient, dbo:ingredientName, dbp:mainIngredient, dbp:minorIngredient))."
       ];
@@ -67,6 +67,12 @@ function loadSearch() {
 
     // Type search
     case "type":
+      triplets = [
+        "?Food dbo:type ?type"
+      ];
+      filters = [
+        "FILTER(regex(?type, '(?i){1}'))."
+      ];
 
     break;
 

@@ -186,7 +186,7 @@ function chargerTypePlat(json) {
     }
 
     for (var i = 0; i < type.length; i++) {
-        type[i] = normalizeString(type[i], true);
+        type[i] = "<a class='ingredientURL' href='./recherche.html?searchType=type&searchKeyword=" + type[i] + "'>" + normalizeString(type[i], true) + "</a>"; 
     }
     type = type.join(", ");
 
