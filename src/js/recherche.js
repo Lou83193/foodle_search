@@ -30,7 +30,7 @@ function loadSearch() {
 
   // If there is no search keyword, redirect to 'country' search type with country filter as search keyword
   if (searchKeyword == null) {
-    window.location.href = "page-pays.html?searchType=country&searchKeyword=" + countryFilter;
+    window.location.href = "page-pays.html?country=" + countryFilter;
     return;
   }
 

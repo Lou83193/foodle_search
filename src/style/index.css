@@ -4,7 +4,24 @@ body {
     padding-top: 10vh;
 }
 
-#barres {
+#logo {
+    display: flex;
+    justify-content: center; 
+    margin-bottom: 4em; 
+    
+}
+#logo > img {
+    width: 20%;
+}
+
+#search-by {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: auto;
+    width: 50%;
+}
+#searchTabs {
     width: 100%;
 }
 
@@ -12,33 +29,34 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0vh 20vw;
+    margin: auto;
+    padding: 2em;
+    width: 50%;
+    border: solid 1px #DEE2E6;
+    border-top: none;
 }
-
-#bouton-recherche {
-    width: 40%;
-    margin-top: 3vh;
-    font-size: medium;
-    color: #6D5F5F;
-}
-
-#bouton-recherche:hover{
-    background-color: whitesmoke;
-}
-
 #barres {
     display: flex;
     flex-direction: row;
+    width: 100%;
 }
 
 #barre-recherche-plats {
-    flex-grow: 4;
+    flex-grow: 1;
     margin-right: 1vw;
 }
 
 #barre-recherche-plats, #barre-recherche-pays, #bouton-recherche {
     padding: 10px 20px;
     transition-duration: 700ms;
+}
+#bouton-recherche {
+    width: 40%;
+    margin-top: 1.5em; 
+    color: #6D5F5F;
+}
+#bouton-recherche:hover{
+    background-color: whitesmoke;
 }
 
 .card {
@@ -65,10 +83,6 @@ body {
     flex-direction: row;
 }
 
-#logo {
-    text-align: center;
-    margin: 1.5em 0em;
-}
 #plat-du-jour-label {
     font-weight: bold;
     margin: 1em 0em;

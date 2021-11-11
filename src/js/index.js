@@ -1,4 +1,4 @@
-
+var selectedSearchType = "name";
 
 function applyMainSearchBarListeners() {
 
@@ -14,17 +14,65 @@ function applyMainSearchBarListeners() {
     
 }
 
+function applySearchTabListeners() {
+
+    $('button[data-bs-toggle="tab"]').on('click', function (e) {
+
+        // Save search type
+        selectedSearchType = e.target.innerHTML.toLowerCase();
+
+        // Change placeholder text in search bar
+        switch (selectedSearchType) {
+            case "name":
+                $('#barre-recherche-plats').prop("placeholder", "Dish name...");
+                break;
+            case "ingredient":
+                $('#barre-recherche-plats').prop("placeholder", "Ingredient...");
+                break;
+            case "type":
+                $('#barre-recherche-plats').prop("placeholder", "Dish type...");
+                break;
+            case "country":
+                $('#barre-recherche-plats').prop("placeholder", "Country name...");
+                break;
+        }
+
+        // Clear search term (bad idea?)
+        // $('#barre-recherche-plats').prop("value", "");
+        
+        // Show or hide country filter
+        if (selectedSearchType == "country") {
+            $('#barre-recherche-pays').css('display', 'none');
+        }
+        else {
+            $('#barre-recherche-pays').css('display', 'block');
+        }
+
+    });
+
+}
+
 
 function searchButtonClicked() {
+
+    let searchType = (selectedSearchType == "name") ? "dish" : selectedSearchType;
     searchContent = document.getElementById("barre-recherche-plats").value;
     countryContent = document.getElementById("barre-recherche-pays").value;
-    if (searchContent != '' || countryContent != '') {
-        // launch search !
-        // redirect with get parameters (if defined) of both !
-        // the other page, on load, gets parameters, fetches content based on it and renders
-        redirectParameters = '?searchType=dish&' + (searchContent != ''? 'searchKeyword='+searchContent : '') + (searchContent != '' && countryContent != ''? '&' : '') + (countryContent != ''? 'countryFilter='+countryContent : '');
-        window.location.href = window.location.href.replace('/index.html', '/recherche.html' + redirectParameters);
+
+    if (searchContent != '') {
+        
+        if (searchType != 'country') { 
+            page = '/recherche.html';
+            parameters = '?searchType=' + searchType + '&searchKeyword='+ searchContent + ((countryContent != '') ? '&countryFilter=' + countryContent : '');
+        }
+        else {
+            page = '/page-pays.html';
+            parameters = '?country=' + searchContent;
+        }
+        window.location.href = window.location.href.replace('/index.html', page + parameters);
+
     }
+
 }
 
 function loadCountries() {
