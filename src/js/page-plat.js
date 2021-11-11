@@ -21,7 +21,7 @@ function chargerInfosPlat(plat) {
     rechercher(query1, chargerDescriptionPlat);
 
     // Origine du plat
-    let query2 = "SELECT * WHERE {?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?sujet. FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (dbo:country, dbo:region, dbo:cuisine, dbp:nationalCuisine)). }";
+    let query2 = "SELECT * WHERE {?food a dbo:Food. ?food rdfs:label '{1}'@en. ?food ?predicat ?origine. ?origine rdfs:label ?sujet FILTER(!isLiteral(?sujet) || lang(?sujet) = '' || langMatches(lang(?sujet), 'en')). FILTER(?predicat IN (dbo:country, dbo:region, dbo:cuisine, dbp:nationalCuisine)). }";
     query2 = query2.replace('{1}', plat);
     rechercher(query2, chargerOriginePlat); 
 
@@ -130,7 +130,7 @@ function chargerOriginePlat(json) {
     if (map.has("country")) {
         pays = map.get("country");
         for (var i = 0; i < pays.length; i++) {
-            pays[i] = "<a href='./page-pays.html?country=" + normalizeString(pays[i], true) + "'>" + normalizeString(pays[i], true) + "</a>";
+            pays[i] = "<a href='./page-pays.html?country=" + pays[i] + "'>" + normalizeString(pays[i], true) + "</a>";
         }
     }
     else if (map.has("cuisine")) {

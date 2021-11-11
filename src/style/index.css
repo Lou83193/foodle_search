@@ -42,10 +42,11 @@ body {
 }
 
 #barre-recherche-plats {
-    flex-grow: 2;
+    flex-grow: 4; 
+    margin-right: 1vw; 
 }
 #barre-recherche-pays {
-    margin-left: 1vw; 
+    flex-grow: 1;
 }
 #bouton-recherche {
     padding: 10px 20px;
@@ -65,12 +66,26 @@ body {
 }
 
 #bouton-recherche {
-    width: 40%;
+    padding: 0.5em 3em;  
     margin-top: 1.5em; 
-    color: #6D5F5F;
+    color: rgba(0, 0, 0, 0.5); 
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    transition-duration: 200ms;
 }
 #bouton-recherche:hover{
-    background-color: whitesmoke;
+    background-color: rgb(241, 241, 241);
+}
+#bouton-recherche:focus {
+    outline: none;
+    box-shadow: 0px 2px 10px #9D9C9C;
+}
+
+#bouton-recherche svg {
+   opacity: 0.5;
+   margin-left: 0.4em;
 }
 
 .card {
@@ -81,10 +96,7 @@ body {
     transition-duration: 700ms;
 }
 
-#barre-recherche-pays:focus, #bouton-recherche:focus {
-    outline: none;
-    box-shadow: 0px 2px 10px #9D9C9C;
-}
+
 
 #plat-du-jour-section {
     display: flex;

@@ -25,15 +25,18 @@ function applySearchTabListeners() {
         switch (selectedSearchType) {
             case "name":
                 $('#barre-recherche-plats').prop("placeholder", "Dish name...");
+                $('#barre-recherche-pays').prop("placeholder", "Filter by country...");
                 break;
             case "ingredient":
                 $('#barre-recherche-plats').prop("placeholder", "Ingredient...");
+                $('#barre-recherche-pays').prop("placeholder", "Filter by country...");
                 break;
             case "type":
                 $('#barre-recherche-plats').prop("placeholder", "Dish type...");
+                $('#barre-recherche-pays').prop("placeholder", "Filter by country...");
                 break;
             case "country":
-                $('#barre-recherche-plats').prop("placeholder", "Country name...");
+                $('#barre-recherche-pays').prop("placeholder", "Country...");
                 break;
         }
 
@@ -42,10 +45,10 @@ function applySearchTabListeners() {
         
         // Show or hide country filter
         if (selectedSearchType == "country") {
-            $('#barre-recherche-pays').css('display', 'none');
+            $('#barre-recherche-plats').css('display', 'none'); 
         }
         else {
-            $('#barre-recherche-pays').css('display', 'block');
+            $('#barre-recherche-plats').css('display', 'block'); 
         }
 
     });
@@ -59,18 +62,19 @@ function searchButtonClicked() {
     searchContent = document.getElementById("barre-recherche-plats").value;
     countryContent = document.getElementById("barre-recherche-pays").value;
 
-    if (searchContent != '') {
-        
-        if (searchType != 'country') { 
+    if (searchType != 'country') { 
+        if (searchContent != '') {
             page = '/recherche.html';
             parameters = '?searchType=' + searchType + '&searchKeyword='+ searchContent + ((countryContent != '') ? '&countryFilter=' + countryContent : '');
+            window.location.href = window.location.href.replace('/index.html', page + parameters);
         }
-        else {
+    }
+    else {
+        if (countryContent != '') {
             page = '/page-pays.html';
-            parameters = '?country=' + searchContent;
+            parameters = '?country=' + countryContent;
+            window.location.href = window.location.href.replace('/index.html', page + parameters);
         }
-        window.location.href = window.location.href.replace('/index.html', page + parameters);
-
     }
 
 }
