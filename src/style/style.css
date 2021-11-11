@@ -75,8 +75,8 @@ body {
 
 /* BARRE DE RECHERCHE */
 .search-bar {
-    position: relative; 
-    /*width: 100%;*/
+    position: relative;
+    width: 25%;
 }
 #search-input {
     border-radius: 2em;
