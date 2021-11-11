@@ -130,7 +130,7 @@ function chargerOriginePlat(json) {
     if (map.has("country")) {
         pays = map.get("country");
         for (var i = 0; i < pays.length; i++) {
-            pays[i] = "<a href='./page-pays.html?country=" + pays[i] + "'>" + normalizeString(pays[i], true) + "</a>";
+            pays[i] = "<a href='./page-pays.html?country=" + normalizeString(pays[i], true) + "'>" + normalizeString(pays[i], true) + "</a>";
         }
     }
     else if (map.has("cuisine")) {
