@@ -18,11 +18,14 @@ function displaySearchResult(index, result) {
 }
 
 function displayCountryDesc(index, result) {
-    let countryDesc = document.getElementById("country-desc");
+    let countryDesc = document.getElementById("country-desc-content");
     let flagImage = document.getElementById("country-flag");
     flagImage.alt = result['label'].value + " Flag";
     flagImage.src = result['flag'].value;
-    countryDesc.innerHTML = result['desc'].value;
+    let readMoreTag = " <a href='{1}' target='_blank' rel='noopener noreferrer'>{2}</a>";
+    readMoreTag = readMoreTag.replace('{1}', result['link'].value);
+    readMoreTag = readMoreTag.replace('{2}', "Read More");
+    countryDesc.innerHTML = result['desc'].value + readMoreTag;
 }
 
 function loadSearch() {
@@ -30,14 +33,17 @@ function loadSearch() {
     // get parameters (null if not defined)
     let countryParameter = findGetParameter('country');
     document.getElementById("country-title").innerHTML = countryParameter;
+    document.getElementById("country-dishes-title").innerHTML = "Food from " + countryParameter;
+    document.title = "Food from " + countryParameter;
     
     console.log('Searched for (country) description:', countryParameter);
-    let query = 'SELECT ?label ?desc ?flag WHERE {\n' +
+    let query = 'SELECT ?label ?desc ?flag ?link WHERE {\n' +
     '?country a dbo:Country.\n' +
     '?country rdfs:label "{1}"@en;\n' +
-    'dbo:abstract ?desc;\n' +
+    'rdfs:comment ?desc;\n' +
     'rdfs:label ?label;\n' +
-    'dbo:thumbnail ?flag.\n' +
+    'dbo:thumbnail ?flag;\n' +
+    'foaf:isPrimaryTopicOf ?link.\n' +
     'FILTER(langMatches(lang(?desc), "EN"))\n' +
     '} LIMIT 1';
     query = query.replaceAll('{1}', countryParameter);

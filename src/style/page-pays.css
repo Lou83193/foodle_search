@@ -1,21 +1,22 @@
-#country-desc {
-    line-height: 1.5em;  
+#country-desc-content {
+    font-size: 1rem;
+    line-height: 1.5rem;  
 }
 
-#country-desc.collapse:not(.show) {
+#country-desc-content.collapse:not(.show) {
     display: block;
     height: 3rem;
     overflow: hidden;
 }
 
-#country-desc.collapsing {
+#country-desc-content.collapsing {
     height: 3rem;
 }
 
-#description a.collapsed::after {
+#country-desc a#toggle-show-more.collapsed::after {
     content: '+ Show More';
 }
 
-#description a:not(.collapsed)::after {
+#country-desc a#toggle-show-more:not(.collapsed)::after {
     content: '- Show Less';
 }
