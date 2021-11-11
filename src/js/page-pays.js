@@ -22,9 +22,9 @@ function displayCountryDesc(index, result) {
     let flagImage = document.getElementById("country-flag");
     flagImage.alt = result['label'].value + " Flag";
     flagImage.src = result['flag'].value;
-    let readMoreTag = " <a href='{1}' target='_blank' rel='noopener noreferrer'>{2}</a>";
+    let readMoreTag = " <a href='{1}' class='ml-2' target='_blank' rel='noopener noreferrer'>{2}</a>";
     readMoreTag = readMoreTag.replace('{1}', result['link'].value);
-    readMoreTag = readMoreTag.replace('{2}', "Read More");
+    readMoreTag = readMoreTag.replace('{2}', "Read&nbsp;More");
     countryDesc.innerHTML = result['desc'].value + readMoreTag;
 }
 
