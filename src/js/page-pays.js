@@ -15,7 +15,6 @@ function displaySearchResult(index, result) {
     cardText.innerHTML = result['abstract'].value;
     newNode.getElementById("card-link").href = "page-plat.html?plat=" + result['label'].value;
     document.getElementById('results-container').appendChild(newNode);
-    // todo : add onclick -> redirects to detail?plat=nom
 }
 
 function displayCountryDesc(index, result) {
