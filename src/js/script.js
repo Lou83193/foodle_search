@@ -52,13 +52,13 @@ function normalizeString(str, uppercaseAll) {
 
 function applyHeaderSearchBarListeners() {
 
-    $('#search-button').click(function(event) {
-        quickSearchButtonClicked('search-input');
+    $('#quicksearch-button').click(function(event) {
+        quickSearchButtonClicked('quicksearch-input');
     });
     
-    $("#search-input").keyup(function(event) {
+    $("#quicksearch-input").keyup(function(event) {
         if (event.keyCode == 13) {
-            $("#search-button").click();
+            $("#quicksearch-button").click();
         }
     });   
 
@@ -90,13 +90,16 @@ function queryBuilder(triplets, filters, limit) {
 
     // Filters 
     query += "FILTER(langMatches(lang(?Abstract), 'en') || lang(?Abstract) = '') \n" +
-    "FILTER(langMatches(lang(?CountryName), 'en') || lang(?CountryName) = '') \n" + 
-    "FILTER(langMatches(lang(?label), 'en') || lang(?label) = '').";
+    "FILTER(langMatches(lang(?CountryName), 'en') || lang(?CountryName) = '').";
+    //"FILTER(langMatches(lang(?label), 'en') || lang(?label) = '' || langMatches(lang(?label), 'fr')).";
 
     // Extra filters 
     for (let i = 0; i < filters.length; i++) {
         query += filters[i] + "\n";
     }
+
+    query += "FILTER(langMatches(lang(?label), 'en') || lang(?label) = '')";
+
 
     // Footer 
     query += "} \n" +

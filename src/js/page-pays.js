@@ -3,7 +3,7 @@ function cleanSearchResults() {
 }
 
 function displaySearchResult(index, result) {
-    const template = document.getElementById('searchResult');
+    const template = document.getElementById('search-result');
     let newNode = document.importNode(template.content, true);
     let cardImage = newNode.querySelector('img');
     cardImage.alt = result['label'].value + ' image';
@@ -56,9 +56,16 @@ function loadSearch() {
             index.push(v);
         });
         
-        data.results.bindings.forEach(r => {
-            displayCountryDesc(index, r);
-        });
+        if(data.results.bindings.length != 0){
+            data.results.bindings.forEach(r => {
+                displayCountryDesc(index, r);
+            });
+        }else {
+            $('#country-desc-content').css('display', 'none');
+            $('#toggle-show-more').css('display', 'none');
+
+        }
+
     });
     
     console.log('Searched for (country) food:', countryParameter);
@@ -85,8 +92,26 @@ function loadSearch() {
             index.push(v);
         });
 
-        data.results.bindings.forEach(r => {
-            displaySearchResult(index, r);
-        });
+        if(data.results.bindings.length != 0) {
+            data.results.bindings.forEach(r => {
+                displaySearchResult(index, r);
+            });
+        }else{
+            $('#page-body-content').css('display', 'none');
+            $('#page-body').append('<h5>This country does not seem to exist, sorry :(</h5>');
+        }
+
     });
+}
+
+// this overrides `contains` to make it case insenstive
+jQuery.expr[':'].contains = function(a, i, m) {
+    return jQuery(a).text().toUpperCase()
+    .indexOf(m[3].toUpperCase()) >= 0;
+};
+
+var filterKeyUp = function () {
+    $('.card').removeClass('d-none');
+    var filter = $(this).val(); // get the value of the input, which we filter on
+    $('#results-container').find(".card .card-body h5:not(:contains('" + filter + "'))").parent().parent().parent().parent().parent().addClass('d-none');
 }
