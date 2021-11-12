@@ -5,12 +5,12 @@
 
 #country-desc-content.collapse:not(.show) {
     display: block;
-    height: 3rem;
+    height: 4.5rem;
     overflow: hidden;
 }
 
 #country-desc-content.collapsing {
-    height: 3rem;
+    height: 4.5rem;
 }
 
 a#toggle-show-more.collapsed::after {
@@ -23,6 +23,9 @@ a#toggle-show-more:not(.collapsed)::after {
 .card-img {
     object-fit:cover;
     height:200px;
+}
+#flag-container {
+    height: 7.7rem;
 }
 
 /* BARRE DE FILTRE */

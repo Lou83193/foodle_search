@@ -30,15 +30,15 @@
     <div id="page-body" class="container-fluid p-0">
         
         <div id="page-body-content" class="container-fluid p-0">
-            <div id="country-header" class="container-fluid row p-3 mx-0 clearfix">
-                <div id="country-desc" class="col-9">
+            
+            <div id="country-header" class="container-fluid p-3 m-0 clearfix">
+                <div id="flag-container" class="float-right ml-3 d-none d-sm-block">
+                    <img id="country-flag" class="shadow-sm rounded mh-100" src="">
+                </div>
+                <div id="country-desc" class="pl-0">
                     <h1 id="country-title" class="title"></h1>
                     <p class="collapse mb-2 text-justify" id="country-desc-content" aria-expanded="false"></p>
                     <a id="toggle-show-more" role="button" class="collapsed" data-toggle="collapse" href="#country-desc-content" aria-expanded="false" aria-controls="country-desc-content"></a>
-                </div>
-
-                <div class="col justify-content-end d-flex">
-                    <img id="country-flag" class="mh-100 shadow-sm rounded mw-100" src="">
                 </div>
 
             </div>

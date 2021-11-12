@@ -115,5 +115,5 @@ jQuery.expr[':'].contains = function(a, i, m) {
 var filterKeyUp = function () {
     $('.card').removeClass('d-none');
     var filter = $(this).val(); // get the value of the input, which we filter on
-    $('#results-container').find(".card .card-body h5:not(:contains('" + filter + "'))").parent().parent().parent().parent().parent().addClass('d-none');
+    $('#results-container').find(".card .card-body h5:not(:contains('" + filter + "'))").parents("#results-container > .card").addClass('d-none');
 }
