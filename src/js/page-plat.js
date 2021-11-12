@@ -347,7 +347,7 @@ function chargerImagesPlat(json) {
             let img = document.createElement('img');
             img.src = res[i]['image'].value;
             if (thumbnailURI.toLowerCase().includes(img.src.toLowerCase())) continue; // skip if it's the same URI as the thumbnail
-            $('#images .row:nth-child(' + ((count>1)+2) + ') .col:nth-child(' + (((count)%2)+1) + ')').append(img);   
+            $('#images .row:nth-child(' + ((count>1)+2) + ') .col:nth-child(' + (((count)%2)+1) + ')').append(img);
             count++;
         }
     }

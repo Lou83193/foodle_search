@@ -5,6 +5,7 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+
     <title>Recherche Foodle</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
@@ -12,10 +13,15 @@
     <link rel='stylesheet' type='text/css' media='screen' href="style/style.css">
     <link rel='stylesheet' type='text/css' media='screen' href='style/recherche.css'>
     
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script src='js/script.js'></script>
     <script src='js/recherche.js'></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#header-bar").load("components/header-bar.html", applyHeaderSearchBarListeners);
+        });
+    </script>
     
 
 </head>
@@ -34,24 +40,9 @@
         </div>
     </template>
 
-    <nav class="navbar navbar-expand-md">
-        <a class="navbar-brand" href="index.html"><img src="style/img/foodle-modern-logo.png"></a> 
-        <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="main-navigation">
-            <div class="search-bar">
-                <input id='search-input' type="text" placeholder="Quick Search..." />
-                <button id='search-button' type="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </nav>
+    <header id="header-bar"></header>
 
-    <header id="page-body" class="page-header header">
+    <div id="page-body" class="page-header header">
 
         <div class="results-row">
             <div id="results-for" class="underline-header">
@@ -67,9 +58,7 @@
             <div class="loader"></div>
         </div> 
 
-    </header>
-    
-    <script> applyHeaderSearchBarListeners(); </script>
+    </div>
 
 </body>
 </html>

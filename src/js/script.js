@@ -30,17 +30,6 @@ function rechercher(contenu_requete, trigger_resultat) {
     xmlhttp.send();
 }
 
-function quickSearchButtonClicked(idBarrePlats) {
-
-    searchContent = document.getElementById(idBarrePlats).value;
-    if (searchContent != '') {
-        parameters = '?searchType=dish&searchKeyword=' + searchContent;
-        window.location.href = 'recherche.html' + parameters;
-    }
-
-}
-
-
 function normalizeString(str, uppercaseAll) {
     str = str.trim();
     str = str.replaceAll('_', ' ');
@@ -71,7 +60,17 @@ function applyHeaderSearchBarListeners() {
         if (event.keyCode == 13) {
             $("#search-button").click();
         }
-    });
+    });   
+
+}
+
+function quickSearchButtonClicked(idBarrePlats) {
+
+    searchContent = document.getElementById(idBarrePlats).value;
+    if (searchContent != '') {
+        parameters = '?searchType=dish&searchKeyword=' + searchContent;
+        window.location.href = 'recherche.html' + parameters;
+    }
 
 }
 

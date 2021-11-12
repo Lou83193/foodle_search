@@ -29,10 +29,10 @@ function loadSearch() {
   let countryFilter = findGetParameter('countryFilter');
 
   // If there is no search keyword, redirect to 'country' search type with country filter as search keyword
-  if (searchKeyword == null) {
+  /*if (searchKeyword == null) {
     window.location.href = "page-pays.html?country=" + countryFilter;
     return;
-  }
+  }*/
 
   // Load search query data in HTML
   if (searchType == "ingredient") {
