@@ -11,7 +11,9 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
-    <script src="js/script.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script type="text/javascript" src="js/slider.js" data-itemInFocus="2" data-activeItems="3"></script>
+    <script type="text/javascript" src="js/page-plat.js"></script>
     <script type="text/javascript">
         $(function(){
             $("#header-bar").load("components/header-bar.html", applyHeaderSearchBarListeners);
@@ -108,53 +110,55 @@
 
 
             <div id="plats-similaires">
-                <h3>Similar dishes</h3>
-                <div class="row">
+                <div id="plats-similaires-titre"><h3>Similar dishes</h3></div>
+                
                     <div class="col">
-                        <div id="test-slider" class="slider carousel carousel-fade" data-ride="carousel">
+                        <div id="test-slider" class="slider carousel carousel-slide" data-ride="carousel">
                             <!-- Indicators -->
+                            <!-- 
                             <ol class="carousel-indicators">
-                                <li data-target="test-slider" data-slide-to="0"></li>
-                                <li data-target="test-slider" data-slide-to="1"></li>
-                                <li data-target="test-slider" data-slide-to="2"></li>
-                                <li data-target="test-slider" data-slide-to="3"></li>
-                                <li data-target="test-slider" data-slide-to="4"></li>
+                                <li data-target="#test-slider" data-slide-to="0" class="active"></li>
+                                <li data-target="#test-slider" data-slide-to="1"></li>
+                                <li data-target="#test-slider" data-slide-to="2"></li>
+                                <li data-target="#test-slider" data-slide-to="3"></li>
+                                <li data-target="#test-slider" data-slide-to="4"></li>
                             </ol>
+                            -->
 
                             <!-- Wrapper for slides -->
-                            <div class="carousel-inner" id="suggestions-container">
-                                <template id="template-suggestion">
-                                    <div class="carousel-item">
-                                        <div class="col-sm">
-                                            <div class="card">
-                                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Pepperoni_pizza.jpg/300px-Pepperoni_pizza.jpg" class="food-img" alt="">
-                                                <div class="card-body">
-                                                    <a id="card-link"><h5 class="card-title">Pizza</h5></a>
-                                                </div>
+                            <template id="template-suggestion">
+                                <div class="carousel-item">
+                                    <div class="col-sm">
+                                        <div class="card">
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Pepperoni_pizza.jpg/300px-Pepperoni_pizza.jpg" class="food-img" alt="">
+                                            <div class="card-body">
+                                                <a id="card-link"><h5 class="card-title">Pizza</h5></a>
                                             </div>
                                         </div>
                                     </div>
-                                </template>
+                                </div>
+                            </template>
+                            <div class="carousel-inner" id="suggestions-container">
+                                <!-- Inject suggestions here -->
+                            </div>
+
                             <!-- Controls -->
-                            <a id="prev-btn" class="carousel-control-prev" href="#test-slider" role="button" data-slide="prev">
-                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                                <span class="sr-only"><</span>
+                            <a class="carousel-control-prev" href="#test-slider" role="button" data-slide="prev">
+                                <span class="carousel-control-icon">&#8249;</span>
                             </a>
                             <a class="carousel-control-next" href="#test-slider" role="button" data-slide="next">
-                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                <span class="sr-only">></span>
+                                <span class="carousel-control-icon">&#8250;</span>
                             </a>
+                            
                         </div>
                     </div>
-                </div>
+                
             </div>
     
         </div>
 
     </div>
 
-    <script type="text/javascript" src="js/slider.js" data-itemInFocus="2" data-activeItems="3"></script>
-    <script src="js/page-plat.js"></script>
     <script>
 
         const url = window.location.search;

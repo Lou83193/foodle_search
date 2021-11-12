@@ -373,8 +373,7 @@ function chargerPlatSimilaire(json) {
         let cardTitle = newNode.querySelector('h5');
         cardTitle.innerHTML = result['nom'].value;
         newNode.getElementById("card-link").href = "page-plat.html?plat=" + result['nom'].value;
-        document.getElementById('suggestions-container').insertBefore(newNode, document.getElementById("prev-btn"));
-
+        document.getElementById('suggestions-container').appendChild(newNode);
     }
 
     slider.init($($('.slider')[0]).attr('id'));

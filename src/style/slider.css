@@ -3,18 +3,17 @@
 */
 
 /* Required CSS Rules */
-.slider, .carousel{
+.slider, .carousel {
     width: auto;
 }
 
 .slider .carousel-item {
-    width: 150px;
+    width: 25%;
 }
 .slider .carousel-item.active {
     display: inline-block;
-    /* This specific amount of margin isn't required, but some is. */
-    margin-left: 2.6%;
-    margin-right: 2.6%;
+    margin-left: 0em;
+    margin-right: 0em;
 } 
 /* End required CSS */
 
@@ -33,7 +32,7 @@
 }
 
 .slider .carousel-item .card {
-    height: 300px;
+    height: auto;
 }
 
 .slider .carousel-item.active:hover {
@@ -54,15 +53,26 @@
 .slider .carousel-control-prev:focus,
 .slider .carousel-control-next,
 .slider .carousel-control-prev {
-    filter: alpha(opacity=100);
-    opacity: .5;
+    
     background-image: none !important;
     color: black;
     top: 36%;
     transform: translateY(-50%);
     cursor: pointer;
-    text-underline: none;
-    font-size: 40px;
+    text-decoration: none;
+    font-size: 5em;
+}
+
+.slider .carousel-control-next,
+.slider .carousel-control-prev {
+    opacity: .5;
+}
+
+.slider .carousel-control-next:hover,
+.slider .carousel-control-prev:hover,
+.slider .carousel-control-next:focus,
+.slider .carousel-control-prev:focus {
+    opacity: .8;
 }
 
 a:link {
@@ -74,7 +84,7 @@ a:link {
     z-index: 3 !important;
 }
 .slider .carousel-indicators li {
-    background-color: grey;
+    background-color: black !important;
 
 }
 .slider .carousel-indicators li.active {
