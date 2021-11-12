@@ -20,6 +20,10 @@ a#toggle-show-more.collapsed::after {
 a#toggle-show-more:not(.collapsed)::after {
     content: '- Show Less';
 }
+.card-img {
+    object-fit:cover;
+    height:200px;
+}
 
 /* BARRE DE FILTRE */
 #filter-icon {

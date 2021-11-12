@@ -7,8 +7,9 @@
     margin: 0;
     box-sizing: border-box;
     width: 40%;
-    height:500px;
+    
     margin:0;
+    background-color: rgba(0, 0, 0, 0.06);
 }
 #contenu {
     display: flex;
