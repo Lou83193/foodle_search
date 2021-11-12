@@ -3,7 +3,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-   <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
 
     <title>Food from Country</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -24,9 +24,9 @@
 </head>
 
 <body onload="loadSearch()">
-
+    
     <header id="header-bar"></header>
-
+    
     <div id="page-body" class="container-fluid p-0">
         
         <div id="page-body-content" class="container-fluid p-0">
@@ -55,30 +55,32 @@
                 </form>
             </div>
         </div>
-
-        <div id="results-container" class="row m-0 py-3">
+        
+        <div id="results-container" class="container-fluid m-0 py-3">
             <!-- inject search results here -->
         </div>
-
+        
         <template id="searchResult">
-                <div class="card">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="" class="img-fluid rounded-start" alt="">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <a id="card-link"><h5 class="card-title"></h5></a>
-                                <p class="card-text"></p>
-                                <a href=""></a>
-                            </div>
+            <div class="card mb-3">
+                <div class="row no-gutters position-relative">
+                    <div class="col-sm-4">
+                        <img src="" class="card-img" alt="">
+                    </div>
+                    <div class="col-sm-8 position-static">
+                        <div class="card-body">
+                            <a id="card-link"><h5 class="card-title stretched-link">Card title</h5></a>
+                            <p class="card-text"></p>
                         </div>
                     </div>
                 </div>
+            </div>
         </template>
         
     </div>
-
+    
+    <script>
+        applyHeaderSearchBarListeners();
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
 </html>
