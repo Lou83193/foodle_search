@@ -102,3 +102,7 @@ body {
 #search-button:hover {
     opacity: 1;
 }
+
+.navbar-brand {
+    margin-left: 2.5vw;
+}

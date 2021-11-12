@@ -6,7 +6,6 @@
 #images {
     margin: 0;
     box-sizing: border-box;
-    background-color: rgba(0, 0, 0, 0.1);
     width: 40%;
     height:500px;
     margin:0;
@@ -173,7 +172,7 @@
 }
 
 #plats-similaires h3 {
-    margin-top: 2vh;
+    margin-top: 0vh;
     margin-bottom: 2vh;
     text-align: center;
 }

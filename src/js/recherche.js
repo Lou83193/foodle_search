@@ -10,6 +10,7 @@ function displaySearchResult(index, result) {
   let cardImage = newNode.querySelector('img');
   cardImage.alt = result['label'].value + ' image';
   cardImage.src = result['thumbnail'].value;
+  checkImage(cardImage.src, cardImage);
   let cardTitle = newNode.querySelector('h5');
   cardTitle.innerHTML = result['label'].value;
   let cardText = newNode.querySelector('p');

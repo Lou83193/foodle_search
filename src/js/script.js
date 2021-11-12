@@ -107,3 +107,20 @@ function queryBuilder(triplets, filters, limit) {
     return query;
 
 }
+
+
+
+function checkImage(url, img) {
+    var image = new Image();
+    image.onload = function() {
+        if (this.width > 0) {
+            console.log("image exists");
+        }
+    }
+    image.onerror = function() {
+        console.log("image doesn't exist");
+        img.src="style/img/imageNotFound.png"
+
+    }
+    image.src = url;
+}

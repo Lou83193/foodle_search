@@ -337,15 +337,17 @@ function chargerImagesPlat(json) {
         let thumbnail = document.createElement('img');
         thumbnail.src = res[0]['image'].value;
         thumbnailURI = thumbnail.src;
+        checkImage(thumbnailURI, thumbnail);
         $('#images .row:nth-child(1) .col:nth-child(1)').append(thumbnail); 
     }
     
-    // Then the other depictions 
+    // Then the other depictions
     if (res.length > 1) {
         let count = 0;
         for (let i = 1; i < res.length; i++) {
             let img = document.createElement('img');
             img.src = res[i]['image'].value;
+            checkImage(img.src, img);
             if (thumbnailURI.toLowerCase().includes(img.src.toLowerCase())) continue; // skip if it's the same URI as the thumbnail
             $('#images .row:nth-child(' + ((count>1)+2) + ') .col:nth-child(' + (((count)%2)+1) + ')').append(img);
             count++;
@@ -367,6 +369,7 @@ function chargerPlatSimilaire(json) {
         let cardImage = newNode.querySelector('img');
         cardImage.alt = result['nom'].value + ' image';
         cardImage.src = result['thumbnail'].value;
+        checkImage(cardImage.src, cardImage);
         let cardTitle = newNode.querySelector('h5');
         cardTitle.innerHTML = result['nom'].value;
         newNode.getElementById("card-link").href = "page-plat.html?plat=" + result['nom'].value;
