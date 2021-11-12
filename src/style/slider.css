@@ -8,8 +8,7 @@
 }
 
 .slider .carousel-item {
-    width: 200px;
-
+    width: 150px;
 }
 .slider .carousel-item.active {
     display: inline-block;
@@ -32,6 +31,11 @@
 .slider .carousel-item {
     margin-bottom: 50px;
 }
+
+.slider .carousel-item .card {
+    height: 300px;
+}
+
 .slider .carousel-item.active:hover {
     cursor: pointer;
 }
@@ -75,4 +79,8 @@ a:link {
 }
 .slider .carousel-indicators li.active {
     background-color: black !important;
+}
+
+.slider h5 {
+    font-size: 13pt;
 }
