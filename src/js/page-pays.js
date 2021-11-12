@@ -32,6 +32,7 @@ function displayCountryDesc(index, result) {
 function loadSearch() {
     // todo : HANDLE SEARCH CONTENT NULL -> search only country
     // get parameters (null if not defined)
+    $('#page-body-content').css('display', 'none');
     let countryParameter = findGetParameter('country');
     document.getElementById("country-title").innerHTML = countryParameter;
     document.getElementById("country-dishes-title").innerHTML = "Food from " + countryParameter;
@@ -86,6 +87,7 @@ function loadSearch() {
     rechercher(query, data => {
         console.log(data);
         cleanSearchResults();
+        $('.loader-overlay').css('display', 'none');
         
         let index = [];
         data.head.vars.forEach((v, _) => {
@@ -93,11 +95,11 @@ function loadSearch() {
         });
 
         if(data.results.bindings.length != 0) {
+            $('#page-body-content').css('display', 'block');
             data.results.bindings.forEach(r => {
                 displaySearchResult(index, r);
             });
         }else{
-            $('#page-body-content').css('display', 'none');
             $('#page-body').append('<h5>This country does not seem to exist, sorry :(</h5>');
         }
 
