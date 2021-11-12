@@ -74,23 +74,19 @@ body {
 }
 
 /* BARRE DE RECHERCHE */
-.search-bar {
-    position: relative;
-    width: 25%;
-}
-#search-input {
+.search-input {
     border-radius: 2em;
     border: solid 1px rgba(0, 0, 0, 0.3);
     padding: 0.5em 1em;
     width: 100%;
 }
-#search-input:focus { 
+.search-input:focus { 
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.25); 
     border: solid 1px rgba(0, 0, 0, 0.4); 
     outline: none;
     transition: linear 120ms;
 }
-#search-button {
+.search-button {
     position: absolute;
     right: 0.5em; 
     top: 50%;
@@ -100,7 +96,7 @@ body {
     background: none;  
     opacity: 0.6;
 }
-#search-button:hover {
+.search-button:hover {
     opacity: 1;
 }
 

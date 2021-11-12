@@ -24,3 +24,15 @@ a#toggle-show-more:not(.collapsed)::after {
     object-fit:cover ;
     height:200px;
 }
+
+/* BARRE DE FILTRE */
+#filter-icon {
+    position: absolute;
+    right: 0.5em;
+    top: 62%;
+    transform: translateY(-50%);
+    border: none;
+    outline: none;
+    background: none;
+    opacity: 0.6;
+}

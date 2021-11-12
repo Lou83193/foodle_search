@@ -3,7 +3,7 @@ function cleanSearchResults() {
 }
 
 function displaySearchResult(index, result) {
-    const template = document.getElementById('searchResult');
+    const template = document.getElementById('search-result');
     let newNode = document.importNode(template.content, true);
     let cardImage = newNode.querySelector('img');
     cardImage.alt = result['label'].value + ' image';
@@ -102,4 +102,16 @@ function loadSearch() {
         }
 
     });
+}
+
+// this overrides `contains` to make it case insenstive
+jQuery.expr[':'].contains = function(a, i, m) {
+    return jQuery(a).text().toUpperCase()
+    .indexOf(m[3].toUpperCase()) >= 0;
+};
+
+var filterKeyUp = function () {
+    $('.card').removeClass('d-none');
+    var filter = $(this).val(); // get the value of the input, which we filter on
+    $('#results-container').find(".card .card-body h5:not(:contains('" + filter + "'))").parent().parent().parent().parent().parent().addClass('d-none');
 }
