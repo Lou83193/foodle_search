@@ -59,6 +59,7 @@ body {
 .navbar {
     background:white;
     box-shadow: 0 -5px 10px black;
+    z-index: 1000;
 }
 .navbar-collapse {
     justify-content: flex-end;
