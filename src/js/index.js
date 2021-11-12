@@ -132,7 +132,6 @@ function loadHighlightedFood() {
         console.log(data);
         let foodname = data.results.bindings["0"]["label"]["value"];
         let type = data.results.bindings["0"]["type"]["value"];
-        //let link = data.results.bindings["0"]["Food"]["value"];
         let i= 'http://dbpedia.org/resource/'.length;
         type = " - "+ type.substring(i)
         let x = document.createElement("A");
@@ -146,10 +145,14 @@ function loadHighlightedFood() {
         document.getElementById("plat-du-jour-description").appendChild(description);
 
         let query2='SELECT ?image WHERE {\n'+
-            '?food a dbo:Food.\n'+
+            '{?food a dbo:Food.\n'+
             '?food rdfs:label "{1}"@en.\n'+
             '?food dbo:thumbnail ?image.\n'+
-            '} LIMIT 1';
+            '}\n UNION \n' +
+            '{ ?food a dbo:Food.\n'+
+            '?food rdfs:label "{1}"@en.\n'+
+            '?food foaf:depiction ?image.\n'+
+            '} \n } LIMIT 1';
 
         rechercher(query2.replaceAll('{1}',foodname), data2 => {
             console.log(data2);
@@ -164,18 +167,4 @@ function loadHighlightedFood() {
 }
 
 
-function checkImage(url, img) {
-    var image = new Image();
-    image.onload = function() {
-        if (this.width > 0) {
-            console.log("image exists");
-        }
-    }
-    image.onerror = function() {
-        console.log("image doesn't exist");
-        img.src="style/img/imageNotFound.png"
-
-    }
-    image.src = url;
-}
 

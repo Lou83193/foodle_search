@@ -8,6 +8,7 @@ function displaySearchResult(index, result) {
     let cardImage = newNode.querySelector('img');
     cardImage.alt = result['label'].value + ' image';
     cardImage.src = result['thumbnail'].value;
+    checkImage(cardImage.src, cardImage);
     let cardTitle = newNode.querySelector('h5');
     cardTitle.innerHTML = result['label'].value;
     let cardText = newNode.querySelector('p');
@@ -21,6 +22,7 @@ function displayCountryDesc(index, result) {
     let flagImage = document.getElementById("country-flag");
     flagImage.alt = result['label'].value + " Flag";
     flagImage.src = result['flag'].value;
+    checkImage(flagImage.src, flagImage);
     let readMoreTag = " <a href='{1}' class='ml-2' target='_blank' rel='noopener noreferrer'>{2}</a>";
     readMoreTag = readMoreTag.replace('{1}', result['link'].value);
     readMoreTag = readMoreTag.replace('{2}', "Read&nbsp;More");
