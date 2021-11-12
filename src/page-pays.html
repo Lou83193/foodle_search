@@ -10,41 +10,31 @@
     <link rel='stylesheet' type='text/css' media='screen' href='style/page-pays.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='style/recherche.css'> 
     <link rel='stylesheet' type='text/css' media='screen' href='style/style.css'>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src='js/script.js'></script>
     <script src='js/page-pays.js'></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#header-bar").load("components/header-bar.html");
+        });
+    </script>
 </head>
 
 <body onload="loadSearch()">
 
-    <nav class="navbar navbar-expand-sm navbar-light bg-light">
-        <a class="navbar-brand" href="index.html"><img src="style/img/foodle-modern-logo.png"></a> 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navigation" aria-controls="main-navigation" aria-expanded="false" aria-label="Toggle search">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="main-navigation">
-            <form class="form-inline col-sm-10 col-md-8 col-lg-6 mx-0 p-0 my-2 my-sm-0">
-                <input id='search-input' type="text" placeholder="Quick Search..." />
-                <button id='search-button' type="submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-                    </svg>
-                </button>
-            </form>
-        </div>
-    </nav>
+    <header id="header-bar"></header>
 
     <div id="page-body" class="container-fluid p-0">
         
         <div class="container-fluid p-0">
-            <div id="country-header" class="row p-3 mx-0">
+            <div id="country-header" class="container-fluid p-3 mx-0 clearfix">
+                <div class="float-right w-25 m-0 mb-1 ml-3 p-0">
+                    <img id="country-flag" class="mh-100 shadow-sm rounded mw-100" src="" alt="flag">
+                </div>
                 <div id="country-desc" class="col pl-0">
                     <h1 id="country-title" class="title"></h1>
-                    <p class="collapse mb-2" id="country-desc-content" aria-expanded="false"></p>
+                    <p class="collapse mb-2 text-justify" id="country-desc-content" aria-expanded="false"></p>
                     <a id="toggle-show-more" role="button" class="collapsed" data-toggle="collapse" href="#country-desc-content" aria-expanded="false" aria-controls="country-desc-content"></a>
-                </div>
-                <div class="m-0 p-0">
-                    <img id="country-flag" class="float-right m-0 p-0" src="" alt="flag">
                 </div>
             </div>
             <hr class="mt-0">
@@ -72,7 +62,7 @@
                 <div class="card">
                     <img src="" class="card-img-top food-img" alt="">
                     <div class="card-body">
-                        <a id="card-link"><h5 class="card-title"></h5></a>
+                        <a id="card-link"><h5 class="card-title stretched-link"></h5></a>
                         <p class="card-text"></p>
                         <a href=""></a>
                     </div>

@@ -67,7 +67,6 @@ body {
 .navbar-brand {
     color: #fff;
     cursor: pointer;
-    margin: auto 1em; 
 }
 .navbar-brand > img {
     height: 2em;

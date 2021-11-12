@@ -13,10 +13,10 @@
     height: 3rem;
 }
 
-#country-desc a#toggle-show-more.collapsed::after {
+a#toggle-show-more.collapsed::after {
     content: '+ Show More';
 }
 
-#country-desc a#toggle-show-more:not(.collapsed)::after {
+a#toggle-show-more:not(.collapsed)::after {
     content: '- Show Less';
 }

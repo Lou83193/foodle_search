@@ -3,7 +3,7 @@ function cleanSearchResults() {
 }
 
 function displaySearchResult(index, result) {
-    let template = document.getElementById('searchResult');
+    const template = document.getElementById('searchResult');
     let newNode = document.importNode(template.content, true);
     let cardImage = newNode.querySelector('img');
     cardImage.alt = result['label'].value + ' image';
