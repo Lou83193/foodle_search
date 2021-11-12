@@ -30,15 +30,17 @@
     <div id="page-body" class="container-fluid p-0">
         
         <div id="page-body-content" class="container-fluid p-0">
-            <div id="country-header" class="container-fluid p-3 mx-0 clearfix">
-                <div class="float-right w-25 m-0 mb-1 ml-3 p-0">
-                    <img id="country-flag" class="mh-100 shadow-sm rounded mw-100" src="">
-                </div>
-                <div id="country-desc" class="col pl-0">
+            <div id="country-header" class="container-fluid row p-3 mx-0 clearfix">
+                <div id="country-desc" class="col-9">
                     <h1 id="country-title" class="title"></h1>
                     <p class="collapse mb-2 text-justify" id="country-desc-content" aria-expanded="false"></p>
                     <a id="toggle-show-more" role="button" class="collapsed" data-toggle="collapse" href="#country-desc-content" aria-expanded="false" aria-controls="country-desc-content"></a>
                 </div>
+
+                <div class="col justify-content-end d-flex">
+                    <img id="country-flag" class="mh-100 shadow-sm rounded mw-100" src="">
+                </div>
+
             </div>
             <hr class="mt-0">
             <div class="row m-0 px-3">
@@ -63,7 +65,7 @@
         <template id="searchResult">
             <div class="card mb-3">
                 <div class="row no-gutters position-relative">
-                    <div class="col-sm-4">
+                    <div class="col-sm-2 ">
                         <img src="" class="card-img" alt="">
                     </div>
                     <div class="col-sm-8 position-static">

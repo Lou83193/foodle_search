@@ -107,6 +107,7 @@ body {
 #plat-du-jour-content {
     display: flex;
     flex-direction: row;
+    margin-bottom: 1em;
 }
 
 #plat-du-jour-label {
@@ -120,14 +121,15 @@ body {
 }
 
 #plat-du-jour {
-    margin-left: 1em;
+    margin-left: 2em;
     height: auto;
     text-overflow: fade(10px);
-
 }
 
 #plat-du-jour-image img {
     object-fit: cover;
     height: 200px;
+    width: 200px;
+    border-radius: 10px 10px 10px 10px;
 }
 
