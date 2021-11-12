@@ -56,9 +56,16 @@ function loadSearch() {
             index.push(v);
         });
         
-        data.results.bindings.forEach(r => {
-            displayCountryDesc(index, r);
-        });
+        if(data.results.bindings.length != 0){
+            data.results.bindings.forEach(r => {
+                displayCountryDesc(index, r);
+            });
+        }else {
+            $('#country-desc-content').css('display', 'none');
+            $('#toggle-show-more').css('display', 'none');
+
+        }
+
     });
     
     console.log('Searched for (country) food:', countryParameter);
@@ -84,10 +91,16 @@ function loadSearch() {
         data.head.vars.forEach((v, _) => {
             index.push(v);
         });
-        
-        data.results.bindings.forEach(r => {
-            displaySearchResult(index, r);
-        });
+
+        if(data.results.bindings.length != 0) {
+            data.results.bindings.forEach(r => {
+                displaySearchResult(index, r);
+            });
+        }else{
+            $('#page-body-content').css('display', 'none');
+            $('#page-body').append('<h5>This country does not seem to exist, sorry :(</h5>');
+        }
+
     });
 }
 
