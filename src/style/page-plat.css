@@ -7,7 +7,6 @@
     margin: 0;
     box-sizing: border-box;
     width: 40%;
-    
     margin:0;
     background-color: rgba(0, 0, 0, 0.06);
 }
@@ -139,14 +138,14 @@
 }
 #nutrition table {
     background-color: rgba(255, 255, 255, 0.5);
-    border: solid 1px grey;
+    border: solid 0px gray;
 }
 #nutrition table th {
     width: 50%;
-    border-right: solid 1px grey;
+    border-right: solid 0px grey; 
 }
 #nutrition table td {
-    border-right: solid 1px grey;
+    border-right: solid 0px grey;
     padding: 0.25em 0.5em;
 }
 
