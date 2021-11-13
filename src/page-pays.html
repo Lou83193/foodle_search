@@ -29,34 +29,34 @@
     
     <div id="page-body" class="container-fluid p-0">
         
-        <div id="page-body-content" class="container-fluid p-0">
-            
-            <div id="country-header" class="container-fluid p-3 m-0 clearfix">
-                <div id="flag-container" class="float-right ml-3 d-none d-sm-block">
-                    <img id="country-flag" class="shadow-sm rounded mh-100" src="">
+        <section id="country-header" class="container-fluid p-3 m-0 clearfix">
+            <div class="flag-container-lg float-right ml-3 d-none d-sm-block">
+                <img class="country-flag shadow-sm rounded mh-100" src="">
+            </div>
+            <div class="d-flex flex-row">
+                <h1 id="country-title"></h1>
+                <div class="flag-container-sm d-sm-none">
+                    <img class="country-flag shadow-sm rounded ml-3 mh-100" src="">
                 </div>
-                <div id="country-desc" class="pl-0">
-                    <h1 id="country-title" class="title"></h1>
-                    <p class="collapse mb-2 text-justify" id="country-desc-content" aria-expanded="false"></p>
-                    <a id="toggle-show-more" role="button" class="collapsed" data-toggle="collapse" href="#country-desc-content" aria-expanded="false" aria-controls="country-desc-content"></a>
-                </div>
-
+                <!-- <div style="background-color: red;">FLAG</div> -->
             </div>
-            <hr class="mt-0">
-            <div class="row m-0 px-3">
-                <h3 id="country-dishes-title">Food from Country:</h3>
-            </div>
-            <div class="row m-0 px-3">
-                <form class="form-inline col-sm-6 col-md-5 col-lg-4 p-0">
-                    <input id="filter-input" class='search-input' type="text" placeholder="Filter results"/>
-                    <svg id="filter-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="black" class="bi bi-funnel-fill" viewBox="0 0 24 24">
-                        <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z"/>
-                    </svg>
-                </form>
-            </div>
+            <p class="collapse mb-2 text-justify" id="country-desc-content" aria-expanded="false"></p>
+            <a id="toggle-show-more" role="button" class="collapsed" data-toggle="collapse" href="#country-desc-content" aria-expanded="false" aria-controls="country-desc-content"></a>
+        </section>
+        <hr class="mt-0">
+        <div class="row m-0 px-3">
+            <h3 id="country-dishes-title">Food from Country:</h3>
+        </div>
+        <div class="row m-0 px-3">
+            <form class="form-inline col-sm-6 col-md-5 col-lg-4 p-0">
+                <input id="filter-input" class='search-input' type="text" placeholder="Filter results"/>
+                <svg id="filter-icon" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="black" class="bi bi-funnel-fill" viewBox="0 0 24 24">
+                    <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z"/>
+                </svg>
+            </form>
         </div>
         
-        <div id="results-container" class="container-fluid m-0 py-1 px-3">
+        <div id="results-container" class="container-fluid">
             <!-- search results are injected here -->
         </div>
 
@@ -65,10 +65,10 @@
         </div>
 
         <template id="search-result">
-            <div class="card mb-3">
+            <div class="card">
                 <div class="row no-gutters position-relative">
                     <div class="col-sm-4 col-lg-3">
-                        <img src="" class="card-img" alt="">
+                        <img src="" class="card-img rounded" alt="">
                     </div>
                     <div class="col position-static">
                         <div class="card-body">

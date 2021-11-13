@@ -19,10 +19,12 @@ function displaySearchResult(index, result) {
 
 function displayCountryDesc(index, result) {
     let countryDesc = document.getElementById("country-desc-content");
-    let flagImage = document.getElementById("country-flag");
-    flagImage.alt = result['label'].value + " Flag";
-    flagImage.src = result['flag'].value;
-    checkImage(flagImage.src, flagImage);
+    let flagImages = document.getElementsByClassName("country-flag");
+    for (let img of flagImages) {
+        img.alt = result['label'].value + " Flag";
+        img.src = result['flag'].value;
+        checkImage(img.src, img);
+    }
     let readMoreTag = " <a href='{1}' class='ml-2' target='_blank' rel='noopener noreferrer'>{2}</a>";
     readMoreTag = readMoreTag.replace('{1}', result['link'].value);
     readMoreTag = readMoreTag.replace('{2}', "Read&nbsp;More");

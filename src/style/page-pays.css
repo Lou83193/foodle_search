@@ -20,12 +20,18 @@ a#toggle-show-more.collapsed::after {
 a#toggle-show-more:not(.collapsed)::after {
     content: '- Show Less';
 }
+
+.flag-container-lg {
+    height: 7.7rem;
+}
+
+.flag-container-sm {
+    height: 2.7rem;
+}
+
 .card-img {
     object-fit:cover;
     height:200px;
-}
-#flag-container {
-    height: 7.7rem;
 }
 
 /* BARRE DE FILTRE */
