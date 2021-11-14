@@ -5,7 +5,7 @@ function cleanSearchResults() {
 }
 
 function displaySearchResult(index, result) {
-  let template = document.getElementById('searchResult');
+  let template = document.getElementById('search-result');
   let newNode = document.importNode(template.content, true);
   let cardImage = newNode.querySelector('img');
   cardImage.alt = result['label'].value + ' image';

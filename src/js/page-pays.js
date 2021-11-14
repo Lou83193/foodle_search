@@ -108,7 +108,8 @@ function loadSearch() {
     });
 }
 
-// this overrides `contains` to make it case insenstive
+// --- Code below is from https://stackoverflow.com/a/66531075 ---
+// this overrides `contains` to make it case insensitive
 jQuery.expr[':'].contains = function(a, i, m) {
     return jQuery(a).text().toUpperCase()
     .indexOf(m[3].toUpperCase()) >= 0;
