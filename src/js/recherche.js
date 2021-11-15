@@ -37,8 +37,8 @@ function loadSearch() {
 
   // Load search query data in HTML
   if (searchType == "ingredient") {
-    $('#results-for').html('<h1>Dishes made with <span id="search-desc"></span>:</h1>');
-    $('.results-row').append('<div id="buy-link" class="blue-button">BUY</div>'); 
+    $('#results-title').html('Dishes made with <span id="search-desc"></span>:');
+    $('#results-header').append('<div id="buy-link" class="blue-button ml-3"></div>'); 
     $("#buy-link").html("<a href='https://www.walmart.com/search?q=" + searchKeyword + "' class='btn btn-info btn-lg' target='_blank'>Buy at Walmart</a>"); 
   }
   $("#search-desc").html(normalizeString(searchKeyword));

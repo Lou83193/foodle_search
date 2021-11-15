@@ -112,7 +112,6 @@ function queryBuilder(triplets, filters, limit) {
 }
 
 
-
 function checkImage(url, img) {
     var image = new Image();
     image.onload = function() {
