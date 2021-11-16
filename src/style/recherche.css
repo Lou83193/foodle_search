@@ -1,16 +1,11 @@
-.row {
-    margin: 1em;
-}
-
 .food-img {
     object-fit: cover;
-    height: 300px;
+    height: 200px;
     border-radius: 15px 15px 0px 0px;
 }
 
-/*white-space: nowrap;*/
 .card-text {
-    height: 100px;
+    height: 6rem;
     overflow: hidden;
     text-overflow: fade(10px);
 }
@@ -21,23 +16,4 @@
     border: 0px solid #9D9C9C;
     background-color: white;
     transition-duration: 700ms;
-}
-
-#results-container > div {
-    margin-top: 1.5vh;
-    margin-bottom: 1.5vh;
-}
-
-#results-for {
-    width: intrinsic;          
-    width: -moz-max-content;   
-    width: -webkit-max-content; 
-    padding: 0;
-}
-.results-row {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 1em 1.6em;
 }

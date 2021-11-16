@@ -27,14 +27,17 @@
 </head>
 <body onload="loadSearch()">
 
-    <template id="searchResult">
-        <div class="col-sm-3">
-            <div class="card">
-                <img src="" class="food-img" alt="">
+    <template id="search-result">
+        <div class="col px-2 py-0 mb-3">
+            <div class="card h-100">
+                <img src="" class="food-img card-img-top" alt="">
                 <div class="card-body">
-                    <a id="card-link"><h5 class="card-title"></h5></a>
-                    <p class="card-text"></p>
-                    <a href=""></a>
+                    <a id="card-link" class="stretched-link"><h5 class="card-title"></h5></a>
+                    <p class="card-text text-justify"></p>
+                    
+                </div>
+                <div class="card-footer position-relative">
+                    <a class="stretched-link" href=""></a>
                 </div>
             </div>
         </div>
@@ -42,15 +45,15 @@
 
     <header id="header-bar"></header>
 
-    <div id="page-body" class="page-header header">
+    <div id="page-body" class="container-fluid p-0">
 
-        <div class="results-row">
-            <div id="results-for" class="underline-header">
-                <h1>Results for "<span id="search-desc"></span>"</h1>
-            </div> 
+        <div id="results-header" class="row m-0 px-3 pt-3">
+            <div class="col-auto p-0 underline-header">
+                <h1 id="results-title" class="mb-1">Results for "<span id="search-desc"></span>"</h1>
+            </div>
         </div>
 
-        <div class="row" id="results-container">
+        <div id="results-container" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 m-0 py-3 px-2">
             <!-- inject search results here -->
         </div>
 
