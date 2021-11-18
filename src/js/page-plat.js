@@ -166,6 +166,7 @@ function chargerOriginePlat(json) {
 function chargerTypePlat(json) {
 
     const map = obtenirResultatsJson(json);
+    console.log(map);
     let type = [""];
     let temperature = [""]; 
     if (map.has("type")) {
@@ -201,7 +202,7 @@ function chargerTypePlat(json) {
     }
     $('#type').html(fullType);
     
-    if (isEmpty == "") { $('#type').remove(); $('#nom-plat-type-separator').remove(); }
+    if (isEmpty) { $('#type').remove(); $('#nom-plat-type-separator').remove(); }
 
     incrementQueryCount();
 
